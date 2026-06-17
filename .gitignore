@@ -1,0 +1,124 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+*.lcov
+.nyc_output
+jest.config.js.bak
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+*.pem
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+
+# Logs
+logs
+*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Dependency directories
+jspm_packages/
+
+# Package manager cache directories
+.npm
+.pnpm-store/
+.yarn/cache/
+
+# Optional eslint cache
+.eslintcache
+
+# Optional prettier cache
+.prettiercache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of package managers
+*.tgz
+
+# Package manager integrity files
+.yarn-integrity
+.pnpm-lock.yaml.bak
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Storybook build outputs
+.out
+.storybook-out
+storybook-static/
+
