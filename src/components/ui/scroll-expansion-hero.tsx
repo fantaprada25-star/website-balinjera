@@ -24,6 +24,7 @@ interface ScrollExpandMediaProps {
   preserveTitleLines?: boolean;
   theme?: "espresso" | "balinjera";
   children?: ReactNode;
+  skipLabel?: string;
 }
 
 function clampProgress(value: number) {
@@ -153,6 +154,7 @@ export default function ScrollExpandMedia({
   preserveTitleLines = false,
   theme = "espresso",
   children,
+  skipLabel,
 }: ScrollExpandMediaProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showContent, setShowContent] = useState(false);
@@ -211,6 +213,12 @@ export default function ScrollExpandMedia({
   }, []);
 
   useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotion.matches) {
+      updateProgress(1);
+      return;
+    }
+
     const handleWheel = (event: globalThis.WheelEvent) => {
       if (
         mediaFullyExpandedRef.current &&
@@ -281,9 +289,21 @@ export default function ScrollExpandMedia({
       if (expandOnHash && window.location.hash.length > 0) {
         return;
       }
+    };
 
-      if (!mediaFullyExpandedRef.current) {
-        window.scrollTo(0, 0);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === ' ' || e.key === 'PageDown' || e.key === 'ArrowDown') {
+        if (!mediaFullyExpandedRef.current) {
+          e.preventDefault();
+          updateProgress(Math.min(scrollProgressRef.current + 0.25, 1));
+        }
+      }
+      if ((e.key === 'PageUp' || e.key === 'ArrowUp') && scrollProgressRef.current > 0 && !mediaFullyExpandedRef.current) {
+        e.preventDefault();
+        updateProgress(Math.max(scrollProgressRef.current - 0.25, 0));
+      }
+      if (e.key === 'End' || e.key === 'Enter') {
+        if (!mediaFullyExpandedRef.current) updateProgress(1);
       }
     };
 
@@ -294,6 +314,7 @@ export default function ScrollExpandMedia({
     });
     window.addEventListener("touchmove", handleTouchMove, { passive: false });
     window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("keydown", handleKey);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
@@ -301,6 +322,7 @@ export default function ScrollExpandMedia({
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("keydown", handleKey);
     };
   }, [expandOnHash, setExpandedState, touchStartY, updateProgress]);
 
@@ -340,6 +362,31 @@ export default function ScrollExpandMedia({
 
   return (
     <div className={classes.root}>
+      {!showContent && (
+        <button
+          onClick={() => updateProgress(1)}
+          aria-label={skipLabel ?? "Passer l'intro"}
+          style={{
+            position: 'fixed',
+            bottom: 'calc(env(safe-area-inset-bottom, 0px) + 80px)',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 60,
+            background: 'rgba(255,253,231,0.18)',
+            border: '1px solid rgba(255,253,231,0.38)',
+            borderRadius: '6px',
+            color: '#fffde7',
+            fontFamily: 'inherit',
+            fontSize: '14px',
+            padding: '10px 20px',
+            cursor: 'pointer',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+          }}
+        >
+          {skipLabel ?? '↓ Continuer'}
+        </button>
+      )}
       <section className="relative flex min-h-[100dvh] flex-col items-center justify-start">
         <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
           <motion.div
