@@ -835,10 +835,10 @@ export function AccessibilityPageContent({ lang }: { lang: BalinjeraLang }) {
               <h2>{page.contactLabel}</h2>
               <div className={styles["accessibilityContactLinks"]}>
                 <a href={`mailto:${BALINJERA_EMAIL}`}>
-                  {page.emailLabel}: {BALINJERA_EMAIL}
+                  {page.emailLabel}: <span dir="ltr">{BALINJERA_EMAIL}</span>
                 </a>
                 <a href={BALINJERA_PHONE_HREF}>
-                  {page.phoneLabel}: {BALINJERA_PHONE_DISPLAY}
+                  {page.phoneLabel}: <span dir="ltr">{BALINJERA_PHONE_DISPLAY}</span>
                 </a>
               </div>
               <p>{page.updated}</p>
@@ -887,7 +887,7 @@ export function EventsPageContent({ lang }: { lang: BalinjeraLang }) {
             <div className={styles["contactRows"]}>
               <a href={BALINJERA_PHONE_HREF}>
                 <Phone aria-hidden="true" />
-                <span>{BALINJERA_PHONE_DISPLAY}</span>
+                <span dir="ltr">{BALINJERA_PHONE_DISPLAY}</span>
               </a>
               <a
                 href="https://maps.google.com/?q=%D7%9E%D7%9C%D7%9F%204%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91"
