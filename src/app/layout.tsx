@@ -11,8 +11,10 @@ export const metadata: Metadata = {
   description:
     "מסעדת באלינג׳רה בתל אביב עם מטבח אתיופי מסורתי, אינג׳רה טרייה ומנות צבעוניות. Traditional Ethiopian cuisine in Tel Aviv.",
   icons: {
-    icon: "/balinjera/favicon.png",
+    icon: '/balinjera/favicon.png',
+    apple: '/balinjera/favicon.png',
   },
+  manifest: '/manifest.webmanifest',
 };
 
 export const viewport: Viewport = {
