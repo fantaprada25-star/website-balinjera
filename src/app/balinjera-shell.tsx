@@ -713,17 +713,12 @@ function BlogHero({
   posts: readonly BalinjeraBlogPost[];
   title: string;
 }) {
-  const page = balinjeraCopy[lang].blogPage;
-
   return (
     <section className={styles["blogMastheadHero"]}>
       <div className={styles["blogHeroIntro"]} data-balinjera-animate="hero">
         <p className={styles["eyebrow"]}>{eyebrow}</p>
         <h1>{title}</h1>
         <p>{body}</p>
-        <SiteButton href="/blog#blog-posts" lang={lang}>
-          {page.articleEyebrow}
-        </SiteButton>
       </div>
       <div className={styles["blogHeroRail"]} data-balinjera-animate="card">
         {posts.map((post, index) => (
@@ -987,26 +982,6 @@ export function BlogPageContent({ lang }: { lang: BalinjeraLang }) {
         posts={page.posts}
         title={page.title}
       />
-
-      <section className={styles["blogGridSection"]} id="blog-posts">
-        <div className={styles["blogGrid"]}>
-          {page.posts.map((post) => (
-            <Link
-              className={styles["blogCard"]}
-              data-balinjera-animate="card"
-              href={hrefWithLang(`/blog/${post.slug}`, lang)}
-              key={post.title}
-            >
-              <Image src={post.image} alt="" width={720} height={480} />
-              <div>
-                <BookOpenText aria-hidden="true" />
-                <h2>{post.title}</h2>
-                <p>{post.excerpt}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
 
       <ReserveSection lang={lang} />
     </>

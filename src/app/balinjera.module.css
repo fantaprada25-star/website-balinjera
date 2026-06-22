@@ -389,7 +389,6 @@
 .detailItem p,
 .eventOption p,
 .eventCta p,
-.blogCard p,
 .contactRows a {
   font-size: 20px;
   font-weight: 400;
@@ -1548,7 +1547,6 @@
 .detailIntro svg,
 .eventOption svg,
 .eventCta svg,
-.blogCard svg,
 .contactRows svg {
   width: 28px;
   height: 28px;
@@ -1588,8 +1586,7 @@
 
 .detailItem:hover,
 .eventOption:hover,
-.eventCta:hover,
-.blogCard:hover {
+.eventCta:hover {
   border-color: color-mix(in srgb, var(--green) 24%, transparent);
   box-shadow: 0 18px 40px color-mix(in srgb, var(--green) 10%, transparent);
   transform: translateY(-3px);
@@ -2038,60 +2035,6 @@
   padding: 12px 14px;
 }
 
-.blogGridSection {
-  background: var(--pale);
-  padding: clamp(78px, 10vw, 150px) clamp(24px, 7vw, 128px);
-}
-
-.blogGrid {
-  display: grid;
-  align-items: stretch;
-  gap: 28px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.blogCard {
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  border: 1px solid rgba(0, 59, 27, 0.12);
-  border-radius: var(--radius);
-  background: var(--cream);
-  overflow: hidden;
-  transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
-}
-
-.blogCard img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  transition: transform 700ms var(--motion);
-}
-
-.blogCard:hover img {
-  transform: scale(1.06);
-}
-
-.blogCard div {
-  display: flex;
-  flex: 1;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 15px;
-  padding: 28px;
-}
-
-.blogCard h2 {
-  font-size: clamp(24px, 2.2vw, 34px);
-  font-weight: 400;
-  line-height: 1.18;
-  text-wrap: balance;
-  text-transform: uppercase;
-}
-
 .articleTopBar {
   display: flex;
   justify-content: flex-start;
@@ -2407,10 +2350,6 @@
   .nameSection {
     flex-direction: column;
     min-height: auto;
-  }
-
-  .blogGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .menuSections {
@@ -2881,7 +2820,6 @@
   .detailItem p,
   .eventOption p,
   .eventCta p,
-  .blogCard p,
   .contactRows a {
     font-size: 18px;
     line-height: 1.58;
@@ -2959,7 +2897,6 @@
 
   .detailSection,
   .eventDetailSection,
-  .blogGridSection,
   .articleSection {
     padding: 68px 7%;
   }
@@ -2976,10 +2913,6 @@
   .eventOption {
     align-items: flex-start;
     padding: 23px;
-  }
-
-  .blogGrid {
-    grid-template-columns: 1fr;
   }
 
   .eventCta {
@@ -3094,8 +3027,7 @@
     font-size: 34px;
   }
 
-  .cardContent,
-  .blogCard div {
+  .cardContent {
     padding: 24px;
   }
 
