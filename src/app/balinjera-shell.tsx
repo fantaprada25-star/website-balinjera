@@ -372,10 +372,6 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
             </SiteButton>
           </div>
         </div>
-        <div
-          className={`${styles["splitImage"]} ${styles["foodImage"]}`}
-          data-balinjera-animate="image"
-        />
       </section>
 
       <section className={styles["featureSection"]} id="menu">
@@ -439,6 +435,11 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
+          <span
+            className={styles["offerImage"]}
+            data-balinjera-animate="image"
+            aria-hidden="true"
+          />
         </div>
       </section>
 

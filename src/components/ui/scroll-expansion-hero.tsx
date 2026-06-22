@@ -24,8 +24,11 @@ interface ScrollExpandMediaProps {
   preserveTitleLines?: boolean;
   theme?: "espresso" | "balinjera";
   children?: ReactNode;
-  skipLabel?: string;
 }
+
+// Distance de scroll (en vh) nécessaire pour déployer entièrement le média
+// sur mobile, où l'expansion est pilotée par le scroll natif (cf. trackRef).
+const MOBILE_EXPAND_VH = 90;
 
 function clampProgress(value: number) {
   return Math.min(Math.max(value, 0), 1);
@@ -154,7 +157,6 @@ export default function ScrollExpandMedia({
   preserveTitleLines = false,
   theme = "espresso",
   children,
-  skipLabel,
 }: ScrollExpandMediaProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showContent, setShowContent] = useState(false);
@@ -165,6 +167,7 @@ export default function ScrollExpandMedia({
   const scrollProgressRef = useRef(0);
   const mediaFullyExpandedRef = useRef(false);
   const touchStartYRef = useRef(0);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   const setExpandedState = useCallback((expanded: boolean) => {
     mediaFullyExpandedRef.current = expanded;
@@ -217,6 +220,56 @@ export default function ScrollExpandMedia({
     if (reducedMotion.matches) {
       updateProgress(1);
       return;
+    }
+
+    // Mobile : pas de scroll-jack. L'expansion est dérivée de la position de
+    // scroll native (conteneur "track" haut + section sticky), ce qui préserve
+    // l'inertie et empêche tout blocage du défilement.
+    if (isMobileState) {
+      if (expandOnHash && window.location.hash.length > 0) {
+        updateProgress(1);
+        return;
+      }
+
+      let frame = 0;
+      const handleMobileScroll = () => {
+        if (frame) {
+          return;
+        }
+
+        frame = window.requestAnimationFrame(() => {
+          frame = 0;
+
+          const el = trackRef.current;
+          if (!el) {
+            return;
+          }
+
+          const distance = el.offsetHeight - window.innerHeight;
+          if (distance <= 0) {
+            updateProgress(1);
+            return;
+          }
+
+          const scrolled = Math.min(
+            Math.max(-el.getBoundingClientRect().top, 0),
+            distance
+          );
+          updateProgress(scrolled / distance);
+        });
+      };
+
+      handleMobileScroll();
+      window.addEventListener("scroll", handleMobileScroll, { passive: true });
+      window.addEventListener("resize", handleMobileScroll);
+
+      return () => {
+        if (frame) {
+          window.cancelAnimationFrame(frame);
+        }
+        window.removeEventListener("scroll", handleMobileScroll);
+        window.removeEventListener("resize", handleMobileScroll);
+      };
     }
 
     const handleWheel = (event: globalThis.WheelEvent) => {
@@ -324,7 +377,7 @@ export default function ScrollExpandMedia({
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("keydown", handleKey);
     };
-  }, [expandOnHash, setExpandedState, touchStartY, updateProgress]);
+  }, [expandOnHash, isMobileState, setExpandedState, touchStartY, updateProgress]);
 
   useEffect(() => {
     if (!expandOnHash) {
@@ -362,33 +415,23 @@ export default function ScrollExpandMedia({
 
   return (
     <div className={classes.root}>
-      {!showContent && (
-        <button
-          onClick={() => updateProgress(1)}
-          aria-label={skipLabel ?? "Passer l'intro"}
-          style={{
-            position: 'fixed',
-            bottom: 'calc(env(safe-area-inset-bottom, 0px) + 80px)',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 60,
-            background: 'rgba(255,253,231,0.18)',
-            border: '1px solid rgba(255,253,231,0.38)',
-            borderRadius: '6px',
-            color: '#fffde7',
-            fontFamily: 'inherit',
-            fontSize: '14px',
-            padding: '10px 20px',
-            cursor: 'pointer',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-          }}
+      <div
+        ref={trackRef}
+        style={
+          isMobileState
+            ? { height: `calc(100dvh + ${MOBILE_EXPAND_VH}vh)` }
+            : undefined
+        }
+      >
+        <section
+          className="relative flex min-h-[100dvh] flex-col items-center justify-start"
+          style={
+            isMobileState
+              ? { position: "sticky", top: 0, height: "100dvh", minHeight: 0 }
+              : undefined
+          }
         >
-          {skipLabel ?? '↓ Continuer'}
-        </button>
-      )}
-      <section className="relative flex min-h-[100dvh] flex-col items-center justify-start">
-        <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
+          <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
           <motion.div
             className="absolute inset-0 z-0 h-full"
             initial={{ opacity: 0 }}
@@ -538,7 +581,8 @@ export default function ScrollExpandMedia({
             ) : null}
           </div>
         </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

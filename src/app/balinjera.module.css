@@ -27,7 +27,7 @@
   --gold: #eeab00;
   --brown: #8c473e;
   --clear: rgba(255, 255, 255, 0);
-  --header: color-mix(in srgb, var(--green) 88%, transparent);
+  --header: color-mix(in srgb, var(--green) 38%, transparent);
   --motion: cubic-bezier(0.2, 0.8, 0.2, 1);
   --radius: 6px;
 
@@ -84,8 +84,17 @@
   border-bottom: 1px solid color-mix(in srgb, var(--cream) 12%, transparent);
   background: var(--header);
   color: var(--cream);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 16px 38px rgba(0, 59, 27, 0.16);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow: 0 12px 30px rgba(0, 59, 27, 0.1);
+}
+
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .header {
+    background: color-mix(in srgb, var(--green) 85%, transparent);
+  }
 }
 
 .headerInner {
@@ -392,11 +401,12 @@
 }
 
 .introCopy {
-  width: 59.956%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   padding-block: clamp(88px, 9vw, 132px) clamp(48px, 5vw, 76px);
-  padding-inline: 16% 15%;
+  padding-inline: 8%;
+  text-align: center;
 }
 
 .copyBlock {
@@ -589,8 +599,8 @@
   width: min(100%, 380px);
   aspect-ratio: 1.28;
   border-radius: var(--radius);
-  background-image: url('/balinjera/products-card.jpg');
-  background-position: center center;
+  background-image: url('/balinjera/food-table.jpg');
+  background-position: center left;
   background-size: cover;
   box-shadow: 0 24px 64px color-mix(in srgb, var(--green) 12%, transparent);
 }
