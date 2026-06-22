@@ -19,7 +19,6 @@ export type BalinjeraBlogPost = {
   slug: string;
   title: string;
   excerpt: string;
-  image: string;
   body: readonly string[];
 };
 
@@ -416,7 +415,6 @@ export const balinjeraCopy = {
           title: "מה הופך אינג׳רה ללב הארוחה?",
           excerpt:
             "אינג׳רה היא גם לחם, גם צלחת וגם הדרך שבה כולם חולקים את אותה ארוחה.",
-          image: "/balinjera/injera-wide.jpg",
           body: [
             "אינג׳רה היא הרבה יותר מלחם שמונח ליד המנה. היא הבסיס של הארוחה האתיופית: עליה מניחים את התבשילים, איתה אוספים כל ביס, וסביבה נוצרת שיחה.",
             "בבאלינג׳רה אנחנו מכינים אינג׳רה טרייה מקמח טף, ללא גלוטן, עם המרקם האוורירי והחמצמצות העדינה שמאזנת את התבלינים. זו הסיבה שכל שולחן מתחיל ממנה.",
@@ -427,7 +425,6 @@ export const balinjeraCopy = {
           slug: "eat-together-balinjera",
           title: "איך אוכלים ביחד בבאלינג׳רה",
           excerpt: "השם באלינג׳רה מזכיר את הרעיון הפשוט והיפה של אכילה משותפת.",
-          image: "/balinjera/food-table.jpg",
           body: [
             "השם באלינג׳רה מחזיק בתוכו את הרעיון המרכזי של המקום: לאכול ביחד. בארוחה אתיופית מסורתית האוכל לא בנוי ממנות נפרדות לכל סועד, אלא משולחן שנפתח במרכז.",
             "כל אחד קורע חתיכת אינג׳רה, אוסף איתה תבשיל, ירקות או קטניות, וממשיך את השיחה סביב אותו מגש. יש בזה קצב אחר, קרוב יותר, שמזכיר אוכל ביתי ומשפחתי.",
@@ -831,7 +828,6 @@ export const balinjeraCopy = {
           title: "Why injera is the heart of the meal",
           excerpt:
             "Injera is bread, plate and the way everyone shares the same meal.",
-          image: "/balinjera/injera-wide.jpg",
           body: [
             "Injera is much more than bread served next to the dish. It is the base of the Ethiopian meal: stews are placed on it, every bite is gathered with it, and conversation forms around it.",
             "At Balinjera we prepare fresh injera from teff flour, naturally gluten free, with the airy texture and gentle tang that balance the spices. That is why every table starts with it.",
@@ -843,7 +839,6 @@ export const balinjeraCopy = {
           title: "How people eat together at Balinjera",
           excerpt:
             "The name Balinjera carries the simple and beautiful idea of a shared meal.",
-          image: "/balinjera/food-table.jpg",
           body: [
             "The name Balinjera carries the core idea of the place: eating together. In a traditional Ethiopian meal, the food is not built as separate plates for each guest, but as a table opened in the center.",
             "Each person tears a piece of injera, gathers stew, vegetables or legumes, and keeps the conversation moving around the same platter. It creates a slower, closer rhythm that feels like family food.",

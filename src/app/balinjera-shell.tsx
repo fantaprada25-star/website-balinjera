@@ -997,7 +997,6 @@ export function BlogPageContent({ lang }: { lang: BalinjeraLang }) {
               href={hrefWithLang(`/blog/${post.slug}`, lang)}
               key={post.title}
             >
-              <Image src={post.image} alt="" width={720} height={480} />
               <div>
                 <BookOpenText aria-hidden="true" />
                 <h2>{post.title}</h2>
