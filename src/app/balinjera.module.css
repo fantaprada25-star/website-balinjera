@@ -284,7 +284,6 @@
   background: linear-gradient(147deg, var(--brown) 78%, var(--gold) 22%);
 }
 
-.hero,
 .foodIntro,
 .featureSection,
 .nameSection {
@@ -327,44 +326,6 @@
   background: var(--cream);
 }
 
-.heroImage {
-  background-image: url('/balinjera/hero.jpg');
-  background-position: center center;
-}
-
-.heroCopy {
-  align-items: flex-end;
-  justify-content: center;
-  padding: 132px clamp(54px, 7vw, 142px) 92px clamp(34px, 5vw, 92px);
-}
-
-.root[dir='ltr'] .heroCopy {
-  align-items: flex-start;
-}
-
-.heroText {
-  width: min(100%, 520px);
-}
-
-.heroText h1 {
-  padding-bottom: 28px;
-  font-size: clamp(42px, 4.4vw, 72px);
-  line-height: 0.96;
-  font-weight: 700;
-  text-wrap: balance;
-  text-transform: uppercase;
-}
-
-.heroText p:not(.eyebrow) {
-  max-width: 390px;
-  margin-inline-start: auto;
-}
-
-.root[dir='ltr'] .heroText p:not(.eyebrow) {
-  margin-inline-start: 0;
-  margin-inline-end: auto;
-}
-
 .eyebrow {
   display: inline-flex;
   width: max-content;
@@ -379,7 +340,6 @@
   line-height: 1.2;
 }
 
-.heroText p,
 .copyBlock p,
 .featureCard p,
 .footer p,
@@ -389,7 +349,6 @@
 .detailItem p,
 .eventOption p,
 .eventCta p,
-.blogCard p,
 .contactRows a {
   font-size: 20px;
   font-weight: 400;
@@ -572,8 +531,8 @@
 
 .cardArrow {
   display: inline-flex;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
   margin-top: 26px;
@@ -616,7 +575,7 @@
 
 .figure {
   position: absolute;
-  top: -10%;
+  top: clamp(0px, 2%, 24px);
   left: 8%;
   width: min(8%, 92px);
   height: auto;
@@ -770,6 +729,9 @@
 }
 
 .footerBrand a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 12px;
   line-height: 24px;
 }
@@ -1548,7 +1510,6 @@
 .detailIntro svg,
 .eventOption svg,
 .eventCta svg,
-.blogCard svg,
 .contactRows svg {
   width: 28px;
   height: 28px;
@@ -1588,8 +1549,7 @@
 
 .detailItem:hover,
 .eventOption:hover,
-.eventCta:hover,
-.blogCard:hover {
+.eventCta:hover {
   border-color: color-mix(in srgb, var(--green) 24%, transparent);
   box-shadow: 0 18px 40px color-mix(in srgb, var(--green) 10%, transparent);
   transform: translateY(-3px);
@@ -2038,60 +1998,6 @@
   padding: 12px 14px;
 }
 
-.blogGridSection {
-  background: var(--pale);
-  padding: clamp(78px, 10vw, 150px) clamp(24px, 7vw, 128px);
-}
-
-.blogGrid {
-  display: grid;
-  align-items: stretch;
-  gap: 28px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.blogCard {
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  border: 1px solid rgba(0, 59, 27, 0.12);
-  border-radius: var(--radius);
-  background: var(--cream);
-  overflow: hidden;
-  transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
-}
-
-.blogCard img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  transition: transform 700ms var(--motion);
-}
-
-.blogCard:hover img {
-  transform: scale(1.06);
-}
-
-.blogCard div {
-  display: flex;
-  flex: 1;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 15px;
-  padding: 28px;
-}
-
-.blogCard h2 {
-  font-size: clamp(24px, 2.2vw, 34px);
-  font-weight: 400;
-  line-height: 1.18;
-  text-wrap: balance;
-  text-transform: uppercase;
-}
-
 .articleTopBar {
   display: flex;
   justify-content: flex-start;
@@ -2279,10 +2185,6 @@
     font-size: 16px;
   }
 
-  .heroCopy {
-    padding-inline: 7%;
-  }
-
   .menuHeroBoard {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2325,6 +2227,12 @@
 
   .nav::-webkit-scrollbar {
     display: none;
+  }
+
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .headerActions {
@@ -2401,16 +2309,11 @@
     margin-top: 5px;
   }
 
-  .hero,
   .foodIntro,
   .featureSection,
   .nameSection {
     flex-direction: column;
     min-height: auto;
-  }
-
-  .blogGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .menuSections {
@@ -2438,27 +2341,12 @@
     min-height: auto;
   }
 
-  .heroImage {
-    min-height: 52svh;
-    background-position: bottom center;
-  }
-
-  .hero {
-    margin-top: 112px;
-  }
-
-  .heroCopy,
   .introCopy,
   .offerCopy,
   .nameCopy {
     align-items: center;
     padding: clamp(56px, 10vw, 92px) 12%;
     text-align: center;
-  }
-
-  .heroText p:not(.eyebrow),
-  .root[dir='ltr'] .heroText p:not(.eyebrow) {
-    margin-inline: auto;
   }
 
   .eyebrow {
@@ -2580,6 +2468,12 @@
     text-align: center;
   }
 
+  .aboutHeroHighlights,
+  .eventsHeroOptions,
+  .menuHeroBoard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .subHero,
   .detailSection,
   .eventDetailSection {
@@ -2652,12 +2546,6 @@
   }
 }
 
-@media (max-width: 640px) {
-  .cardsGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 767px) {
   .root {
     scroll-padding-top: 76px;
@@ -2716,7 +2604,6 @@
     width: min(150px, 42vw);
   }
 
-  .hero,
   .subHero {
     margin-top: 76px;
   }
@@ -2797,15 +2684,6 @@
     grid-template-columns: 38px minmax(0, 1fr);
   }
 
-  .heroImage {
-    min-height: 48svh;
-    background-position: center left;
-  }
-
-  .heroCopy {
-    padding: 52px 8% 60px;
-  }
-
   .aboutPageHero .subHeroCopy {
     padding-inline: 8%;
     padding-left: 8%;
@@ -2853,17 +2731,6 @@
     padding: 8px 9px;
   }
 
-  .heroText {
-    width: min(100%, 340px);
-  }
-
-  .heroText h1 {
-    padding-bottom: 24px;
-    font-size: 36px;
-    line-height: 1.08;
-  }
-
-  .heroText p,
   .copyBlock p,
   .featureCard p,
   .footer p,
@@ -2881,7 +2748,6 @@
   .detailItem p,
   .eventOption p,
   .eventCta p,
-  .blogCard p,
   .contactRows a {
     font-size: 18px;
     line-height: 1.58;
@@ -2959,7 +2825,6 @@
 
   .detailSection,
   .eventDetailSection,
-  .blogGridSection,
   .articleSection {
     padding: 68px 7%;
   }
@@ -2976,10 +2841,6 @@
   .eventOption {
     align-items: flex-start;
     padding: 23px;
-  }
-
-  .blogGrid {
-    grid-template-columns: 1fr;
   }
 
   .eventCta {
@@ -3081,11 +2942,6 @@
     padding: 0;
   }
 
-  .heroText {
-    width: min(100%, 320px);
-  }
-
-  .heroText h1,
   .subHeroCopy h1,
   .aboutHeroMain h1,
   .eventsHeroCopy h1,
@@ -3094,8 +2950,7 @@
     font-size: 34px;
   }
 
-  .cardContent,
-  .blogCard div {
+  .cardContent {
     padding: 24px;
   }
 
