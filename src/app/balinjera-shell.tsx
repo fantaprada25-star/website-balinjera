@@ -486,10 +486,12 @@ export function ReserveSection({
   actionHref = BALINJERA_ORDER_HREF,
   actionLabel,
   lang,
+  showImage = true,
 }: {
   actionHref?: string;
   actionLabel?: ReactNode;
   lang: BalinjeraLang;
+  showImage?: boolean;
 }) {
   const copy = balinjeraCopy[lang];
 
@@ -505,7 +507,9 @@ export function ReserveSection({
           {actionLabel ?? copy.orderLabel}
         </SiteButton>
       </div>
-      <div className={styles["teamImage"]} data-balinjera-animate="image" />
+      {showImage ? (
+        <div className={styles["teamImage"]} data-balinjera-animate="image" />
+      ) : null}
     </section>
   );
 }
@@ -518,6 +522,7 @@ function PageHero({
   imageClass,
   lang,
   sectionClass,
+  showImage = true,
   title,
 }: {
   actionHref?: string;
@@ -527,14 +532,25 @@ function PageHero({
   imageClass: string | undefined;
   lang: BalinjeraLang;
   sectionClass?: string | undefined;
+  showImage?: boolean;
   title: string;
 }) {
+  const className = [
+    styles["subHero"],
+    showImage ? undefined : styles["subHeroNoImage"],
+    sectionClass,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <section className={`${styles["subHero"]} ${sectionClass ?? ""}`}>
-      <div
-        className={`${styles["subHeroImage"]} ${imageClass ?? ""}`}
-        data-balinjera-animate="image"
-      />
+    <section className={className}>
+      {showImage ? (
+        <div
+          className={`${styles["subHeroImage"]} ${imageClass ?? ""}`}
+          data-balinjera-animate="image"
+        />
+      ) : null}
       <div className={styles["subHeroCopy"]} data-balinjera-animate="hero">
         <p className={styles["eyebrow"]}>{eyebrow}</p>
         <h1>{title}</h1>
@@ -1024,6 +1040,7 @@ export function BlogArticlePageContent({
         imageClass={styles["blogHeroImage"]}
         lang={lang}
         sectionClass={styles["articleHero"]}
+        showImage={false}
         title={post.title}
       />
 
@@ -1037,7 +1054,7 @@ export function BlogArticlePageContent({
         </article>
       </section>
 
-      <ReserveSection lang={lang} />
+      <ReserveSection lang={lang} showImage={false} />
     </>
   );
 }

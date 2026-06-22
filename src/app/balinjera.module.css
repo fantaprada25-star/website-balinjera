@@ -931,6 +931,23 @@
   background: var(--cream);
 }
 
+.subHeroNoImage {
+  min-height: auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.subHeroNoImage .subHeroCopy {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  align-items: center;
+  padding-inline: clamp(24px, 7vw, 128px);
+  text-align: center;
+}
+
+.subHeroNoImage .subHeroCopy p:not(.eyebrow) {
+  margin-inline: auto;
+}
+
 .subHeroImage {
   position: relative;
   min-height: 668px;
@@ -2085,6 +2102,10 @@
 .articleHero {
   min-height: 668px;
   padding-top: 0;
+}
+
+.articleHero.subHeroNoImage {
+  min-height: auto;
 }
 
 .articleSection {
