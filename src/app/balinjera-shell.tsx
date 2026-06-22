@@ -546,18 +546,201 @@ function PageHero({
   );
 }
 
+function AboutHero({
+  body,
+  eyebrow,
+  highlights,
+  lang,
+  story,
+  storyTitle,
+  title,
+}: {
+  body: string;
+  eyebrow: string;
+  highlights: readonly string[];
+  lang: BalinjeraLang;
+  story: string;
+  storyTitle: string;
+  title: string;
+}) {
+  return (
+    <section className={styles["aboutEditorialHero"]}>
+      <div className={styles["aboutHeroGrid"]}>
+        <div className={styles["aboutHeroMain"]} data-balinjera-animate="hero">
+          <h1>{title}</h1>
+          <p>{body}</p>
+          <SiteButton href={BALINJERA_ORDER_HREF} lang={lang}>
+            {balinjeraCopy[lang].orderLabel}
+          </SiteButton>
+        </div>
+        <aside
+          className={styles["aboutHeroAside"]}
+          data-balinjera-animate="card"
+        >
+          <p className={styles["eyebrow"]}>{eyebrow}</p>
+          <div className={styles["aboutHeroMark"]} aria-hidden="true">
+            <Utensils />
+          </div>
+          <div className={styles["aboutHeroStory"]}>
+            <h2>{storyTitle}</h2>
+            <p>{story}</p>
+          </div>
+        </aside>
+        <div
+          className={styles["aboutHeroHighlights"]}
+          data-balinjera-animate="card"
+        >
+          {highlights.map((item, index) => (
+            <article key={item}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p>{item}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EventsHero({
+  body,
+  eyebrow,
+  lang,
+  options,
+  title,
+}: {
+  body: string;
+  eyebrow: string;
+  lang: BalinjeraLang;
+  options: readonly string[];
+  title: string;
+}) {
+  const copy = balinjeraCopy[lang];
+
+  return (
+    <section className={styles["eventsInvitationHero"]}>
+      <div className={styles["eventsHeroCopy"]} data-balinjera-animate="hero">
+        <p className={styles["eyebrow"]}>{eyebrow}</p>
+        <h1>{title}</h1>
+        <p>{body}</p>
+        <SiteButton href={EVENTS_CONTACT_HREF} lang={lang} brown>
+          {copy.contactLabel}
+        </SiteButton>
+      </div>
+      <div className={styles["eventsHeroMedia"]} data-balinjera-animate="image">
+        <div className={styles["eventsHeroPhoto"]} aria-hidden="true" />
+      </div>
+      <div
+        className={styles["eventsHeroOptions"]}
+        data-balinjera-animate="card"
+      >
+        {options.map((item) => (
+          <article key={item}>
+            <CalendarDays aria-hidden="true" />
+            <p>{item}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function MenuHero({
+  body,
+  lang,
+  sections,
+  title,
+}: {
+  body: string;
+  lang: BalinjeraLang;
+  sections: readonly { readonly title: string }[];
+  title: string;
+}) {
+  const copy = balinjeraCopy[lang];
+
+  return (
+    <section
+      className={styles["menuBoardHero"]}
+      data-balinjera-scroll-hero="menu"
+    >
+      <div className={styles["menuHeroCopy"]} data-balinjera-animate="hero">
+        <p className={styles["eyebrow"]}>{copy.menuCta}</p>
+        <h1>{title}</h1>
+        <p>{body}</p>
+        <SiteButton href="/menu#menu-sections" lang={lang}>
+          {copy.menuCta}
+        </SiteButton>
+      </div>
+      <div className={styles["menuHeroBoard"]} data-balinjera-animate="card">
+        {sections.slice(0, 5).map((section, index) => (
+          <article key={section.title}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h2>{section.title}</h2>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BlogHero({
+  body,
+  eyebrow,
+  lang,
+  posts,
+  title,
+}: {
+  body: string;
+  eyebrow: string;
+  lang: BalinjeraLang;
+  posts: readonly BalinjeraBlogPost[];
+  title: string;
+}) {
+  const page = balinjeraCopy[lang].blogPage;
+
+  return (
+    <section className={styles["blogMastheadHero"]}>
+      <div className={styles["blogHeroIntro"]} data-balinjera-animate="hero">
+        <p className={styles["eyebrow"]}>{eyebrow}</p>
+        <h1>{title}</h1>
+        <p>{body}</p>
+        <SiteButton href="/blog#blog-posts" lang={lang}>
+          {page.articleEyebrow}
+        </SiteButton>
+      </div>
+      <div className={styles["blogHeroRail"]} data-balinjera-animate="card">
+        {posts.map((post, index) => (
+          <Link
+            className={styles["blogHeroPostLink"]}
+            href={hrefWithLang(`/blog/${post.slug}`, lang)}
+            key={post.title}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <BookOpenText aria-hidden="true" />
+              <h2>{post.title}</h2>
+              <p>{post.excerpt}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function AboutPageContent({ lang }: { lang: BalinjeraLang }) {
   const copy = balinjeraCopy[lang];
   const page = copy.aboutPage;
 
   return (
     <>
-      <PageHero
+      <AboutHero
         body={page.body}
         eyebrow={page.eyebrow}
-        imageClass={styles["aboutHeroImage"]}
+        highlights={page.highlights}
         lang={lang}
-        sectionClass={styles["aboutPageHero"]}
+        story={page.story}
+        storyTitle={page.storyTitle}
         title={page.title}
       />
 
@@ -663,14 +846,11 @@ export function EventsPageContent({ lang }: { lang: BalinjeraLang }) {
 
   return (
     <>
-      <PageHero
-        actionHref={EVENTS_CONTACT_HREF}
-        actionLabel={copy.contactLabel}
+      <EventsHero
         body={page.body}
         eyebrow={page.eyebrow}
-        imageClass={styles["eventHeroImage"]}
         lang={lang}
-        sectionClass={styles["eventPageHero"]}
+        options={page.options}
         title={page.title}
       />
 
@@ -734,16 +914,14 @@ export function MenuPageContent({ lang }: { lang: BalinjeraLang }) {
 
   return (
     <>
-      <PageHero
+      <MenuHero
         body={page.body}
-        eyebrow={copy.menuCta}
-        imageClass={styles["menuHeroImage"]}
         lang={lang}
-        sectionClass={styles["menuPageHero"]}
+        sections={page.sections}
         title={page.title}
       />
 
-      <section className={styles["menuPageSection"]}>
+      <section className={styles["menuPageSection"]} id="menu-sections">
         <div
           className={styles["menuPageHeader"]}
           data-balinjera-animate="fade-up"
@@ -785,15 +963,15 @@ export function BlogPageContent({ lang }: { lang: BalinjeraLang }) {
 
   return (
     <>
-      <PageHero
+      <BlogHero
         body={page.body}
         eyebrow={page.eyebrow}
-        imageClass={styles["blogHeroImage"]}
         lang={lang}
+        posts={page.posts}
         title={page.title}
       />
 
-      <section className={styles["blogGridSection"]}>
+      <section className={styles["blogGridSection"]} id="blog-posts">
         <div className={styles["blogGrid"]}>
           {page.posts.map((post) => (
             <Link

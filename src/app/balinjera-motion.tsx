@@ -13,6 +13,9 @@ export function BalinjeraMotion() {
     const elements = Array.from(
       root.querySelectorAll<HTMLElement>("[data-balinjera-animate]")
     );
+    const menuScrollHeroes = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-balinjera-scroll-hero='menu']")
+    );
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     if (reducedMotion.matches) {
@@ -32,6 +35,35 @@ export function BalinjeraMotion() {
     const revealVisibleElements = () => {
       const viewportHeight =
         window.innerHeight || document.documentElement.clientHeight;
+
+      menuScrollHeroes.forEach((hero) => {
+        const rect = hero.getBoundingClientRect();
+        const travel = Math.max(rect.height * 0.64, viewportHeight * 0.38);
+        const progress = Math.min(Math.max(-rect.top / travel, 0), 1);
+
+        hero.style.setProperty("--menu-copy-y", `${-8 * progress}px`);
+        hero.style.setProperty(
+          "--menu-copy-scale",
+          `${1 - 0.024 * progress}`
+        );
+        hero.style.setProperty(
+          "--menu-copy-opacity",
+          `${Math.max(0, 1 - 1.45 * progress)}`
+        );
+        hero.style.setProperty("--menu-board-y", `${-18 * progress}px`);
+        hero.style.setProperty(
+          "--menu-board-scale",
+          `${1 - 0.04 * progress}`
+        );
+        hero.style.setProperty(
+          "--menu-board-opacity",
+          `${Math.max(0.08, 1 - 1.25 * progress)}`
+        );
+        hero.style.setProperty(
+          "--menu-board-saturate",
+          `${1 + 0.14 * progress}`
+        );
+      });
 
       elements.forEach((element) => {
         if (element.classList.contains("is-visible")) {
