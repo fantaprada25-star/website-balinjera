@@ -1,0 +1,17 @@
+{
+  "name": "Balinjera | מסעדת באלינג'רה",
+  "short_name": "Balinjera",
+  "description": "Traditional Ethiopian restaurant in Tel Aviv",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1008",
+  "theme_color": "#8b6914",
+  "icons": [
+    {
+      "src": "/balinjera/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
