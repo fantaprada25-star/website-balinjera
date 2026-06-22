@@ -167,7 +167,6 @@ export default function ScrollExpandMedia({
   const scrollProgressRef = useRef(0);
   const mediaFullyExpandedRef = useRef(false);
   const touchStartYRef = useRef(0);
-  const trackRef = useRef<HTMLDivElement>(null);
 
   const setExpandedState = useCallback((expanded: boolean) => {
     mediaFullyExpandedRef.current = expanded;
@@ -222,9 +221,9 @@ export default function ScrollExpandMedia({
       return;
     }
 
-    // Mobile : pas de scroll-jack. L'expansion est dérivée de la position de
-    // scroll native (conteneur "track" haut + section sticky), ce qui préserve
-    // l'inertie et empêche tout blocage du défilement.
+    // Mobile : pas de scroll-jack. La progression est dérivée de window.scrollY
+    // directement, sans track ni sticky (qui serait cassé par overflow-x:hidden
+    // sur les ancêtres). Aucun espace extra n'est ajouté à la page.
     if (isMobileState) {
       if (expandOnHash && window.location.hash.length > 0) {
         updateProgress(1);
@@ -240,21 +239,8 @@ export default function ScrollExpandMedia({
         frame = window.requestAnimationFrame(() => {
           frame = 0;
 
-          const el = trackRef.current;
-          if (!el) {
-            return;
-          }
-
-          const distance = el.offsetHeight - window.innerHeight;
-          if (distance <= 0) {
-            updateProgress(1);
-            return;
-          }
-
-          const scrolled = Math.min(
-            Math.max(-el.getBoundingClientRect().top, 0),
-            distance
-          );
+          const distance = window.innerHeight * (MOBILE_EXPAND_VH / 100);
+          const scrolled = Math.min(Math.max(window.scrollY, 0), distance);
           updateProgress(scrolled / distance);
         });
       };
@@ -415,23 +401,8 @@ export default function ScrollExpandMedia({
 
   return (
     <div className={classes.root}>
-      <div
-        ref={trackRef}
-        style={
-          isMobileState
-            ? { height: `calc(100dvh + ${MOBILE_EXPAND_VH}vh)` }
-            : undefined
-        }
-      >
-        <section
-          className="relative flex min-h-[100dvh] flex-col items-center justify-start"
-          style={
-            isMobileState
-              ? { position: "sticky", top: 0, height: "100dvh", minHeight: 0 }
-              : undefined
-          }
-        >
-          <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
+      <section className="relative flex min-h-[100dvh] flex-col items-center justify-start">
+        <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
           <motion.div
             className="absolute inset-0 z-0 h-full"
             initial={{ opacity: 0 }}
@@ -581,8 +552,7 @@ export default function ScrollExpandMedia({
             ) : null}
           </div>
         </div>
-        </section>
-      </div>
+      </section>
     </div>
   );
 }
