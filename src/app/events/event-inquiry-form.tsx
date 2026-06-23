@@ -1,6 +1,6 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { CheckCircle2, Send } from "lucide-react";
 import { useId, useState, type FormEvent } from "react";
 
 import { balinjeraCopy, type BalinjeraLang } from "../balinjera-content";
@@ -50,6 +50,7 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
   }
 
   return (
+    <>
     <form
       id="event-inquiry"
       className={styles["eventForm"]}
@@ -129,7 +130,6 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
             name="message"
             rows={5}
             placeholder={copy.fields.message.placeholder}
-            required
           />
         </div>
       </div>
@@ -145,12 +145,6 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
           <Send aria-hidden="true" />
         </button>
 
-        {status === "success" ? (
-          <p role="status" aria-live="polite">
-            {copy.success}
-          </p>
-        ) : null}
-
         {status === "error" ? (
           <p role="status" aria-live="polite">
             {copy.error}
@@ -158,5 +152,27 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
         ) : null}
       </div>
     </form>
+
+    {status === "success" ? (
+      <div
+        className={styles["successOverlay"]}
+        role="dialog"
+        aria-modal="true"
+        aria-label={copy.success}
+        onClick={() => setStatus("idle")}
+      >
+        <div
+          className={styles["successModal"]}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <CheckCircle2 className={styles["successIcon"]} aria-hidden="true" />
+          <p>{copy.success}</p>
+          <button type="button" onClick={() => setStatus("idle")}>
+            OK
+          </button>
+        </div>
+      </div>
+    ) : null}
+    </>
   );
 }
