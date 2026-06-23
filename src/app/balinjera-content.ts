@@ -196,6 +196,7 @@ export const balinjeraCopy = {
         body: [
           "באלינג׳רה מארחת אירועים תיירותיים, ארוחות טעימה תרבותיות, ימי הולדת, מפגשים משפחתיים וארוחות צוות בכרם התימנים, אחת השכונות ההיסטוריות של תל אביב ליד שוק הכרמל. החוויה בנויה סביב אינג׳רה טרייה, מגשים משותפים, מסורת אתיופית-יהודית ואירוח מקומי חם.",
           "לקבוצות שמחפשות חוויית אוכל מיוחדת בתל אביב, באלינג׳רה מציעה אפשרויות טבעוניות ובשריות, תבשילים צבעוניים ושולחן שנועד לאכילה משותפת - תחנה טבעית למבקרים שרוצים לגלות מטבח אתיופי בתוך סביבה מקומית היסטורית.",
+          "בנוסף לאירועים במסעדה, באלינג׳רה מציעה קייטרינג אתיופי לאירועים פרטיים בתל אביב: ימי הולדת, כנסים, ארוחות צוות ומפגשי משפחה. אנחנו מגיעים עם תפריט מלא, אינג׳רה טרייה ואווירה חמה שהופכת כל אירוע לחוויה ייחודית.",
         ],
       },
       form: {
@@ -616,6 +617,7 @@ export const balinjeraCopy = {
         body: [
           "Balinjera hosts tourist events, cultural tasting meals, birthdays, family gatherings and team lunches in Kerem HaTeimanim, one of Tel Aviv's most historic neighborhoods beside Carmel Market. The experience is built around fresh injera, shared platters, Ethiopian-Jewish tradition and warm local hospitality.",
           "For groups looking for a memorable food experience in Tel Aviv, Balinjera offers vegan and meat options, colorful stews and a table designed for eating together, making it a natural stop for visitors who want to discover Ethiopian cuisine in a historic local setting.",
+          "Beyond hosting at the restaurant, Balinjera offers Ethiopian catering for private events in Tel Aviv: birthdays, conferences, corporate dinners, and family gatherings. We arrive with a full menu, fresh injera, and the warm atmosphere that turns every event into a memorable experience.",
         ],
       },
       form: {
