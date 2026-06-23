@@ -201,10 +201,13 @@ export const balinjeraCopy = {
       },
       form: {
         title: "ספרו לנו על האירוע",
-        body: "הטופס מוכן לעיצוב ולבדיקה מקומית. שליחה אמיתית דרך Resend תחובר רק אחרי שהפרויקט יעבור לריפו הסופי.",
+        body: "מלאו את הפרטים ונחזור אליכם בהקדם כדי לתכנן יחד את האירוע.",
         submit: "שליחת פרטים",
+        sending: "שולח…",
         success:
-          "הפרטים נשמרו בממשק המקומי. בשלב הזה לא נשלח אימייל, והחיבור ל-Resend יתווסף בריפו הסופי.",
+          "תודה! הפרטים נשלחו ונחזור אליכם בהקדם. אפשר גם להתקשר אלינו לכל שאלה.",
+        error:
+          "שליחת הטופס נכשלה. נסו שוב בעוד רגע או התקשרו אלינו ונשמח לעזור.",
         consent: "אני מאשר/ת שיחזרו אליי לגבי האירוע.",
         fields: {
           name: {
@@ -622,10 +625,13 @@ export const balinjeraCopy = {
       },
       form: {
         title: "Tell us about the event",
-        body: "The form is ready for local design and testing. Real Resend delivery will be connected only after the project is extracted into its final repository.",
+        body: "Fill in the details and we'll get back to you shortly to plan the event together.",
         submit: "Send details",
+        sending: "Sending…",
         success:
-          "The details were captured in the local interface. No email is sent at this stage; Resend will be connected in the final repository.",
+          "Thank you! Your details were sent and we'll get back to you shortly. Feel free to call us with any question.",
+        error:
+          "Something went wrong. Please try again in a moment or call us and we'll be glad to help.",
         consent: "I agree to be contacted about this event request.",
         fields: {
           name: {
