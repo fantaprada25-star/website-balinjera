@@ -1,8 +1,20 @@
 import type { Metadata } from 'next'
 
 import { resolveLang } from '../balinjera-content'
+import { SchemaScript } from '../balinjera-schema'
 import { buildPageMeta } from '../balinjera-seo'
 import { AboutPageContent, BalinjeraFrame } from '../balinjera-shell'
+
+const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://balinjera.vercel.app'
+
+const breadcrumbSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Balinjera', item: siteUrl + '/' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: siteUrl + '/about' },
+  ],
+}
 
 type BalinjeraSearchParams = Promise<{
   lang?: string | string[]
@@ -38,8 +50,11 @@ export default async function BalinjeraAboutPage({
   const lang = resolveLang(params?.lang)
 
   return (
-    <BalinjeraFrame active="about" currentPath="/about" lang={lang}>
-      <AboutPageContent lang={lang} />
-    </BalinjeraFrame>
+    <>
+      <SchemaScript schema={breadcrumbSchema} />
+      <BalinjeraFrame active="about" currentPath="/about" lang={lang}>
+        <AboutPageContent lang={lang} />
+      </BalinjeraFrame>
+    </>
   )
 }

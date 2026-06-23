@@ -7,8 +7,11 @@ import {
   getBlogPostSlugs,
   resolveLang,
 } from '../../balinjera-content'
+import { SchemaScript } from '../../balinjera-schema'
 import { buildPageMeta } from '../../balinjera-seo'
 import { BalinjeraFrame, BlogArticlePageContent } from '../../balinjera-shell'
+
+const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://balinjera.vercel.app'
 
 type BalinjeraArticleParams = Promise<{
   slug: string
@@ -60,13 +63,51 @@ export default async function BalinjeraBlogArticlePage({
     notFound()
   }
 
+  const articleSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    inLanguage: lang === 'he' ? 'he-IL' : 'en',
+    url: `${siteUrl}/blog/${slug}`,
+    image: `${siteUrl}/balinjera/hero.jpg`,
+    author: {
+      '@type': 'Organization',
+      name: 'Balinjera',
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Balinjera',
+      url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/balinjera/logo.png`,
+      },
+    },
+  }
+
+  const crumbSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Balinjera', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${siteUrl}/blog/${slug}` },
+    ],
+  }
+
   return (
-    <BalinjeraFrame
-      active="blog"
-      currentPath={`/blog/${slug}`}
-      lang={lang}
-    >
-      <BlogArticlePageContent lang={lang} post={post} />
-    </BalinjeraFrame>
+    <>
+      <SchemaScript schema={articleSchema} />
+      <SchemaScript schema={crumbSchema} />
+      <BalinjeraFrame
+        active="blog"
+        currentPath={`/blog/${slug}`}
+        lang={lang}
+      >
+        <BlogArticlePageContent lang={lang} post={post} />
+      </BalinjeraFrame>
+    </>
   )
 }
