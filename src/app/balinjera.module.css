@@ -3149,3 +3149,20 @@
     transform: none !important;
   }
 }
+
+.blogReadMore {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.blogReadMore a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
