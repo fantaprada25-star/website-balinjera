@@ -10,12 +10,43 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
   const copy = balinjeraCopy[lang].eventsPage.form;
   const rawId = useId();
   const formId = rawId.replace(/:/g, "");
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: data.get("name"),
+      email: data.get("email"),
+      phone: data.get("phone"),
+      date: data.get("date"),
+      guests: data.get("guests"),
+      message: data.get("message"),
+      consent: data.get("consent") === "on",
+      lang,
+    };
+
+    setStatus("sending");
+
+    try {
+      const response = await fetch("/api/event-inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("request failed");
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -109,14 +140,20 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
       </label>
 
       <div className={styles["eventFormActions"]}>
-        <button type="submit">
-          <span>{copy.submit}</span>
+        <button type="submit" disabled={status === "sending"}>
+          <span>{status === "sending" ? copy.sending : copy.submit}</span>
           <Send aria-hidden="true" />
         </button>
 
-        {submitted ? (
+        {status === "success" ? (
           <p role="status" aria-live="polite">
             {copy.success}
+          </p>
+        ) : null}
+
+        {status === "error" ? (
+          <p role="status" aria-live="polite">
+            {copy.error}
           </p>
         ) : null}
       </div>
