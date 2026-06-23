@@ -1998,6 +1998,61 @@
   padding: 12px 14px;
 }
 
+.successOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 59, 27, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.successModal {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.successIcon {
+  color: var(--green);
+  width: 52px;
+  height: 52px;
+}
+
+.successModal p {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--green);
+  margin: 0;
+}
+
+.successModal button {
+  background: var(--green);
+  color: var(--cream);
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 36px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  transition: background 0.15s;
+}
+
+.successModal button:hover {
+  background: color-mix(in srgb, var(--green) 80%, black);
+}
+
 .articleTopBar {
   display: flex;
   justify-content: flex-start;

@@ -204,8 +204,7 @@ export const balinjeraCopy = {
         body: "מלאו את הפרטים ונחזור אליכם בהקדם כדי לתכנן יחד את האירוע.",
         submit: "שליחת פרטים",
         sending: "שולח…",
-        success:
-          "תודה! הפרטים נשלחו ונחזור אליכם בהקדם. אפשר גם להתקשר אלינו לכל שאלה.",
+        success: "פנייתך נשלחה! ניצור איתך קשר בהקדם.",
         error:
           "שליחת הטופס נכשלה. נסו שוב בעוד רגע או התקשרו אלינו ונשמח לעזור.",
         consent: "אני מאשר/ת שיחזרו אליי לגבי האירוע.",
@@ -628,8 +627,7 @@ export const balinjeraCopy = {
         body: "Fill in the details and we'll get back to you shortly to plan the event together.",
         submit: "Send details",
         sending: "Sending…",
-        success:
-          "Thank you! Your details were sent and we'll get back to you shortly. Feel free to call us with any question.",
+        success: "Your request has been sent, we'll contact you very soon!",
         error:
           "Something went wrong. Please try again in a moment or call us and we'll be glad to help.",
         consent: "I agree to be contacted about this event request.",

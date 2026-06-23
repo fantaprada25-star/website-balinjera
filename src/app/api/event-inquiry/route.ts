@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  if (!name || !emailValid || !phone || !date || !guests || !message || !consent) {
+  if (!name || !emailValid || !phone || !date || !guests || !consent) {
     return NextResponse.json(
       { ok: false, error: "validation" },
       { status: 400 },
