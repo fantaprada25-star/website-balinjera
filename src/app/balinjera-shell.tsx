@@ -713,17 +713,12 @@ function BlogHero({
   posts: readonly BalinjeraBlogPost[];
   title: string;
 }) {
-  const page = balinjeraCopy[lang].blogPage;
-
   return (
     <section className={styles["blogMastheadHero"]}>
       <div className={styles["blogHeroIntro"]} data-balinjera-animate="hero">
         <p className={styles["eyebrow"]}>{eyebrow}</p>
         <h1>{title}</h1>
         <p>{body}</p>
-        <SiteButton href="/blog#blog-posts" lang={lang}>
-          {page.articleEyebrow}
-        </SiteButton>
       </div>
       <div className={styles["blogHeroRail"]} data-balinjera-animate="card">
         {posts.map((post, index) => (
@@ -840,10 +835,10 @@ export function AccessibilityPageContent({ lang }: { lang: BalinjeraLang }) {
               <h2>{page.contactLabel}</h2>
               <div className={styles["accessibilityContactLinks"]}>
                 <a href={`mailto:${BALINJERA_EMAIL}`}>
-                  {page.emailLabel}: {BALINJERA_EMAIL}
+                  {page.emailLabel}: <span dir="ltr">{BALINJERA_EMAIL}</span>
                 </a>
                 <a href={BALINJERA_PHONE_HREF}>
-                  {page.phoneLabel}: {BALINJERA_PHONE_DISPLAY}
+                  {page.phoneLabel}: <span dir="ltr">{BALINJERA_PHONE_DISPLAY}</span>
                 </a>
               </div>
               <p>{page.updated}</p>
@@ -892,7 +887,7 @@ export function EventsPageContent({ lang }: { lang: BalinjeraLang }) {
             <div className={styles["contactRows"]}>
               <a href={BALINJERA_PHONE_HREF}>
                 <Phone aria-hidden="true" />
-                <span>{BALINJERA_PHONE_DISPLAY}</span>
+                <span dir="ltr">{BALINJERA_PHONE_DISPLAY}</span>
               </a>
               <a
                 href="https://maps.google.com/?q=%D7%9E%D7%9C%D7%9F%204%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91"
@@ -988,26 +983,6 @@ export function BlogPageContent({ lang }: { lang: BalinjeraLang }) {
         title={page.title}
       />
 
-      <section className={styles["blogGridSection"]} id="blog-posts">
-        <div className={styles["blogGrid"]}>
-          {page.posts.map((post) => (
-            <Link
-              className={styles["blogCard"]}
-              data-balinjera-animate="card"
-              href={hrefWithLang(`/blog/${post.slug}`, lang)}
-              key={post.title}
-            >
-              <Image src={post.image} alt="" width={720} height={480} />
-              <div>
-                <BookOpenText aria-hidden="true" />
-                <h2>{post.title}</h2>
-                <p>{post.excerpt}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       <ReserveSection lang={lang} />
     </>
   );
@@ -1050,6 +1025,19 @@ export function BlogArticlePageContent({
             {post.body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+            {(() => {
+              const relatedPost = page.posts.find((p) => p.slug !== post.slug)
+              if (!relatedPost) return null
+              const label = lang === 'he' ? 'לקריאה נוספת' : 'Further reading'
+              return (
+                <div className={styles['blogReadMore']}>
+                  <span>{label}:</span>
+                  <Link href={hrefWithLang(`/blog/${relatedPost.slug}`, lang)}>
+                    {relatedPost.title}
+                  </Link>
+                </div>
+              )
+            })()}
           </div>
         </article>
       </section>

@@ -508,19 +508,19 @@ export default function ScrollExpandMedia({
                   textBlend ? "mix-blend-difference" : "mix-blend-normal"
                 }`}
               >
-                <motion.h2
+                <motion.h1
                   className={classes.title}
                   style={{ transform: `translateX(-${textTranslateX}vw)` }}
                 >
                   {renderTextLines(firstPart)}
-                </motion.h2>
+                </motion.h1>
                 {restPart ? (
-                  <motion.h2
+                  <motion.h1
                     className={`${classes.title} text-center`}
                     style={{ transform: `translateX(${textTranslateX}vw)` }}
                   >
                     {renderTextLines(restPart)}
-                  </motion.h2>
+                  </motion.h1>
                 ) : null}
                 {body ? (
                   <motion.div
