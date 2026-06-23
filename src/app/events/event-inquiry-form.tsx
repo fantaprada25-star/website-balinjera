@@ -159,12 +159,8 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
         role="dialog"
         aria-modal="true"
         aria-label={copy.success}
-        onClick={() => setStatus("idle")}
       >
-        <div
-          className={styles["successModal"]}
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className={styles["successModal"]}>
           <CheckCircle2 className={styles["successIcon"]} aria-hidden="true" />
           <p>{copy.success}</p>
           <button type="button" onClick={() => setStatus("idle")}>
