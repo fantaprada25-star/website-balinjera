@@ -1025,6 +1025,19 @@ export function BlogArticlePageContent({
             {post.body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+            {(() => {
+              const relatedPost = page.posts.find((p) => p.slug !== post.slug)
+              if (!relatedPost) return null
+              const label = lang === 'he' ? 'לקריאה נוספת' : 'Further reading'
+              return (
+                <div className={styles['blogReadMore']}>
+                  <span>{label}:</span>
+                  <Link href={hrefWithLang(`/blog/${relatedPost.slug}`, lang)}>
+                    {relatedPost.title}
+                  </Link>
+                </div>
+              )
+            })()}
           </div>
         </article>
       </section>

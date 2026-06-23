@@ -19,7 +19,6 @@ export type BalinjeraBlogPost = {
   slug: string;
   title: string;
   excerpt: string;
-  image: string;
   body: readonly string[];
 };
 
@@ -197,6 +196,7 @@ export const balinjeraCopy = {
         body: [
           "באלינג׳רה מארחת אירועים תיירותיים, ארוחות טעימה תרבותיות, ימי הולדת, מפגשים משפחתיים וארוחות צוות בכרם התימנים, אחת השכונות ההיסטוריות של תל אביב ליד שוק הכרמל. החוויה בנויה סביב אינג׳רה טרייה, מגשים משותפים, מסורת אתיופית-יהודית ואירוח מקומי חם.",
           "לקבוצות שמחפשות חוויית אוכל מיוחדת בתל אביב, באלינג׳רה מציעה אפשרויות טבעוניות ובשריות, תבשילים צבעוניים ושולחן שנועד לאכילה משותפת - תחנה טבעית למבקרים שרוצים לגלות מטבח אתיופי בתוך סביבה מקומית היסטורית.",
+          "בנוסף לאירועים במסעדה, באלינג׳רה מציעה קייטרינג אתיופי לאירועים פרטיים בתל אביב: ימי הולדת, כנסים, ארוחות צוות ומפגשי משפחה. אנחנו מגיעים עם תפריט מלא, אינג׳רה טרייה ואווירה חמה שהופכת כל אירוע לחוויה ייחודית.",
         ],
       },
       form: {
@@ -416,7 +416,6 @@ export const balinjeraCopy = {
           title: "מה הופך אינג׳רה ללב הארוחה?",
           excerpt:
             "אינג׳רה היא לא רק הלחם של הארוחה האתיופית, אלא הבסיס שעליו נבנים הטעמים, הקצב והחוויה המשותפת סביב השולחן.",
-          image: "/balinjera/injera-wide.jpg",
           body: [
             "אינג׳רה היא אחד הסמלים המוכרים ביותר של המטבח האתיופי, אבל מי שפוגש אותה רק כעוד לחם ליד המנה מפספס את התפקיד האמיתי שלה. היא הבסיס של הארוחה, המשטח שעליו מניחים את התבשילים, הכלי שבעזרתו אוספים כל ביס, וגם הדרך שבה כולם מתחברים לאותו מגש.",
             "הייחוד של אינג׳רה מתחיל בקמח הטף. הטף הוא דגן קטן, עשיר ומזין, שמלווה את המטבח האתיופי במשך דורות. ממנו נוצרת בלילה עדינה שעוברת תהליך תסיסה טבעי, ולכן לאינג׳רה יש חמיצות קלה, עומק טעם ומרקם אוורירי שמחזיק היטב תבשילים רכים, רטבים ותבלינים.",
@@ -431,7 +430,6 @@ export const balinjeraCopy = {
           title: "איך אוכלים ביחד בבאלינג׳רה",
           excerpt:
             "באלינג׳רה נבנתה סביב רעיון של שולחן פתוח: מגש משותף, ידיים סביב האוכל ושיחה שמתקדמת בקצב טבעי.",
-          image: "/balinjera/food-table.jpg",
           body: [
             "השם באלינג׳רה מחזיק בתוכו את הרעיון המרכזי של המקום: לאכול ביחד. בארוחה אתיופית מסורתית האוכל לא בנוי ממנות נפרדות לכל סועד, אלא ממגש שנפתח במרכז השולחן ומזמין את כולם להשתתף בו.",
             "כשמגש כזה מגיע לשולחן, כל אחד רואה את אותם צבעים וטעמים: תבשילי קטניות, ירקות מתובלים, רטבים עשירים, מנות בשריות או טבעוניות ואינג׳רה טרייה שמחזיקה את הכל. הבחירה מה לקחת, איך לשלב טעמים ומתי לחזור לעוד ביס מתרחשת תוך כדי שיחה.",
@@ -619,6 +617,7 @@ export const balinjeraCopy = {
         body: [
           "Balinjera hosts tourist events, cultural tasting meals, birthdays, family gatherings and team lunches in Kerem HaTeimanim, one of Tel Aviv's most historic neighborhoods beside Carmel Market. The experience is built around fresh injera, shared platters, Ethiopian-Jewish tradition and warm local hospitality.",
           "For groups looking for a memorable food experience in Tel Aviv, Balinjera offers vegan and meat options, colorful stews and a table designed for eating together, making it a natural stop for visitors who want to discover Ethiopian cuisine in a historic local setting.",
+          "Beyond hosting at the restaurant, Balinjera offers Ethiopian catering for private events in Tel Aviv: birthdays, conferences, corporate dinners, and family gatherings. We arrive with a full menu, fresh injera, and the warm atmosphere that turns every event into a memorable experience.",
         ],
       },
       form: {
@@ -838,7 +837,6 @@ export const balinjeraCopy = {
           title: "Why injera is the heart of the meal",
           excerpt:
             "Injera is not only the bread of an Ethiopian meal. It is the base that carries the flavors, the rhythm and the shared experience around the table.",
-          image: "/balinjera/injera-wide.jpg",
           body: [
             "Injera is one of the most recognizable symbols of Ethiopian cooking, but anyone who meets it only as bread on the side misses its real role. It is the base of the meal, the surface that holds the stews, the tool used to gather every bite and the reason everyone connects to the same platter.",
             "Its character begins with teff flour. Teff is a small, nourishing grain that has shaped Ethiopian kitchens for generations. It becomes a delicate batter that naturally ferments, giving injera its gentle tang, layered flavor and airy texture that can hold soft stews, sauces and spices.",
@@ -853,7 +851,6 @@ export const balinjeraCopy = {
           title: "How people eat together at Balinjera",
           excerpt:
             "Balinjera is built around the idea of an open table: a shared platter, hands around the food and conversation that moves at a natural pace.",
-          image: "/balinjera/food-table.jpg",
           body: [
             "The name Balinjera carries the central idea of the place: eating together. In a traditional Ethiopian meal, the food is not built as separate plates for each guest, but as a platter opened in the center of the table and shared by everyone.",
             "When a platter arrives, everyone sees the same colors and flavors: legume stews, seasoned vegetables, rich sauces, meat or vegan dishes and fresh injera holding everything together. Choosing what to take, how to combine flavors and when to return for another bite happens naturally through conversation.",
