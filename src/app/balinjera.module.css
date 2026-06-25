@@ -2831,6 +2831,15 @@
     font-size: 25px;
   }
 
+  .introCopy {
+    padding-bottom: 28px;
+  }
+
+  .cardsColumn,
+  .root[dir='ltr'] .cardsColumn {
+    padding-top: 28px;
+  }
+
   .offerImage {
     width: min(100%, 360px);
   }
