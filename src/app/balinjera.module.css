@@ -363,7 +363,7 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding-block: clamp(88px, 9vw, 132px) clamp(48px, 5vw, 76px);
+  padding-block: clamp(88px, 9vw, 132px) 28px;
   padding-inline: 8%;
   text-align: center;
 }
@@ -404,12 +404,12 @@
 .cardsColumn {
   display: flex;
   width: 59.956%;
-  align-items: center;
-  padding: 170px 0 170px clamp(42px, 6.5vw, 124px);
+  align-items: flex-start;
+  padding: 28px 0 170px clamp(42px, 6.5vw, 124px);
 }
 
 .root[dir='ltr'] .cardsColumn {
-  padding: 170px clamp(42px, 6.5vw, 124px) 170px 0;
+  padding: 28px clamp(42px, 6.5vw, 124px) 170px 0;
 }
 
 .cardsGrid {
@@ -2404,6 +2404,10 @@
     text-align: center;
   }
 
+  .introCopy {
+    padding-bottom: 28px;
+  }
+
   .eyebrow {
     margin-inline: auto;
   }
@@ -2414,7 +2418,7 @@
 
   .cardsColumn,
   .root[dir='ltr'] .cardsColumn {
-    padding: clamp(70px, 10vw, 110px) 8%;
+    padding: 28px 8% clamp(70px, 10vw, 110px);
   }
 
   .cardsGrid {
@@ -2427,7 +2431,8 @@
 
   .cardsColumn,
   .root[dir='ltr'] .cardsColumn {
-    padding-block: clamp(56px, 8vw, 96px);
+    padding-top: 28px;
+    padding-bottom: clamp(56px, 8vw, 96px);
   }
 
   .featureCard,
@@ -2829,6 +2834,15 @@
 
   .featureCard h3 {
     font-size: 25px;
+  }
+
+  .introCopy {
+    padding-bottom: 28px;
+  }
+
+  .cardsColumn,
+  .root[dir='ltr'] .cardsColumn {
+    padding-top: 28px;
   }
 
   .offerImage {
