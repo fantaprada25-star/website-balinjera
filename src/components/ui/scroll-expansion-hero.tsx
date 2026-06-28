@@ -24,6 +24,7 @@ interface ScrollExpandMediaProps {
   body?: ReactNode;
   expandOnHash?: boolean;
   preserveTitleLines?: boolean;
+  priorityMedia?: boolean;
   theme?: "espresso" | "balinjera";
   children?: ReactNode;
 }
@@ -166,6 +167,7 @@ export default function ScrollExpandMedia({
   body,
   expandOnHash = false,
   preserveTitleLines = false,
+  priorityMedia = false,
   theme = "espresso",
   children,
 }: ScrollExpandMediaProps) {
@@ -426,7 +428,7 @@ export default function ScrollExpandMedia({
         <div className={styles["stage"]}>
           <motion.div
             className={styles["background"]}
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 - scrollProgress }}
             transition={{ duration: 0.1 }}
           >
@@ -503,6 +505,7 @@ export default function ScrollExpandMedia({
                         styles["mediaSurfaceCover"],
                         classes.mediaRadius
                       )}
+                      priority={priorityMedia}
                     />
                     <motion.div
                       className={classes.imageOverlay}

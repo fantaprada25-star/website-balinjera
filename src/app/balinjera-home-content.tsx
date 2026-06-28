@@ -26,6 +26,7 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
         body={copy.hero.body}
         expandOnHash
         preserveTitleLines
+        priorityMedia
         theme="balinjera"
       />
 
