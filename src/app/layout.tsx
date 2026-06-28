@@ -42,7 +42,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} dir={dir}>
-      <body className="antialiased">
+      <body>
         {children}
         <Analytics />
         {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}

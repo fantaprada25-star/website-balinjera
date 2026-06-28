@@ -1,42 +1,43 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-import { balinjeraCopy, resolveLang } from '../balinjera-content'
+import { balinjeraCopy, resolveLang } from "../balinjera-content";
+import { MenuPageContent } from "../balinjera-menu-content";
 import {
   buildMenuSchema,
   buildPageBreadcrumbSchema,
   SchemaScript,
-} from '../balinjera-schema'
-import { buildPageMeta } from '../balinjera-seo'
-import { SeoLinkTags } from '../balinjera-seo-links'
-import { BalinjeraFrame, MenuPageContent } from '../balinjera-shell'
+} from "../balinjera-schema";
+import { buildPageMeta } from "../balinjera-seo";
+import { SeoLinkTags } from "../balinjera-seo-links";
+import { BalinjeraFrame } from "../balinjera-shell";
 
 type BalinjeraSearchParams = Promise<{
-  lang?: string | string[]
-}>
+  lang?: string | string[];
+}>;
 
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: BalinjeraSearchParams
+  searchParams: BalinjeraSearchParams;
 }): Promise<Metadata> {
-  const { lang: rawLang } = await searchParams
-  const lang = resolveLang(rawLang)
-  const copy = balinjeraCopy[lang]
+  const { lang: rawLang } = await searchParams;
+  const lang = resolveLang(rawLang);
+  const copy = balinjeraCopy[lang];
 
   return buildPageMeta({
     lang,
     title: copy.seo.pages.menu.title,
     description: copy.seo.pages.menu.description,
-  })
+  });
 }
 
 export default async function BalinjeraMenuPage({
   searchParams,
 }: {
-  searchParams?: BalinjeraSearchParams
+  searchParams?: BalinjeraSearchParams;
 }) {
-  const params = await searchParams
-  const lang = resolveLang(params?.lang)
+  const params = await searchParams;
+  const lang = resolveLang(params?.lang);
 
   return (
     <>
@@ -45,8 +46,8 @@ export default async function BalinjeraMenuPage({
         schema={[
           buildPageBreadcrumbSchema({
             lang,
-            page: 'menu',
-            path: '/menu',
+            page: "menu",
+            path: "/menu",
           }),
           buildMenuSchema(lang),
         ]}
@@ -55,5 +56,5 @@ export default async function BalinjeraMenuPage({
         <MenuPageContent lang={lang} />
       </BalinjeraFrame>
     </>
-  )
+  );
 }

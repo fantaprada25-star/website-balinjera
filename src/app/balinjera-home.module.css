@@ -1,0 +1,535 @@
+.foodIntro,
+.featureSection,
+.nameSection {
+  display: flex;
+  min-height: 100svh;
+  align-items: stretch;
+}
+
+.splitImage,
+.splitCopy {
+  min-height: inherit;
+}
+
+.splitImage {
+  position: relative;
+  width: 59.956%;
+  min-width: 0;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.splitImage::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 59, 27, 0.08), rgba(0, 59, 27, 0.02)),
+    linear-gradient(90deg, rgba(255, 253, 231, 0.06), transparent 46%);
+  content: '';
+  pointer-events: none;
+}
+
+.splitCopy {
+  display: flex;
+  width: 40%;
+  min-width: 0;
+  flex-direction: column;
+  background: var(--cream);
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 18px;
+  border: 1px solid color-mix(in srgb, var(--green) 26%, transparent);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--gold) 16%, transparent);
+  padding: 9px 13px;
+  color: var(--brown);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.copyBlock p,
+.featureCard p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.foodIntro {
+  min-height: auto;
+}
+
+.introCopy {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-block: clamp(88px, 9vw, 132px) 28px;
+  padding-inline: 8%;
+  text-align: center;
+}
+
+.copyBlock {
+  width: 100%;
+  max-width: 560px;
+}
+
+.copyBlock h2 {
+  padding-bottom: 22px;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+  text-wrap: balance;
+  text-transform: uppercase;
+}
+
+.foodIntro .copyBlock h2 {
+  padding-bottom: 0;
+}
+
+.copyBlock p {
+  padding-bottom: 28px;
+}
+
+.featureSection {
+  min-height: 920px;
+  background: var(--pale);
+}
+
+.cardsColumn {
+  display: flex;
+  width: 59.956%;
+  align-items: flex-start;
+  padding: 28px 0 170px clamp(42px, 6.5vw, 124px);
+}
+
+:global([data-balinjera-root][dir='ltr']) .cardsColumn {
+  padding: 28px clamp(42px, 6.5vw, 124px) 170px 0;
+}
+
+.cardsGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.3vw, 34px);
+}
+
+.featureCard {
+  --card-offset: 0px;
+
+  position: relative;
+  display: flex;
+  min-height: 610px;
+  overflow: hidden;
+  align-items: flex-end;
+  border: 1px solid rgba(0, 59, 27, 0.08);
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--green) 8%, transparent);
+  color: var(--green);
+  isolation: isolate;
+  transform: translateY(var(--card-offset));
+  will-change: transform;
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    filter 220ms ease,
+    opacity 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.featureCard:nth-child(2) {
+  --card-offset: -94px;
+}
+
+.featureCard:nth-child(3) {
+  --card-offset: 72px;
+}
+
+.featureCard:hover {
+  box-shadow: 0 28px 70px rgba(0, 59, 27, 0.18);
+  transform: translateY(calc(var(--card-offset) - 8px));
+}
+
+.featureCard:active {
+  transform: translateY(calc(var(--card-offset) - 2px)) scale(0.99);
+}
+
+.cardBrown {
+  background: linear-gradient(
+    180deg,
+    var(--cream) 58%,
+    color-mix(in srgb, var(--brown) 84%, var(--cream)) 100%
+  );
+}
+
+.cardGold {
+  background: linear-gradient(
+    180deg,
+    var(--cream) 58%,
+    color-mix(in srgb, var(--gold) 84%, var(--cream)) 100%
+  );
+}
+
+.cardMedia {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.74;
+  transform: scale(1.04);
+  transition:
+    opacity 300ms ease,
+    transform 700ms var(--motion);
+}
+
+.featureCard:hover .cardMedia {
+  opacity: 0.86;
+  transform: scale(1.1);
+}
+
+.cardMedia::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 253, 231, 0.16),
+    rgba(255, 253, 231, 0.42) 58%,
+    rgba(255, 253, 231, 0.24)
+  );
+  content: '';
+}
+
+.cardMediaEvent {
+  background-image: url('/balinjera/event-card.jpg');
+}
+
+.cardMediaRestaurant {
+  background-image: url('/balinjera/food-table.jpg');
+}
+
+.cardMediaProducts {
+  background-image: url('/balinjera/products-card.jpg');
+}
+
+.cardContent {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(28px, 3.4vw, 52px);
+}
+
+.featureCard h3 {
+  padding-bottom: 15px;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-wrap: balance;
+  text-transform: uppercase;
+}
+
+.cardArrow {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 26px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  background: var(--cream);
+}
+
+.cardArrow svg {
+  width: 19px;
+  height: 19px;
+}
+
+.offerCopy {
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 4vw, 52px);
+  padding: 92px 9%;
+  background: var(--pale);
+}
+
+.offerImage {
+  width: min(100%, 380px);
+  aspect-ratio: 1.28;
+  border-radius: var(--radius);
+  background-image: url('/balinjera/food-table.jpg');
+  background-position: center left;
+  background-size: cover;
+  box-shadow: 0 24px 64px color-mix(in srgb, var(--green) 12%, transparent);
+}
+
+.nameSection {
+  min-height: 805px;
+}
+
+.injeraImage {
+  background-image: url('/balinjera/injera-wide.jpg');
+  background-position: center center;
+}
+
+.figure {
+  position: absolute;
+  top: clamp(0px, 2%, 24px);
+  left: 8%;
+  width: min(8%, 92px);
+  height: auto;
+  opacity: 0.78;
+  transform: translateY(20px);
+}
+
+:global([data-balinjera-root][dir='ltr']) .figure {
+  right: 8%;
+  left: auto;
+}
+
+.nameCopy {
+  align-items: center;
+  justify-content: center;
+  padding: 96px 12%;
+  background: linear-gradient(
+    180deg,
+    var(--cream) 62%,
+    color-mix(in srgb, var(--brown) 80%, var(--cream)) 100%
+  );
+}
+
+.testimonialSection {
+  display: flex;
+  min-height: 650px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 50% 0, rgba(238, 171, 0, 0.14), transparent 35%),
+    var(--cream);
+  padding: 110px 4%;
+  text-align: center;
+}
+
+.quoteMark {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 44px;
+  color: var(--green);
+}
+
+.quoteMark::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 28px;
+  height: 18px;
+  background: var(--gold);
+  content: '';
+}
+
+.quoteMark span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-size: 76px;
+  font-weight: 700;
+  line-height: 42px;
+}
+
+.testimonialSection blockquote {
+  max-width: 860px;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+.testimonialSection cite {
+  margin-top: 28px;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+:global([data-balinjera-root].motion-ready)
+  .featureCard[data-balinjera-animate='card'] {
+  transform: translateY(calc(var(--card-offset) + 34px)) scale(0.985);
+}
+
+:global([data-balinjera-root])
+  .featureCard[data-balinjera-animate='card']:global(.is-visible) {
+  transform: translateY(var(--card-offset)) scale(1);
+}
+
+:global([data-balinjera-root])
+  .featureCard[data-balinjera-animate='card']:global(.is-visible):hover {
+  transform: translateY(calc(var(--card-offset) - 8px)) scale(1);
+}
+
+@media (max-width: 1180px) {
+  .cardsGrid {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .foodIntro,
+  .featureSection,
+  .nameSection {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .splitImage,
+  .splitCopy,
+  .introCopy,
+  .cardsColumn,
+  .offerCopy {
+    width: 100%;
+  }
+
+  .splitImage {
+    min-height: 52svh;
+  }
+
+  .splitCopy {
+    min-height: auto;
+  }
+
+  .introCopy,
+  .offerCopy,
+  .nameCopy {
+    align-items: center;
+    padding: clamp(56px, 10vw, 92px) 12%;
+    text-align: center;
+  }
+
+  .introCopy {
+    padding-bottom: 28px;
+  }
+
+  .eyebrow {
+    margin-inline: auto;
+  }
+
+  .foodIntro {
+    flex-direction: column-reverse;
+  }
+
+  .cardsColumn,
+  :global([data-balinjera-root][dir='ltr']) .cardsColumn {
+    padding: 28px 8% clamp(70px, 10vw, 110px);
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featureSection {
+    min-height: auto;
+  }
+
+  .cardsColumn,
+  :global([data-balinjera-root][dir='ltr']) .cardsColumn {
+    padding-top: 28px;
+    padding-bottom: clamp(56px, 8vw, 96px);
+  }
+
+  .featureCard,
+  .featureCard:nth-child(2),
+  .featureCard:nth-child(3),
+  .featureCard:hover,
+  .featureCard:nth-child(2):hover,
+  .featureCard:nth-child(3):hover {
+    --card-offset: 0px;
+
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 767px) {
+  .copyBlock p,
+  .featureCard p {
+    font-size: 18px;
+    line-height: 1.58;
+  }
+
+  .copyBlock h2 {
+    padding-bottom: 18px;
+    font-size: 29px;
+    line-height: 1.2;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .featureCard,
+  .featureCard:nth-child(2),
+  .featureCard:nth-child(3) {
+    min-height: 390px;
+  }
+
+  .featureCard h3 {
+    font-size: 25px;
+  }
+
+  .introCopy {
+    padding-bottom: 28px;
+  }
+
+  .cardsColumn,
+  :global([data-balinjera-root][dir='ltr']) .cardsColumn {
+    padding-top: 28px;
+  }
+
+  .offerImage {
+    width: min(100%, 360px);
+  }
+
+  .nameSection {
+    flex-direction: column;
+  }
+
+  .injeraImage {
+    min-height: 52svh;
+  }
+
+  .testimonialSection {
+    min-height: auto;
+    padding: 84px 9%;
+  }
+
+  .testimonialSection blockquote {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardContent {
+    padding: 24px;
+  }
+
+  .featureCard,
+  .featureCard:nth-child(2),
+  .featureCard:nth-child(3) {
+    min-height: 350px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global([data-balinjera-root]) .featureCard[data-balinjera-animate='card'] {
+    transform: translateY(var(--card-offset)) !important;
+  }
+}

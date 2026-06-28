@@ -1,38 +1,39 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-import { balinjeraCopy, resolveLang } from '../balinjera-content'
-import { buildPageBreadcrumbSchema, SchemaScript } from '../balinjera-schema'
-import { buildPageMeta } from '../balinjera-seo'
-import { SeoLinkTags } from '../balinjera-seo-links'
-import { BalinjeraFrame, EventsPageContent } from '../balinjera-shell'
+import { balinjeraCopy, resolveLang } from "../balinjera-content";
+import { EventsPageContent } from "../balinjera-events-content";
+import { buildPageBreadcrumbSchema, SchemaScript } from "../balinjera-schema";
+import { buildPageMeta } from "../balinjera-seo";
+import { SeoLinkTags } from "../balinjera-seo-links";
+import { BalinjeraFrame } from "../balinjera-shell";
 
 type BalinjeraSearchParams = Promise<{
-  lang?: string | string[]
-}>
+  lang?: string | string[];
+}>;
 
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: BalinjeraSearchParams
+  searchParams: BalinjeraSearchParams;
 }): Promise<Metadata> {
-  const { lang: rawLang } = await searchParams
-  const lang = resolveLang(rawLang)
-  const copy = balinjeraCopy[lang]
+  const { lang: rawLang } = await searchParams;
+  const lang = resolveLang(rawLang);
+  const copy = balinjeraCopy[lang];
 
   return buildPageMeta({
     lang,
     title: copy.seo.pages.events.title,
     description: copy.seo.pages.events.description,
-  })
+  });
 }
 
 export default async function BalinjeraEventsPage({
   searchParams,
 }: {
-  searchParams?: BalinjeraSearchParams
+  searchParams?: BalinjeraSearchParams;
 }) {
-  const params = await searchParams
-  const lang = resolveLang(params?.lang)
+  const params = await searchParams;
+  const lang = resolveLang(params?.lang);
 
   return (
     <>
@@ -40,13 +41,13 @@ export default async function BalinjeraEventsPage({
       <SchemaScript
         schema={buildPageBreadcrumbSchema({
           lang,
-          page: 'events',
-          path: '/events',
+          page: "events",
+          path: "/events",
         })}
       />
       <BalinjeraFrame active="events" currentPath="/events" lang={lang}>
         <EventsPageContent lang={lang} />
       </BalinjeraFrame>
     </>
-  )
+  );
 }
