@@ -10,6 +10,8 @@ import {
   type ReactNode,
 } from "react";
 
+import styles from "./scroll-expansion-hero.module.css";
+
 interface ScrollExpandMediaProps {
   mediaType?: "video" | "image";
   mediaSrc: string;
@@ -34,43 +36,52 @@ function clampProgress(value: number) {
   return Math.min(Math.max(value, 0), 1);
 }
 
+function cx(...classes: Array<string | false | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const themeClasses = {
   espresso: {
-    root: "overflow-x-hidden bg-[#5a3a2b] transition-colors duration-700 ease-in-out",
-    backgroundOverlay: "absolute inset-0 bg-[#5a3a2b]/18",
-    container:
-      "relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-start px-4 sm:px-6 lg:px-8",
-    mediaFrame:
-      "absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 rounded-[4px] transition-none",
-    mediaRadius: "rounded-[4px]",
+    root: cx(styles["root"], styles["rootEspresso"]),
+    backgroundOverlay: cx(
+      styles["backgroundOverlay"],
+      styles["backgroundOverlayEspresso"]
+    ),
+    container: cx(styles["container"], styles["containerEspresso"]),
+    mediaFrame: styles["mediaFrame"] ?? "",
+    mediaRadius: styles["mediaRadius"] ?? "",
     mediaShadow: "0 0 50px rgba(90, 58, 43, 0.36)",
-    videoOverlay: "absolute inset-0 rounded-[4px] bg-[#5a3a2b]/40",
-    imageOverlay: "absolute inset-0 rounded-[4px] bg-[#5a3a2b]/56",
-    date: "text-2xl font-black text-[#f6f1e7]",
-    scrollHint: "text-center text-sm font-black text-[#f6f1e7]/82",
-    title:
-      "text-4xl leading-none font-black text-[#f6f1e7] transition-none md:text-6xl lg:text-8xl",
-    body: "max-w-2xl text-center text-base leading-7 font-black text-[#f6f1e7]/82 md:text-lg",
-    contentSection: "flex w-full flex-col px-0 py-10 md:px-6 lg:py-20",
+    videoOverlay: cx(styles["mediaOverlay"], styles["videoOverlayEspresso"]),
+    imageOverlay: cx(styles["mediaOverlay"], styles["imageOverlayEspresso"]),
+    date: cx(styles["date"], styles["dateEspresso"]),
+    scrollHint: cx(styles["scrollHint"], styles["scrollHintEspresso"]),
+    title: cx(styles["title"], styles["titleEspresso"]),
+    body: cx(styles["body"], styles["bodyEspresso"]),
+    contentSection: cx(
+      styles["contentSection"],
+      styles["contentSectionEspresso"]
+    ),
   },
   balinjera: {
-    root: "overflow-x-hidden bg-[#fffde7] transition-colors duration-700 ease-in-out",
-    backgroundOverlay: "absolute inset-0 bg-[#003b1b]/30",
-    container:
-      "relative z-10 mx-auto flex w-full max-w-[1720px] flex-col items-center justify-start px-5 sm:px-8 lg:px-12",
-    mediaFrame:
-      "absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 rounded-[4px] transition-none",
-    mediaRadius: "rounded-[4px]",
+    root: cx(styles["root"], styles["rootBalinjera"]),
+    backgroundOverlay: cx(
+      styles["backgroundOverlay"],
+      styles["backgroundOverlayBalinjera"]
+    ),
+    container: cx(styles["container"], styles["containerBalinjera"]),
+    mediaFrame: styles["mediaFrame"] ?? "",
+    mediaRadius: styles["mediaRadius"] ?? "",
     mediaShadow: "0 0 54px rgba(0, 59, 27, 0.34)",
-    videoOverlay: "absolute inset-0 rounded-[4px] bg-[#003b1b]/42",
-    imageOverlay: "absolute inset-0 rounded-[4px] bg-[#003b1b]/46",
-    date: "text-xl font-black text-[#eeab00] drop-shadow-[0_2px_8px_rgba(0,59,27,0.45)] md:text-2xl",
-    scrollHint:
-      "text-center text-sm font-black text-[#fffde7]/86 drop-shadow-[0_2px_8px_rgba(0,59,27,0.42)]",
-    title:
-      "text-4xl leading-none font-black text-[#fffde7] drop-shadow-[0_3px_14px_rgba(0,59,27,0.55)] transition-none md:text-6xl lg:text-8xl",
-    body: "max-w-3xl text-center text-base leading-7 font-black text-[#fffde7]/88 drop-shadow-[0_2px_10px_rgba(0,59,27,0.46)] md:text-lg lg:text-xl",
-    contentSection: "flex w-full flex-col px-0 py-0",
+    videoOverlay: cx(styles["mediaOverlay"], styles["videoOverlayBalinjera"]),
+    imageOverlay: cx(styles["mediaOverlay"], styles["imageOverlayBalinjera"]),
+    date: cx(styles["date"], styles["dateBalinjera"]),
+    scrollHint: cx(styles["scrollHint"], styles["scrollHintBalinjera"]),
+    title: cx(styles["title"], styles["titleBalinjera"]),
+    body: cx(styles["body"], styles["bodyBalinjera"]),
+    contentSection: cx(
+      styles["contentSection"],
+      styles["contentSectionBalinjera"]
+    ),
   },
 } satisfies Record<
   NonNullable<ScrollExpandMediaProps["theme"]>,
@@ -215,7 +226,7 @@ export default function ScrollExpandMedia({
   }, []);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reducedMotion.matches) {
       updateProgress(1);
       return;
@@ -331,17 +342,21 @@ export default function ScrollExpandMedia({
     };
 
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === ' ' || e.key === 'PageDown' || e.key === 'ArrowDown') {
+      if (e.key === " " || e.key === "PageDown" || e.key === "ArrowDown") {
         if (!mediaFullyExpandedRef.current) {
           e.preventDefault();
           updateProgress(Math.min(scrollProgressRef.current + 0.25, 1));
         }
       }
-      if ((e.key === 'PageUp' || e.key === 'ArrowUp') && scrollProgressRef.current > 0 && !mediaFullyExpandedRef.current) {
+      if (
+        (e.key === "PageUp" || e.key === "ArrowUp") &&
+        scrollProgressRef.current > 0 &&
+        !mediaFullyExpandedRef.current
+      ) {
         e.preventDefault();
         updateProgress(Math.max(scrollProgressRef.current - 0.25, 0));
       }
-      if (e.key === 'End' || e.key === 'Enter') {
+      if (e.key === "End" || e.key === "Enter") {
         if (!mediaFullyExpandedRef.current) updateProgress(1);
       }
     };
@@ -363,7 +378,13 @@ export default function ScrollExpandMedia({
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("keydown", handleKey);
     };
-  }, [expandOnHash, isMobileState, setExpandedState, touchStartY, updateProgress]);
+  }, [
+    expandOnHash,
+    isMobileState,
+    setExpandedState,
+    touchStartY,
+    updateProgress,
+  ]);
 
   useEffect(() => {
     if (!expandOnHash) {
@@ -401,10 +422,10 @@ export default function ScrollExpandMedia({
 
   return (
     <div className={classes.root}>
-      <section className="relative flex min-h-[100dvh] flex-col items-center justify-start">
-        <div className="relative flex min-h-[100dvh] w-full flex-col items-center">
+      <section className={styles["section"]}>
+        <div className={styles["stage"]}>
           <motion.div
-            className="absolute inset-0 z-0 h-full"
+            className={styles["background"]}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 - scrollProgress }}
             transition={{ duration: 0.1 }}
@@ -414,14 +435,14 @@ export default function ScrollExpandMedia({
               alt=""
               width={1920}
               height={1080}
-              className="h-screen w-screen object-cover object-center"
+              className={styles["backgroundImage"]}
               priority
             />
             <div className={classes.backgroundOverlay} />
           </motion.div>
 
           <div className={classes.container}>
-            <div className="relative flex h-[100dvh] w-full flex-col items-center justify-center">
+            <div className={styles["viewport"]}>
               <div
                 className={classes.mediaFrame}
                 style={{
@@ -433,13 +454,16 @@ export default function ScrollExpandMedia({
                 }}
               >
                 {mediaType === "video" ? (
-                  <div className="pointer-events-none relative h-full w-full">
+                  <div className={styles["mediaSurfaceFrame"]}>
                     {isYoutubeVideo ? (
                       <iframe
                         width="100%"
                         height="100%"
                         src={getYoutubeEmbedSrc(mediaSrc)}
-                        className={`h-full w-full ${classes.mediaRadius}`}
+                        className={cx(
+                          styles["mediaSurface"],
+                          classes.mediaRadius
+                        )}
                         title={title || "Video content"}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -453,7 +477,10 @@ export default function ScrollExpandMedia({
                         loop
                         playsInline
                         preload="auto"
-                        className={`h-full w-full object-cover ${classes.mediaRadius}`}
+                        className={cx(
+                          styles["mediaSurfaceCover"],
+                          classes.mediaRadius
+                        )}
                         controls={false}
                         disablePictureInPicture
                       />
@@ -466,13 +493,16 @@ export default function ScrollExpandMedia({
                     />
                   </div>
                 ) : (
-                  <div className="relative h-full w-full">
+                  <div className={styles["mediaSurfaceWrap"]}>
                     <Image
                       src={mediaSrc}
                       alt={title || "Media content"}
                       width={1280}
                       height={720}
-                      className={`h-full w-full object-cover ${classes.mediaRadius}`}
+                      className={cx(
+                        styles["mediaSurfaceCover"],
+                        classes.mediaRadius
+                      )}
                     />
                     <motion.div
                       className={classes.imageOverlay}
@@ -483,7 +513,7 @@ export default function ScrollExpandMedia({
                   </div>
                 )}
 
-                <div className="relative z-10 mt-4 flex flex-col items-center text-center transition-none">
+                <div className={styles["mediaMeta"]}>
                   {date ? (
                     <p
                       className={classes.date}
@@ -504,9 +534,12 @@ export default function ScrollExpandMedia({
               </div>
 
               <div
-                className={`relative z-10 flex w-full flex-col items-center justify-center gap-4 text-center transition-none ${
-                  textBlend ? "mix-blend-difference" : "mix-blend-normal"
-                }`}
+                className={cx(
+                  styles["textLayer"],
+                  textBlend
+                    ? styles["textBlendDifference"]
+                    : styles["textBlendNormal"]
+                )}
               >
                 <motion.h1
                   className={classes.title}
@@ -516,7 +549,7 @@ export default function ScrollExpandMedia({
                 </motion.h1>
                 {restPart ? (
                   <motion.h1
-                    className={`${classes.title} text-center`}
+                    className={classes.title}
                     style={{ transform: `translateX(${textTranslateX}vw)` }}
                   >
                     {renderTextLines(restPart)}
