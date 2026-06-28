@@ -1,27 +1,39 @@
 # Balinjera Restaurant
 
-Balinjera (באלינג'רה) is a traditional Ethiopian restaurant in Tel Aviv, Israel.
+> Traditional Ethiopian restaurant in Tel Aviv, Israel, specializing in injera and shared Ethiopian meals.
 
-## Key information
+Balinjera (באלינג'רה) serves traditional Ethiopian food at Malan 4 / HaKovshim 39 in Kerem HaTeimanim, near Carmel Market. The site is bilingual: Hebrew is the default RTL experience, and English LTR pages are available with the `?lang=en` query parameter.
+
+Important details:
+
 - Cuisine: Traditional Ethiopian, specializing in injera (אינג'רה)
-- Address: Malan 4 / HaKovshim 39, Kerem HaTeimanim (near Carmel Market), Tel Aviv, Israel
+- Hours: Sunday–Thursday 12:00–20:00, Friday 11:00–15:00, Saturday closed
 - Phone: 03-525-2527
 - Email: fantaprada25@gmail.com
-- Hours: Sunday–Thursday 12:00–20:00, Friday 11:00–15:00, Saturday closed
-- Online orders: https://wolt.com/he/isr/tel-aviv/restaurant/balinjera
 
-## Pages
-- Home: https://www.balinjera.com/
-- About: https://www.balinjera.com/about
-- Menu: https://www.balinjera.com/menu
-- Events & Catering: https://www.balinjera.com/events
-- Blog: https://www.balinjera.com/blog
-- Blog – Injera, Heart of the Meal: https://www.balinjera.com/blog/injera-heart-of-meal
-- Blog – Eating Together at Balinjera: https://www.balinjera.com/blog/eat-together-balinjera
+## Key Pages
 
-## Social
-- Instagram: https://www.instagram.com/ethiopianfoodrestaurant/
-- Facebook: https://www.facebook.com/Traditional.Ethiopian.Cuisine/
+- [Home](https://www.balinjera.com/): Main restaurant page with overview, hours, contact details, and ordering links.
+- [About](https://www.balinjera.com/about): Background on Balinjera, Ethiopian food traditions, and the restaurant story.
+- [Menu](https://www.balinjera.com/menu): Restaurant menu and dishes.
+- [Events and Catering](https://www.balinjera.com/events): Private events, catering, and group meal inquiries.
+- [Blog](https://www.balinjera.com/blog): Articles about Ethiopian food, injera, and eating together at Balinjera.
 
-## Languages
-Primary: Hebrew (RTL). English available at all pages via the ?lang=en query parameter.
+## Language Versions
+
+- [Hebrew home](https://www.balinjera.com/): Default Hebrew RTL version.
+- [English home](https://www.balinjera.com/?lang=en): English LTR version.
+- [English about](https://www.balinjera.com/about?lang=en): English restaurant background.
+- [English menu](https://www.balinjera.com/menu?lang=en): English menu page.
+- [English events and catering](https://www.balinjera.com/events?lang=en): English events and catering page.
+
+## Featured Articles
+
+- [Injera, Heart of the Meal](https://www.balinjera.com/blog/injera-heart-of-meal): Article about injera and its role in Ethiopian cuisine.
+- [Eating Together at Balinjera](https://www.balinjera.com/blog/eat-together-balinjera): Article about shared Ethiopian dining.
+
+## Ordering and Social Profiles
+
+- [Online orders on Wolt](https://wolt.com/he/isr/tel-aviv/restaurant/balinjera): Online ordering for Balinjera.
+- [Instagram](https://www.instagram.com/ethiopianfoodrestaurant/): Balinjera Instagram profile.
+- [Facebook](https://www.facebook.com/Traditional.Ethiopian.Cuisine/): Balinjera Facebook page.
