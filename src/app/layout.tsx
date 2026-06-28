@@ -7,7 +7,9 @@ import './globals.css'
 const DEFAULT_SITE_URL = 'https://balinjera.vercel.app'
 
 const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? DEFAULT_SITE_URL
-const googleAnalyticsId = process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID']?.trim()
+const DEFAULT_GOOGLE_ANALYTICS_ID = 'G-8FFS8Y1PH2'
+const googleAnalyticsId =
+  process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID']?.trim() || DEFAULT_GOOGLE_ANALYTICS_ID
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
