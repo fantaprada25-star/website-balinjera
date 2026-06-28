@@ -24,6 +24,7 @@ interface ScrollExpandMediaProps {
   body?: ReactNode;
   expandOnHash?: boolean;
   preserveTitleLines?: boolean;
+  priorityMedia?: boolean;
   theme?: "espresso" | "balinjera";
   children?: ReactNode;
 }
@@ -166,6 +167,7 @@ export default function ScrollExpandMedia({
   body,
   expandOnHash = false,
   preserveTitleLines = false,
+  priorityMedia = false,
   theme = "espresso",
   children,
 }: ScrollExpandMediaProps) {
@@ -178,6 +180,7 @@ export default function ScrollExpandMedia({
   const scrollProgressRef = useRef(0);
   const mediaFullyExpandedRef = useRef(false);
   const touchStartYRef = useRef(0);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   const setExpandedState = useCallback((expanded: boolean) => {
     mediaFullyExpandedRef.current = expanded;
@@ -232,10 +235,11 @@ export default function ScrollExpandMedia({
       return;
     }
 
-    // Mobile : pas de scroll-jack. La progression est dérivée de window.scrollY
-    // directement, sans track ni sticky (qui serait cassé par overflow-x:hidden
-    // sur les ancêtres). Aucun espace extra n'est ajouté à la page.
-    if (isMobileState) {
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+
+    // Mobile: native scroll drives a local track, so the first swipe reaches
+    // the browser scroll pipeline without any touchmove preventDefault.
+    if (mobileQuery.matches) {
       if (expandOnHash && window.location.hash.length > 0) {
         updateProgress(1);
         return;
@@ -250,8 +254,23 @@ export default function ScrollExpandMedia({
         frame = window.requestAnimationFrame(() => {
           frame = 0;
 
-          const distance = window.innerHeight * (MOBILE_EXPAND_VH / 100);
-          const scrolled = Math.min(Math.max(window.scrollY, 0), distance);
+          const track = trackRef.current;
+
+          if (!track) {
+            return;
+          }
+
+          const distance = track.offsetHeight - window.innerHeight;
+
+          if (distance <= 0) {
+            updateProgress(1);
+            return;
+          }
+
+          const scrolled = Math.min(
+            Math.max(-track.getBoundingClientRect().top, 0),
+            distance
+          );
           updateProgress(scrolled / distance);
         });
       };
@@ -422,170 +441,189 @@ export default function ScrollExpandMedia({
 
   return (
     <div className={classes.root}>
-      <section className={styles["section"]}>
-        <div className={styles["stage"]}>
-          <motion.div
-            className={styles["background"]}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 - scrollProgress }}
-            transition={{ duration: 0.1 }}
-          >
-            <Image
-              src={bgImageSrc}
-              alt=""
-              width={1920}
-              height={1080}
-              className={styles["backgroundImage"]}
-              priority
-            />
-            <div className={classes.backgroundOverlay} />
-          </motion.div>
+      <div
+        ref={trackRef}
+        style={
+          isMobileState
+            ? { height: `calc(100dvh + ${MOBILE_EXPAND_VH}vh)` }
+            : undefined
+        }
+      >
+        <section
+          className={styles["section"]}
+          style={
+            isMobileState
+              ? { position: "sticky", top: 0, height: "100dvh", minHeight: 0 }
+              : undefined
+          }
+        >
+          <div className={styles["stage"]}>
+            <motion.div
+              className={styles["background"]}
+              initial={false}
+              animate={{ opacity: 1 - scrollProgress }}
+              transition={{ duration: 0.1 }}
+            >
+              <Image
+                src={bgImageSrc}
+                alt=""
+                width={1920}
+                height={1080}
+                className={styles["backgroundImage"]}
+                priority
+              />
+              <div className={classes.backgroundOverlay} />
+            </motion.div>
 
-          <div className={classes.container}>
-            <div className={styles["viewport"]}>
-              <div
-                className={classes.mediaFrame}
-                style={{
-                  width: `${mediaWidth}px`,
-                  height: `${mediaHeight}px`,
-                  maxWidth: "95vw",
-                  maxHeight: "85vh",
-                  boxShadow: classes.mediaShadow,
-                }}
-              >
-                {mediaType === "video" ? (
-                  <div className={styles["mediaSurfaceFrame"]}>
-                    {isYoutubeVideo ? (
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={getYoutubeEmbedSrc(mediaSrc)}
-                        className={cx(
-                          styles["mediaSurface"],
-                          classes.mediaRadius
-                        )}
-                        title={title || "Video content"}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
+            <div className={classes.container}>
+              <div className={styles["viewport"]}>
+                <div
+                  className={classes.mediaFrame}
+                  style={{
+                    width: `${mediaWidth}px`,
+                    height: `${mediaHeight}px`,
+                    maxWidth: "95vw",
+                    maxHeight: "85vh",
+                    boxShadow: classes.mediaShadow,
+                  }}
+                >
+                  {mediaType === "video" ? (
+                    <div className={styles["mediaSurfaceFrame"]}>
+                      {isYoutubeVideo ? (
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={getYoutubeEmbedSrc(mediaSrc)}
+                          className={cx(
+                            styles["mediaSurface"],
+                            classes.mediaRadius
+                          )}
+                          title={title || "Video content"}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <video
+                          src={mediaSrc}
+                          poster={posterSrc}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          preload="auto"
+                          className={cx(
+                            styles["mediaSurfaceCover"],
+                            classes.mediaRadius
+                          )}
+                          controls={false}
+                          disablePictureInPicture
+                        />
+                      )}
+                      <motion.div
+                        className={classes.videoOverlay}
+                        initial={{ opacity: 0.7 }}
+                        animate={{ opacity: 0.5 - scrollProgress * 0.3 }}
+                        transition={{ duration: 0.2 }}
                       />
-                    ) : (
-                      <video
+                    </div>
+                  ) : (
+                    <div className={styles["mediaSurfaceWrap"]}>
+                      <Image
                         src={mediaSrc}
-                        poster={posterSrc}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
+                        alt={title || "Media content"}
+                        width={1280}
+                        height={720}
                         className={cx(
                           styles["mediaSurfaceCover"],
                           classes.mediaRadius
                         )}
-                        controls={false}
-                        disablePictureInPicture
+                        priority={priorityMedia}
                       />
-                    )}
-                    <motion.div
-                      className={classes.videoOverlay}
-                      initial={{ opacity: 0.7 }}
-                      animate={{ opacity: 0.5 - scrollProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </div>
-                ) : (
-                  <div className={styles["mediaSurfaceWrap"]}>
-                    <Image
-                      src={mediaSrc}
-                      alt={title || "Media content"}
-                      width={1280}
-                      height={720}
-                      className={cx(
-                        styles["mediaSurfaceCover"],
-                        classes.mediaRadius
-                      )}
-                    />
-                    <motion.div
-                      className={classes.imageOverlay}
-                      initial={{ opacity: 0.7 }}
-                      animate={{ opacity: 0.7 - scrollProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </div>
-                )}
+                      <motion.div
+                        className={classes.imageOverlay}
+                        initial={{ opacity: 0.7 }}
+                        animate={{ opacity: 0.7 - scrollProgress * 0.3 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </div>
+                  )}
 
-                <div className={styles["mediaMeta"]}>
-                  {date ? (
-                    <p
-                      className={classes.date}
-                      style={{ transform: `translateX(-${textTranslateX}vw)` }}
-                    >
-                      {date}
-                    </p>
-                  ) : null}
-                  {scrollToExpand ? (
-                    <p
-                      className={classes.scrollHint}
+                  <div className={styles["mediaMeta"]}>
+                    {date ? (
+                      <p
+                        className={classes.date}
+                        style={{
+                          transform: `translateX(-${textTranslateX}vw)`,
+                        }}
+                      >
+                        {date}
+                      </p>
+                    ) : null}
+                    {scrollToExpand ? (
+                      <p
+                        className={classes.scrollHint}
+                        style={{ transform: `translateX(${textTranslateX}vw)` }}
+                      >
+                        {scrollToExpand}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div
+                  className={cx(
+                    styles["textLayer"],
+                    textBlend
+                      ? styles["textBlendDifference"]
+                      : styles["textBlendNormal"]
+                  )}
+                >
+                  <motion.h1
+                    className={classes.title}
+                    style={{ transform: `translateX(-${textTranslateX}vw)` }}
+                  >
+                    {renderTextLines(firstPart)}
+                  </motion.h1>
+                  {restPart ? (
+                    <motion.h1
+                      className={classes.title}
                       style={{ transform: `translateX(${textTranslateX}vw)` }}
                     >
-                      {scrollToExpand}
-                    </p>
+                      {renderTextLines(restPart)}
+                    </motion.h1>
+                  ) : null}
+                  {body ? (
+                    <motion.div
+                      className={classes.body}
+                      initial={false}
+                      animate={{
+                        opacity: Math.max(1 - scrollProgress * 1.35, 0),
+                        y: scrollProgress * 24,
+                      }}
+                      transition={{ duration: 0.12 }}
+                    >
+                      {body}
+                    </motion.div>
                   ) : null}
                 </div>
               </div>
 
-              <div
-                className={cx(
-                  styles["textLayer"],
-                  textBlend
-                    ? styles["textBlendDifference"]
-                    : styles["textBlendNormal"]
-                )}
-              >
-                <motion.h1
-                  className={classes.title}
-                  style={{ transform: `translateX(-${textTranslateX}vw)` }}
+              {children ? (
+                <motion.section
+                  className={classes.contentSection}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: showContent ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.7 }}
                 >
-                  {renderTextLines(firstPart)}
-                </motion.h1>
-                {restPart ? (
-                  <motion.h1
-                    className={classes.title}
-                    style={{ transform: `translateX(${textTranslateX}vw)` }}
-                  >
-                    {renderTextLines(restPart)}
-                  </motion.h1>
-                ) : null}
-                {body ? (
-                  <motion.div
-                    className={classes.body}
-                    initial={false}
-                    animate={{
-                      opacity: Math.max(1 - scrollProgress * 1.35, 0),
-                      y: scrollProgress * 24,
-                    }}
-                    transition={{ duration: 0.12 }}
-                  >
-                    {body}
-                  </motion.div>
-                ) : null}
-              </div>
+                  {children}
+                </motion.section>
+              ) : null}
             </div>
-
-            {children ? (
-              <motion.section
-                className={classes.contentSection}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: showContent ? 1 : 0,
-                }}
-                transition={{ duration: 0.7 }}
-              >
-                {children}
-              </motion.section>
-            ) : null}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
