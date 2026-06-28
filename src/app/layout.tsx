@@ -2,11 +2,11 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
+
+import { getSiteUrl } from './balinjera-seo'
 import './globals.css'
 
-const DEFAULT_SITE_URL = 'https://balinjera.vercel.app'
-
-const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? DEFAULT_SITE_URL
+const siteUrl = getSiteUrl()
 const DEFAULT_GOOGLE_ANALYTICS_ID = 'G-8FFS8Y1PH2'
 const googleAnalyticsId =
   process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID']?.trim() || DEFAULT_GOOGLE_ANALYTICS_ID

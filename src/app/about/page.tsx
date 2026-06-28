@@ -1,20 +1,10 @@
 import type { Metadata } from 'next'
 
-import { resolveLang } from '../balinjera-content'
-import { SchemaScript } from '../balinjera-schema'
+import { balinjeraCopy, resolveLang } from '../balinjera-content'
+import { buildPageBreadcrumbSchema, SchemaScript } from '../balinjera-schema'
 import { buildPageMeta } from '../balinjera-seo'
+import { SeoLinkTags } from '../balinjera-seo-links'
 import { AboutPageContent, BalinjeraFrame } from '../balinjera-shell'
-
-const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://balinjera.vercel.app'
-
-const breadcrumbSchema: Record<string, unknown> = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Balinjera', item: siteUrl + '/' },
-    { '@type': 'ListItem', position: 2, name: 'About', item: siteUrl + '/about' },
-  ],
-}
 
 type BalinjeraSearchParams = Promise<{
   lang?: string | string[]
@@ -27,17 +17,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang: rawLang } = await searchParams
   const lang = resolveLang(rawLang)
+  const copy = balinjeraCopy[lang]
+
   return buildPageMeta({
     lang,
-    path: '/about',
-    title:
-      lang === 'he'
-        ? 'על באלינג׳רה — הסיפור שלנו | מסעדה אתיופית תל אביב'
-        : 'About Balinjera — Our Story | Ethiopian Restaurant Tel Aviv',
-    description:
-      lang === 'he'
-        ? 'הכירו את הסיפור מאחורי מסעדת באלינג׳רה — מטבח אתיופי אותנטי עם לב, בכרם התימנים תל אביב.'
-        : 'Learn the story behind Balinjera — authentic Ethiopian cuisine served with heart in Kerem HaTeimanim, Tel Aviv.',
+    title: copy.seo.pages.about.title,
+    description: copy.seo.pages.about.description,
   })
 }
 
@@ -51,7 +36,14 @@ export default async function BalinjeraAboutPage({
 
   return (
     <>
-      <SchemaScript schema={breadcrumbSchema} />
+      <SeoLinkTags lang={lang} path="/about" />
+      <SchemaScript
+        schema={buildPageBreadcrumbSchema({
+          lang,
+          page: 'about',
+          path: '/about',
+        })}
+      />
       <BalinjeraFrame active="about" currentPath="/about" lang={lang}>
         <AboutPageContent lang={lang} />
       </BalinjeraFrame>
