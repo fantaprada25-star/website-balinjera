@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
@@ -6,6 +7,7 @@ import './globals.css'
 const DEFAULT_SITE_URL = 'https://balinjera.vercel.app'
 
 const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? DEFAULT_SITE_URL
+const googleAnalyticsId = process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID']?.trim()
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -17,6 +19,9 @@ export const metadata: Metadata = {
     apple: '/balinjera/favicon.png',
   },
   manifest: '/manifest.webmanifest',
+  verification: {
+    google: 'YA_jjypnYMrW-7_dEloIyxEiDYojV9MMWWiGNfUu4nI',
+  },
 }
 
 export const viewport: Viewport = {
@@ -38,6 +43,7 @@ export default async function RootLayout({
       <body className="antialiased">
         {children}
         <Analytics />
+        {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
       </body>
     </html>
   )
