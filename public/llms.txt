@@ -11,13 +11,13 @@ Balinjera (באלינג'רה) is a traditional Ethiopian restaurant in Tel Aviv,
 - Online orders: https://wolt.com/he/isr/tel-aviv/restaurant/balinjera
 
 ## Pages
-- Home: https://balinjera.vercel.app/
-- About: https://balinjera.vercel.app/about
-- Menu: https://balinjera.vercel.app/menu
-- Events & Catering: https://balinjera.vercel.app/events
-- Blog: https://balinjera.vercel.app/blog
-- Blog – Injera, Heart of the Meal: https://balinjera.vercel.app/blog/injera-heart-of-meal
-- Blog – Eating Together at Balinjera: https://balinjera.vercel.app/blog/eat-together-balinjera
+- Home: https://www.balinjera.com/
+- About: https://www.balinjera.com/about
+- Menu: https://www.balinjera.com/menu
+- Events & Catering: https://www.balinjera.com/events
+- Blog: https://www.balinjera.com/blog
+- Blog – Injera, Heart of the Meal: https://www.balinjera.com/blog/injera-heart-of-meal
+- Blog – Eating Together at Balinjera: https://www.balinjera.com/blog/eat-together-balinjera
 
 ## Social
 - Instagram: https://www.instagram.com/ethiopianfoodrestaurant/

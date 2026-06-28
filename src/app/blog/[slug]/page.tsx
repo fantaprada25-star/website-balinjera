@@ -7,11 +7,14 @@ import {
   getBlogPostSlugs,
   resolveLang,
 } from '../../balinjera-content'
-import { SchemaScript } from '../../balinjera-schema'
+import {
+  buildBlogArticleBreadcrumbSchema,
+  buildBlogPostingSchema,
+  SchemaScript,
+} from '../../balinjera-schema'
 import { buildPageMeta } from '../../balinjera-seo'
+import { SeoLinkTags } from '../../balinjera-seo-links'
 import { BalinjeraFrame, BlogArticlePageContent } from '../../balinjera-shell'
-
-const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://balinjera.vercel.app'
 
 type BalinjeraArticleParams = Promise<{
   slug: string
@@ -38,11 +41,10 @@ export async function generateMetadata({
   const copy = balinjeraCopy[lang]
   const post = copy.blogPage.posts.find((p) => p.slug === slug)
   if (!post) return {}
-  const suffix = lang === 'he' ? ' | מסעדת באלינג׳רה' : ' | Balinjera'
+
   return buildPageMeta({
     lang,
-    path: `/blog/${slug}`,
-    title: `${post.title}${suffix}`,
+    title: `${post.title}${copy.seo.blogArticleTitleSuffix}`,
     description: post.excerpt,
     ogType: 'article',
   })
@@ -63,44 +65,15 @@ export default async function BalinjeraBlogArticlePage({
     notFound()
   }
 
-  const articleSchema: Record<string, unknown> = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    inLanguage: lang === 'he' ? 'he-IL' : 'en',
-    url: `${siteUrl}/blog/${slug}`,
-    image: `${siteUrl}/balinjera/hero.jpg`,
-    author: {
-      '@type': 'Organization',
-      name: 'Balinjera',
-      url: siteUrl,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Balinjera',
-      url: siteUrl,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${siteUrl}/balinjera/logo.png`,
-      },
-    },
-  }
-
-  const crumbSchema: Record<string, unknown> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Balinjera', item: `${siteUrl}/` },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog` },
-      { '@type': 'ListItem', position: 3, name: post.title, item: `${siteUrl}/blog/${slug}` },
-    ],
-  }
-
   return (
     <>
-      <SchemaScript schema={articleSchema} />
-      <SchemaScript schema={crumbSchema} />
+      <SeoLinkTags lang={lang} path={`/blog/${post.slug}`} />
+      <SchemaScript
+        schema={[
+          buildBlogPostingSchema({ lang, post }),
+          buildBlogArticleBreadcrumbSchema({ lang, post }),
+        ]}
+      />
       <BalinjeraFrame
         active="blog"
         currentPath={`/blog/${slug}`}

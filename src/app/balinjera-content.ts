@@ -19,7 +19,19 @@ export type BalinjeraBlogPost = {
   slug: string;
   title: string;
   excerpt: string;
+  publishedAt: string;
+  modifiedAt: string;
   body: readonly string[];
+};
+
+export type BalinjeraSeoPageMeta = {
+  title: string;
+  description: string;
+};
+
+export type BalinjeraSeoCopy = {
+  pages: Record<BalinjeraPageKey, BalinjeraSeoPageMeta>;
+  blogArticleTitleSuffix: string;
 };
 
 export type BalinjeraMenuItem = {
@@ -118,6 +130,41 @@ export const balinjeraCopy = {
       { key: "blog", label: "בלוג", href: "/blog" },
       { key: "order", label: "הזמינו", href: BALINJERA_ORDER_HREF },
     ],
+    seo: {
+      pages: {
+        home: {
+          title: "מסעדת באלינג׳רה — מטבח אתיופי מסורתי בתל אביב",
+          description:
+            "מסעדת באלינג׳רה בכרם התימנים, תל אביב. מטבח אתיופי אותנטי, אינג׳רה טרייה ואווירה חמה. הזמינו שולחן או קייטרינג אתיופי.",
+        },
+        about: {
+          title: "על באלינג׳רה — הסיפור שלנו | מסעדה אתיופית תל אביב",
+          description:
+            "הכירו את הסיפור מאחורי מסעדת באלינג׳רה — מטבח אתיופי אותנטי עם לב, בכרם התימנים תל אביב.",
+        },
+        menu: {
+          title: "התפריט | מסעדת באלינג׳רה — מנות אתיופיות תל אביב",
+          description:
+            "גלו את תפריט באלינג׳רה — מנות אתיופיות מסורתיות, אינג׳רה טרייה, מבחר טבעוני. כשר. כרם התימנים, תל אביב.",
+        },
+        events: {
+          title: "אירועים וקייטרינג אתיופי | מסעדת באלינג׳רה תל אביב",
+          description:
+            "קייטרינג אתיופי לאירועים פרטיים ומפגשי קבוצות בתל אביב. באלינג׳רה — חוויה ייחודית לכל אירוע. צרו קשר.",
+        },
+        blog: {
+          title: "בלוג | מסעדת באלינג׳רה — מטבח אתיופי ואינג׳רה",
+          description:
+            "מאמרים על המטבח האתיופי, אינג׳רה ותרבות האוכל של באלינג׳רה. קראו ולמדו.",
+        },
+        accessibility: {
+          title: "הצהרת נגישות | מסעדת באלינג׳רה",
+          description:
+            "הצהרת הנגישות של אתר מסעדת באלינג׳רה, כולל התאמות נגישות, פרטי קשר ופנייה בנושא נגישות.",
+        },
+      },
+      blogArticleTitleSuffix: " | מסעדת באלינג׳רה",
+    },
     hero: {
       eyebrow: "ביסטרו אתיופי כשר בכרם התימנים",
       title: "מסעדת באלינג׳רה,\nמטבח אתיופי\nמסורתי",
@@ -418,6 +465,8 @@ export const balinjeraCopy = {
           title: "מה הופך אינג׳רה ללב הארוחה?",
           excerpt:
             "אינג׳רה היא לא רק הלחם של הארוחה האתיופית, אלא הבסיס שעליו נבנים הטעמים, הקצב והחוויה המשותפת סביב השולחן.",
+          publishedAt: "2026-06-22",
+          modifiedAt: "2026-06-22",
           body: [
             "אינג׳רה היא אחד הסמלים המוכרים ביותר של המטבח האתיופי, אבל מי שפוגש אותה רק כעוד לחם ליד המנה מפספס את התפקיד האמיתי שלה. היא הבסיס של הארוחה, המשטח שעליו מניחים את התבשילים, הכלי שבעזרתו אוספים כל ביס, וגם הדרך שבה כולם מתחברים לאותו מגש.",
             "הייחוד של אינג׳רה מתחיל בקמח הטף. הטף הוא דגן קטן, עשיר ומזין, שמלווה את המטבח האתיופי במשך דורות. ממנו נוצרת בלילה עדינה שעוברת תהליך תסיסה טבעי, ולכן לאינג׳רה יש חמיצות קלה, עומק טעם ומרקם אוורירי שמחזיק היטב תבשילים רכים, רטבים ותבלינים.",
@@ -432,6 +481,8 @@ export const balinjeraCopy = {
           title: "איך אוכלים ביחד בבאלינג׳רה",
           excerpt:
             "באלינג׳רה נבנתה סביב רעיון של שולחן פתוח: מגש משותף, ידיים סביב האוכל ושיחה שמתקדמת בקצב טבעי.",
+          publishedAt: "2026-06-22",
+          modifiedAt: "2026-06-22",
           body: [
             "השם באלינג׳רה מחזיק בתוכו את הרעיון המרכזי של המקום: לאכול ביחד. בארוחה אתיופית מסורתית האוכל לא בנוי ממנות נפרדות לכל סועד, אלא ממגש שנפתח במרכז השולחן ומזמין את כולם להשתתף בו.",
             "כשמגש כזה מגיע לשולחן, כל אחד רואה את אותם צבעים וטעמים: תבשילי קטניות, ירקות מתובלים, רטבים עשירים, מנות בשריות או טבעוניות ואינג׳רה טרייה שמחזיקה את הכל. הבחירה מה לקחת, איך לשלב טעמים ומתי לחזור לעוד ביס מתרחשת תוך כדי שיחה.",
@@ -540,6 +591,41 @@ export const balinjeraCopy = {
       { key: "blog", label: "Blog", href: "/blog" },
       { key: "order", label: "Order", href: BALINJERA_ORDER_HREF },
     ],
+    seo: {
+      pages: {
+        home: {
+          title: "Balinjera — Traditional Ethiopian Restaurant in Tel Aviv",
+          description:
+            "Balinjera in Kerem HaTeimanim, Tel Aviv. Authentic Ethiopian cuisine, fresh injera, warm atmosphere. Reserve a table or book Ethiopian catering.",
+        },
+        about: {
+          title: "About Balinjera — Our Story | Ethiopian Restaurant Tel Aviv",
+          description:
+            "Learn the story behind Balinjera — authentic Ethiopian cuisine served with heart in Kerem HaTeimanim, Tel Aviv.",
+        },
+        menu: {
+          title: "Menu — Balinjera Ethiopian Restaurant Tel Aviv",
+          description:
+            "Explore Balinjera's menu — traditional Ethiopian dishes, fresh injera, vegan options. Kosher. Kerem HaTeimanim, Tel Aviv.",
+        },
+        events: {
+          title: "Events & Ethiopian Catering | Balinjera Restaurant Tel Aviv",
+          description:
+            "Ethiopian catering for private events and group dining in Tel Aviv. Balinjera offers a unique experience for every occasion. Contact us.",
+        },
+        blog: {
+          title: "Blog — Balinjera | Ethiopian Cuisine & Injera",
+          description:
+            "Articles about Ethiopian cuisine, injera, and Balinjera's food culture. Read and discover.",
+        },
+        accessibility: {
+          title: "Accessibility Statement | Balinjera Restaurant",
+          description:
+            "Balinjera's accessibility statement, including website accessibility adjustments, contact details, and accessibility inquiry information.",
+        },
+      },
+      blogArticleTitleSuffix: " | Balinjera",
+    },
     hero: {
       eyebrow: "Kosher Ethiopian bistro in Kerem HaTeimanim",
       title: "Balinjera Restaurant,\ntraditional\nEthiopian cuisine",
@@ -841,6 +927,8 @@ export const balinjeraCopy = {
           title: "Why injera is the heart of the meal",
           excerpt:
             "Injera is not only the bread of an Ethiopian meal. It is the base that carries the flavors, the rhythm and the shared experience around the table.",
+          publishedAt: "2026-06-22",
+          modifiedAt: "2026-06-22",
           body: [
             "Injera is one of the most recognizable symbols of Ethiopian cooking, but anyone who meets it only as bread on the side misses its real role. It is the base of the meal, the surface that holds the stews, the tool used to gather every bite and the reason everyone connects to the same platter.",
             "Its character begins with teff flour. Teff is a small, nourishing grain that has shaped Ethiopian kitchens for generations. It becomes a delicate batter that naturally ferments, giving injera its gentle tang, layered flavor and airy texture that can hold soft stews, sauces and spices.",
@@ -855,6 +943,8 @@ export const balinjeraCopy = {
           title: "How people eat together at Balinjera",
           excerpt:
             "Balinjera is built around the idea of an open table: a shared platter, hands around the food and conversation that moves at a natural pace.",
+          publishedAt: "2026-06-22",
+          modifiedAt: "2026-06-22",
           body: [
             "The name Balinjera carries the central idea of the place: eating together. In a traditional Ethiopian meal, the food is not built as separate plates for each guest, but as a platter opened in the center of the table and shared by everyone.",
             "When a platter arrives, everyone sees the same colors and flavors: legume stews, seasoned vegetables, rich sauces, meat or vegan dishes and fresh injera holding everything together. Choosing what to take, how to combine flavors and when to return for another bite happens naturally through conversation.",

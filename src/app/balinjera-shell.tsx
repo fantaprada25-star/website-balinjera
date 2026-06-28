@@ -110,7 +110,7 @@ function SiteButton({
 
   if (href.startsWith("http")) {
     return (
-      <a className={className} href={href} target="_blank" rel="noreferrer">
+      <a className={className} href={href} target="_blank" rel="noopener noreferrer">
         {content}
       </a>
     );
@@ -148,7 +148,7 @@ function SiteHeader({
             className={className}
             href={href}
             key={item.key}
-            rel="noreferrer"
+            rel="noopener noreferrer"
             target="_blank"
           >
             {item.label}
@@ -242,7 +242,7 @@ function Footer({ lang }: { lang: BalinjeraLang }) {
           height={58}
         />
         <p>{splitLines(copy.footerTagline)}</p>
-        <a href={SITEKEPT_URL} target="_blank" rel="noreferrer">
+        <a href={SITEKEPT_URL} target="_blank" rel="noopener noreferrer">
           {copy.madeBy}
         </a>
       </div>
@@ -263,7 +263,7 @@ function Footer({ lang }: { lang: BalinjeraLang }) {
             className={styles["socialBrown"]}
             href="https://www.instagram.com/ethiopianfoodrestaurant/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="Instagram"
           >
             <Instagram aria-hidden="true" />
@@ -272,7 +272,7 @@ function Footer({ lang }: { lang: BalinjeraLang }) {
             className={styles["socialGold"]}
             href="https://www.facebook.com/Traditional.Ethiopian.Cuisine/?locale=he_IL"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="Facebook"
           >
             f
@@ -300,7 +300,7 @@ function FloatingActions({ lang }: { lang: BalinjeraLang }) {
           className={`${styles["quickAction"]} ${styles["woltAction"]}`}
           href={BALINJERA_ORDER_HREF}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label={copy.wolt}
         >
           Wolt
@@ -309,7 +309,7 @@ function FloatingActions({ lang }: { lang: BalinjeraLang }) {
           className={`${styles["quickAction"]} ${styles["whatsappAction"]}`}
           href={WHATSAPP_HREF}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           aria-label={copy.whatsapp}
         >
           <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -807,7 +807,7 @@ export function AccessibilityPageContent({ lang }: { lang: BalinjeraLang }) {
               <p key={paragraph}>{paragraph}</p>
             ))}
             <p>
-              <a href={page.wcagHref} target="_blank" rel="noreferrer">
+              <a href={page.wcagHref} target="_blank" rel="noopener noreferrer">
                 {page.wcagLabel}
               </a>
             </p>
@@ -892,7 +892,7 @@ export function EventsPageContent({ lang }: { lang: BalinjeraLang }) {
               <a
                 href="https://maps.google.com/?q=%D7%9E%D7%9C%D7%9F%204%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 <MapPin aria-hidden="true" />
                 <span>{copy.footerColumns[0].lines.join(", ")}</span>

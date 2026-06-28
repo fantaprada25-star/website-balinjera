@@ -1,44 +1,47 @@
 import type { Metadata } from 'next'
 
-const DEFAULT_SITE_URL = 'https://balinjera.vercel.app'
+import type { BalinjeraLang } from './balinjera-content'
+
+const DEFAULT_SITE_URL = 'https://www.balinjera.com'
 
 export function getSiteUrl(): string {
-  return process.env['NEXT_PUBLIC_SITE_URL'] ?? DEFAULT_SITE_URL
+  return (process.env['NEXT_PUBLIC_SITE_URL'] ?? DEFAULT_SITE_URL).replace(/\/$/, '')
+}
+
+export function getLocalizedUrl(path: string, lang: BalinjeraLang): string {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  const baseUrl = `${getSiteUrl()}${normalizedPath}`
+
+  return lang === 'en' ? `${baseUrl}?lang=en` : baseUrl
+}
+
+export function getLanguageAlternates(path: string): Record<string, string> {
+  return {
+    he: getLocalizedUrl(path, 'he'),
+    en: getLocalizedUrl(path, 'en'),
+    'x-default': getLocalizedUrl(path, 'he'),
+  }
 }
 
 export function buildPageMeta({
   lang,
-  path,
   title,
   description,
   ogType = 'website',
 }: {
-  lang: 'he' | 'en'
-  path: string
+  lang: BalinjeraLang
   title: string
   description: string
   ogType?: 'website' | 'article'
 }): Metadata {
   const siteUrl = getSiteUrl()
-  const heUrl = `${siteUrl}${path}`
-  const enUrl = `${siteUrl}${path}?lang=en`
-  const canonical = lang === 'en' ? enUrl : heUrl
 
   return {
     title,
     description,
-    alternates: {
-      canonical,
-      languages: {
-        he: heUrl,
-        en: enUrl,
-        'x-default': heUrl,
-      },
-    },
     openGraph: {
       title,
       description,
-      url: canonical,
       siteName: 'Balinjera',
       images: [
         {
