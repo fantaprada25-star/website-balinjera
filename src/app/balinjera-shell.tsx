@@ -177,6 +177,8 @@ function SiteHeader({
             alt="Balinjera"
             width={209}
             height={59}
+            sizes="(max-width: 767px) 150px, 209px"
+            quality={55}
             priority
           />
         </Link>
@@ -239,6 +241,8 @@ function Footer({ lang }: { lang: BalinjeraLang }) {
           alt="Balinjera"
           width={185}
           height={58}
+          sizes="155px"
+          quality={55}
         />
         <p>{splitLines(copy.footerTagline)}</p>
         <a href={SITEKEPT_URL} target="_blank" rel="noopener noreferrer">
