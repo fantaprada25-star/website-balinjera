@@ -7,6 +7,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type ReactNode,
 } from "react";
 
@@ -28,10 +29,6 @@ interface ScrollExpandMediaProps {
   theme?: "espresso" | "balinjera";
   children?: ReactNode;
 }
-
-// Distance de scroll (en vh) nécessaire pour déployer entièrement le média
-// sur mobile, où l'expansion est pilotée par le scroll natif (cf. trackRef).
-const MOBILE_EXPAND_VH = 90;
 
 function clampProgress(value: number) {
   return Math.min(Math.max(value, 0), 1);
@@ -438,25 +435,16 @@ export default function ScrollExpandMedia({
   const isYoutubeVideo =
     mediaSrc.includes("youtube.com") || mediaSrc.includes("youtu.be");
   const classes = themeClasses[theme];
+  const mediaFrameStyle = {
+    "--media-width": `${mediaWidth}px`,
+    "--media-height": `${mediaHeight}px`,
+    "--media-shadow": classes.mediaShadow,
+  } as CSSProperties;
 
   return (
     <div className={classes.root}>
-      <div
-        ref={trackRef}
-        style={
-          isMobileState
-            ? { height: `calc(100dvh + ${MOBILE_EXPAND_VH}vh)` }
-            : undefined
-        }
-      >
-        <section
-          className={styles["section"]}
-          style={
-            isMobileState
-              ? { position: "sticky", top: 0, height: "100dvh", minHeight: 0 }
-              : undefined
-          }
-        >
+      <div ref={trackRef} className={styles["track"]}>
+        <section className={styles["section"]}>
           <div className={styles["stage"]}>
             <motion.div
               className={styles["background"]}
@@ -479,13 +467,7 @@ export default function ScrollExpandMedia({
               <div className={styles["viewport"]}>
                 <div
                   className={classes.mediaFrame}
-                  style={{
-                    width: `${mediaWidth}px`,
-                    height: `${mediaHeight}px`,
-                    maxWidth: "95vw",
-                    maxHeight: "85vh",
-                    boxShadow: classes.mediaShadow,
-                  }}
+                  style={mediaFrameStyle}
                 >
                   {mediaType === "video" ? (
                     <div className={styles["mediaSurfaceFrame"]}>

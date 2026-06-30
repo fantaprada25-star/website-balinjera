@@ -92,7 +92,12 @@
   top: 50%;
   left: 50%;
   z-index: 0;
+  width: var(--media-width, 300px);
+  height: var(--media-height, 400px);
+  max-width: 95vw;
+  max-height: 85vh;
   border-radius: 4px;
+  box-shadow: var(--media-shadow, 0 0 54px rgba(0, 59, 27, 0.34));
   transform: translate(-50%, -50%);
   transition: none;
 }
@@ -259,6 +264,19 @@
 
 .contentSectionBalinjera {
   padding-block: 0;
+}
+
+@media (max-width: 767px) {
+  .track {
+    height: calc(100dvh + 90vh);
+  }
+
+  .track .section {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    min-height: 0;
+  }
 }
 
 @media (min-width: 640px) {
