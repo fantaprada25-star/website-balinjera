@@ -23,11 +23,16 @@
 .splitImage::after {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background:
     linear-gradient(180deg, rgba(0, 59, 27, 0.08), rgba(0, 59, 27, 0.02)),
     linear-gradient(90deg, rgba(255, 253, 231, 0.06), transparent 46%);
   content: '';
   pointer-events: none;
+}
+
+.decorativeImage {
+  object-fit: cover;
 }
 
 .splitCopy {
@@ -183,6 +188,7 @@
   background-position: center;
   background-size: cover;
   opacity: 0.74;
+  overflow: hidden;
   transform: scale(1.04);
   transition:
     opacity 300ms ease,
@@ -197,6 +203,7 @@
 .cardMedia::after {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     180deg,
     rgba(255, 253, 231, 0.16),
@@ -206,16 +213,16 @@
   content: '';
 }
 
-.cardMediaEvent {
-  background-image: url('/balinjera/event-card.jpg');
+.cardMediaEvent .decorativeImage {
+  object-position: center center;
 }
 
-.cardMediaRestaurant {
-  background-image: url('/balinjera/food-table.jpg');
+.cardMediaRestaurant .decorativeImage {
+  object-position: center center;
 }
 
-.cardMediaProducts {
-  background-image: url('/balinjera/products-card.jpg');
+.cardMediaProducts .decorativeImage {
+  object-position: center center;
 }
 
 .cardContent {
@@ -261,28 +268,33 @@
 }
 
 .offerImage {
+  position: relative;
+  display: block;
   width: min(100%, 380px);
   aspect-ratio: 1.28;
+  overflow: hidden;
   border-radius: var(--radius);
-  background-image: url('/balinjera/food-table.jpg');
-  background-position: center left;
-  background-size: cover;
   box-shadow: 0 24px 64px color-mix(in srgb, var(--green) 12%, transparent);
+}
+
+.offerImageMedia {
+  object-position: center left;
 }
 
 .nameSection {
   min-height: 805px;
 }
 
-.injeraImage {
-  background-image: url('/balinjera/injera-wide.jpg');
-  background-position: center center;
+.splitImageMedia {
+  z-index: 0;
+  object-position: center center;
 }
 
 .figure {
   position: absolute;
   top: clamp(0px, 2%, 24px);
   left: 8%;
+  z-index: 1;
   width: min(8%, 92px);
   height: auto;
   opacity: 0.78;

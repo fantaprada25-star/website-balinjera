@@ -53,6 +53,12 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
                   : card.media === "products"
                     ? styles["cardMediaProducts"]
                     : styles["cardMediaRestaurant"];
+              const mediaSrc =
+                card.media === "event"
+                  ? "/balinjera/event-card.jpg"
+                  : card.media === "products"
+                    ? "/balinjera/products-card.jpg"
+                    : "/balinjera/food-table.jpg";
               const cardClass = [
                 styles["featureCard"],
                 index === 1 ? styles["cardGold"] : styles["cardBrown"],
@@ -62,7 +68,16 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
                   <span
                     className={[styles["cardMedia"], mediaClass].join(" ")}
                     aria-hidden="true"
-                  />
+                  >
+                    <Image
+                      className={styles["decorativeImage"]}
+                      src={mediaSrc}
+                      alt=""
+                      fill
+                      sizes="(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 20vw"
+                      quality={65}
+                    />
+                  </span>
                   <span className={styles["cardContent"]}>
                     <h3>{card.title}</h3>
                     <p>{card.description}</p>
@@ -110,7 +125,19 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
             className={styles["offerImage"]}
             data-balinjera-animate="image"
             aria-hidden="true"
-          />
+          >
+            <Image
+              className={[
+                styles["decorativeImage"],
+                styles["offerImageMedia"],
+              ].join(" ")}
+              src="/balinjera/food-table.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 767px) 90vw, 380px"
+              quality={65}
+            />
+          </span>
         </div>
       </section>
 
@@ -119,6 +146,17 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
           className={[styles["splitImage"], styles["injeraImage"]].join(" ")}
           data-balinjera-animate="image"
         >
+          <Image
+            className={[
+              styles["decorativeImage"],
+              styles["splitImageMedia"],
+            ].join(" ")}
+            src="/balinjera/injera-wide.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            quality={65}
+          />
           <Image
             className={styles["figure"]}
             src="/balinjera/figure.png"

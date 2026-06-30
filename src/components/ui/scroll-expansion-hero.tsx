@@ -458,6 +458,8 @@ export default function ScrollExpandMedia({
                 width={1920}
                 height={1080}
                 className={styles["backgroundImage"]}
+                sizes="100vw"
+                quality={60}
                 priority
               />
               <div className={classes.backgroundOverlay} />
@@ -519,6 +521,8 @@ export default function ScrollExpandMedia({
                           styles["mediaSurfaceCover"],
                           classes.mediaRadius
                         )}
+                        sizes="(max-width: 767px) 95vw, 85vw"
+                        quality={60}
                         priority={priorityMedia}
                       />
                       <motion.div
