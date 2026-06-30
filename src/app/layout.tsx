@@ -2,6 +2,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
+import { preload } from 'react-dom'
 
 import { getSiteUrl } from './balinjera-seo'
 import './globals.css'
@@ -36,6 +37,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  preload('/balinjera/Futurism-Regular.woff2', {
+    as: 'font',
+    crossOrigin: 'anonymous',
+    type: 'font/woff2',
+  })
+  preload('/balinjera/Futurism-Bold.woff2', {
+    as: 'font',
+    crossOrigin: 'anonymous',
+    type: 'font/woff2',
+  })
+
   const headersList = await headers()
   const lang = headersList.get('x-lang') ?? 'he'
   const dir = lang === 'en' ? 'ltr' : 'rtl'
