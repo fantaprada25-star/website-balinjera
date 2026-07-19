@@ -44,9 +44,19 @@ export function BlogArticlePageContent({
       <section className={styles["articleSection"]}>
         <article className={styles["articleBody"]}>
           <div className={styles["articleText"]}>
-            {post.body.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {post.body.map((section) => (
+              <div key={section.heading}>
+                <h2>{section.heading}</h2>
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
             ))}
+            <div className={styles["blogReadMore"]}>
+              <Link href={hrefWithLang(post.relatedLink.path, lang)}>
+                {post.relatedLink.label}
+              </Link>
+            </div>
             {(() => {
               const relatedPost = page.posts.find((p) => p.slug !== post.slug);
               if (!relatedPost) return null;

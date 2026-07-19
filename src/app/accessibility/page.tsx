@@ -20,11 +20,14 @@ export async function generateMetadata({
   const lang = resolveLang(rawLang);
   const copy = balinjeraCopy[lang];
 
-  return buildPageMeta({
-    lang,
-    title: copy.seo.pages.accessibility.title,
-    description: copy.seo.pages.accessibility.description,
-  });
+  return {
+    ...buildPageMeta({
+      lang,
+      title: copy.seo.pages.accessibility.title,
+      description: copy.seo.pages.accessibility.description,
+    }),
+    robots: { index: true, follow: true },
+  };
 }
 
 export default async function BalinjeraAccessibilityPage({

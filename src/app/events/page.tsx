@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 
 import { balinjeraCopy, resolveLang } from "../balinjera-content";
 import { EventsPageContent } from "../balinjera-events-content";
-import { buildPageBreadcrumbSchema, SchemaScript } from "../balinjera-schema";
+import {
+  buildEventsServiceSchema,
+  buildPageBreadcrumbSchema,
+  SchemaScript,
+} from "../balinjera-schema";
 import { buildPageMeta } from "../balinjera-seo";
 import { SeoLinkTags } from "../balinjera-seo-links";
 import { BalinjeraFrame } from "../balinjera-shell";
@@ -45,6 +49,7 @@ export default async function BalinjeraEventsPage({
           path: "/events",
         })}
       />
+      <SchemaScript schema={buildEventsServiceSchema(lang)} />
       <BalinjeraFrame active="events" currentPath="/events" lang={lang}>
         <EventsPageContent lang={lang} />
       </BalinjeraFrame>

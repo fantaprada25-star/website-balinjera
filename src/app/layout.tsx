@@ -14,9 +14,9 @@ const googleAnalyticsId =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Balinjera | מסעדת באלינג׳רה',
+  title: 'באלינג׳רה | מסעדה אתיופית כשרה בתל אביב',
   description:
-    'מסעדת באלינג׳רה בתל אביב עם מטבח אתיופי מסורתי, אינג׳רה טרייה ומנות צבעוניות. Traditional Ethiopian cuisine in Tel Aviv.',
+    'מסעדת באלינג׳רה בתל אביב עם מטבח אתיופי מסורתי, אינג׳רה טרייה ומנות צבעוניות.',
   icons: {
     icon: '/balinjera/favicon.png',
     apple: '/balinjera/favicon.png',
