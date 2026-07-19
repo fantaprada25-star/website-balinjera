@@ -8,14 +8,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = ['/', '/about', '/menu', '/events', '/blog', '/accessibility']
   const articleRoutes = getBlogPostSlugs().map((slug) => `/blog/${slug}`)
+  const routes = [...staticRoutes, ...articleRoutes]
 
-  return [...staticRoutes, ...articleRoutes].map((route) => ({
-    url: getLocalizedUrl(route, 'he'),
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: route === '/' ? 0.8 : 0.6,
-    alternates: {
-      languages: getLanguageAlternates(route),
-    },
-  }))
+  return routes.flatMap((route) =>
+    (['he', 'en'] as const).map((lang) => ({
+      url: getLocalizedUrl(route, lang),
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: route === '/' ? 0.8 : 0.6,
+      alternates: {
+        languages: getLanguageAlternates(route),
+      },
+    })),
+  )
 }

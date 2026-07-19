@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 
 import { balinjeraCopy, resolveLang } from "./balinjera-content";
 import { HomePageContent } from "./balinjera-home-content";
-import { buildRestaurantSchema, SchemaScript } from "./balinjera-schema";
+import {
+  buildFaqPageSchema,
+  buildRestaurantSchema,
+  SchemaScript,
+} from "./balinjera-schema";
 import { buildPageMeta } from "./balinjera-seo";
 import { SeoLinkTags } from "./balinjera-seo-links";
 import { BalinjeraFrame } from "./balinjera-shell";
@@ -38,7 +42,8 @@ export default async function BalinjeraPage({
   return (
     <>
       <SeoLinkTags lang={lang} path="/" />
-      <SchemaScript schema={buildRestaurantSchema()} />
+      <SchemaScript schema={buildRestaurantSchema(lang)} />
+      <SchemaScript schema={buildFaqPageSchema(lang)} />
       <BalinjeraFrame active="home" currentPath="/" lang={lang}>
         <HomePageContent lang={lang} />
       </BalinjeraFrame>
