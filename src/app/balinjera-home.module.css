@@ -373,6 +373,31 @@
   line-height: 16px;
 }
 
+.faqSection {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 4%;
+}
+
+.faqSection h2 {
+  margin-bottom: 20px;
+  font-size: clamp(20px, 2vw, 24px);
+}
+
+.faqItem {
+  margin-bottom: 18px;
+}
+
+.faqItem dt {
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.faqItem dd {
+  margin: 0;
+  opacity: 0.85;
+}
+
 :global([data-balinjera-root].motion-ready)
   .featureCard[data-balinjera-animate='card'] {
   transform: translateY(calc(var(--card-offset) + 34px)) scale(0.985);

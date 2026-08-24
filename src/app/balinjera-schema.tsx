@@ -39,14 +39,15 @@ const RESTAURANT_DESCRIPTION: Record<BalinjeraLang, string> = {
   en: 'Kosher Ethiopian restaurant in Kerem HaTeimanim, next to Carmel Market in Tel Aviv, specializing in fresh injera and traditional Ethiopian cuisine.',
 }
 
-// Google + TripAdvisor both show 4.7/5 as of 2026-07-19. TripAdvisor's count (178,
-// directly from its listing page) is used as reviewCount since it's the more precise
-// per-platform figure; re-verify periodically, review counts drift upward over time.
+// TripAdvisor shows 4.7/5 with 179 reviews as of 2026-08-25 (re-verified via direct
+// search of the live listing, not a search-engine AI summary — an earlier session's
+// figure of 1,506 "Google reviews" could not be independently confirmed and should
+// not be used). Re-verify periodically, review counts drift upward over time.
 const AGGREGATE_RATING: JsonLd = {
   '@type': 'AggregateRating',
   ratingValue: '4.7',
   bestRating: '5',
-  reviewCount: '178',
+  reviewCount: '179',
 }
 
 export function buildRestaurantSchema(lang: BalinjeraLang): JsonLd {
