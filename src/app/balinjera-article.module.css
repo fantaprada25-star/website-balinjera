@@ -81,14 +81,12 @@
   line-height: 1.55;
 }
 
-.blogHeroImage {
-  background-image: url('/balinjera/injera-wide.jpg');
-  background-position: center center;
-}
+/* Blog articles render PageHero with showImage={false}, so no hero image is
+   emitted there; the former .blogHeroImage background rule was dead CSS. */
 
-.accessibilityHeroImage {
-  background-image: url('/balinjera/food-table.jpg');
-  background-position: center center;
+.subHeroImageMedia {
+  object-fit: cover;
+  object-position: center center;
 }
 
 .articleTopBar {

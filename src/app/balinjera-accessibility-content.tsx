@@ -20,7 +20,7 @@ export function AccessibilityPageContent({ lang }: { lang: BalinjeraLang }) {
         actionLabel={page.actionLabel}
         body={page.body}
         eyebrow={page.eyebrow}
-        imageClass={styles["accessibilityHeroImage"]}
+        imageSrc="/balinjera/food-table.jpg"
         lang={lang}
         sectionClass={styles["articleHero"]}
         title={page.title}

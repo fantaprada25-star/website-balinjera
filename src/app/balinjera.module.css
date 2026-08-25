@@ -323,9 +323,11 @@
   width: 100%;
   min-height: 220px;
   overflow: hidden;
-  background-image: url('/balinjera/team.jpg');
-  background-position: center center;
-  background-size: cover;
+}
+
+.teamImageMedia {
+  object-fit: cover;
+  object-position: center center;
 }
 
 .teamImage::after {

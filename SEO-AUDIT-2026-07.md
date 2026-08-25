@@ -1,5 +1,7 @@
 # Balinjera — SEO / GEO Audit
 
+> ⚠️ **Superseded.** See [`SEO-AUDIT-2026-08.md`](SEO-AUDIT-2026-08.md) for the current audit — a multi-agent technical/competitor/content pass with live-verified fixes, including a critical caching/rendering finding not covered here.
+
 **Site:** Balinjera — kosher Ethiopian restaurant, Kerem HaTeimanim / Carmel Market, Tel Aviv. Bilingual Hebrew (RTL, default) / English (LTR, `?lang=en`).
 **Date:** 2026-07-19
 **Method:** production HTML verified live via `curl` (not just source reading), Google Search Console (live account, ~2026-06-27 → 2026-07-18), Google Business Profile Performance (live account, Feb–Jul 2026), PageSpeed Insights, and external web research (reviews, press, competitors). Every technical claim below is traceable to one of those sources. The P0 code fixes identified in this audit were implemented and verified live in the same session (§7).

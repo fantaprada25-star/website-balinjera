@@ -61,9 +61,11 @@
 .eventsHeroPhoto {
   position: absolute;
   inset: 0;
-  background-image: url('/balinjera/event-card.jpg');
-  background-position: center center;
-  background-size: cover;
+}
+
+.eventsHeroPhotoMedia {
+  object-fit: cover;
+  object-position: center center;
 }
 
 .eventsHeroPhoto::after {
