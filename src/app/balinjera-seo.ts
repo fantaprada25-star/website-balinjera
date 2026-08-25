@@ -46,8 +46,8 @@ export function buildPageMeta({
       images: [
         {
           url: `${siteUrl}/balinjera/hero.jpg`,
-          width: 1280,
-          height: 720,
+          width: 1152,
+          height: 970,
           alt: lang === 'he' ? 'מסעדת באלינג׳רה' : 'Balinjera Restaurant',
         },
       ],

@@ -26,7 +26,6 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
         body={copy.hero.body}
         expandOnHash
         preserveTitleLines
-        priorityMedia
         theme="balinjera"
       />
 
@@ -184,6 +183,18 @@ export function HomePageContent({ lang }: { lang: BalinjeraLang }) {
           {copy.quote.body}
         </blockquote>
         <cite>{copy.quote.cite}</cite>
+      </section>
+
+      <section className={styles["faqSection"]}>
+        <h2>{copy.faqTitle}</h2>
+        <dl>
+          {copy.faq.map((item) => (
+            <div className={styles["faqItem"]} key={item.question}>
+              <dt>{item.question}</dt>
+              <dd>{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <ReserveSection lang={lang} />

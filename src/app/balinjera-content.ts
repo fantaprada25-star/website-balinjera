@@ -146,6 +146,7 @@ export const balinjeraCopy = {
       { key: "blog", label: "בלוג", href: "/blog" },
       { key: "order", label: "הזמינו", href: BALINJERA_ORDER_HREF },
     ],
+    faqTitle: "שאלות נפוצות",
     faq: [
       {
         question: "האם באלינג׳רה כשרה?",
@@ -725,6 +726,7 @@ export const balinjeraCopy = {
       { key: "blog", label: "Blog", href: "/blog" },
       { key: "order", label: "Order", href: BALINJERA_ORDER_HREF },
     ],
+    faqTitle: "Frequently asked questions",
     faq: [
       {
         question: "Is Balinjera kosher?",
@@ -1148,7 +1150,7 @@ export const balinjeraCopy = {
           slug: "kosher-ethiopian-food-carmel-market",
           title: "Kosher Ethiopian food near Carmel Market",
           excerpt:
-            "Kerem HaTeimanim and Carmel Market are a great starting point for discovering kosher Ethiopian cuisine in the heart of Tel Aviv, with fresh injera and a tradition built for eating together.",
+            "Kerem HaTeimanim and Carmel Market are a great starting point for kosher Ethiopian cuisine in Tel Aviv, with fresh injera and food made for sharing.",
           publishedAt: "2026-07-19",
           modifiedAt: "2026-07-19",
           body: [

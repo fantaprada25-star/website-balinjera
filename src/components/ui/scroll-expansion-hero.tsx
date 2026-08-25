@@ -564,20 +564,22 @@ export default function ScrollExpandMedia({
                       : styles["textBlendNormal"]
                   )}
                 >
-                  <motion.h1
-                    className={classes.title}
-                    style={{ transform: `translateX(-${textTranslateX}vw)` }}
-                  >
-                    {renderTextLines(firstPart)}
-                  </motion.h1>
-                  {restPart ? (
-                    <motion.h1
+                  <h1>
+                    <motion.div
                       className={classes.title}
-                      style={{ transform: `translateX(${textTranslateX}vw)` }}
+                      style={{ transform: `translateX(-${textTranslateX}vw)` }}
                     >
-                      {renderTextLines(restPart)}
-                    </motion.h1>
-                  ) : null}
+                      {renderTextLines(firstPart)}
+                    </motion.div>
+                    {restPart ? (
+                      <motion.div
+                        className={classes.title}
+                        style={{ transform: `translateX(${textTranslateX}vw)` }}
+                      >
+                        {renderTextLines(restPart)}
+                      </motion.div>
+                    ) : null}
+                  </h1>
                   {body ? (
                     <motion.div
                       className={classes.body}

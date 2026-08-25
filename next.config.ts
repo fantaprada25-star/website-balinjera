@@ -11,6 +11,23 @@ const nextConfig: NextConfig = {
     inlineCss: true,
   },
   outputFileTracingRoot: path.join(__dirname),
+  async redirects() {
+    return [
+      {
+        // Legacy WooCommerce shop URLs, still indexed from before the site
+        // migrated to this Next.js app. There is no shop anymore — the menu
+        // is the closest live equivalent.
+        source: '/shop',
+        destination: '/menu',
+        permanent: true,
+      },
+      {
+        source: '/shop/:path*',
+        destination: '/menu',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default nextConfig;
