@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 import styles from "./balinjera-article.module.css";
@@ -14,6 +15,7 @@ export function PageHero({
   body,
   eyebrow,
   imageClass,
+  imageSrc,
   lang,
   sectionClass,
   showImage = true,
@@ -23,7 +25,8 @@ export function PageHero({
   actionLabel?: ReactNode;
   body: string;
   eyebrow: string;
-  imageClass: string | undefined;
+  imageClass?: string | undefined;
+  imageSrc?: string | undefined;
   lang: BalinjeraLang;
   sectionClass?: string | undefined;
   showImage?: boolean;
@@ -43,7 +46,19 @@ export function PageHero({
         <div
           className={[styles["subHeroImage"], imageClass ?? ""].join(" ")}
           data-balinjera-animate="image"
-        />
+        >
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="(max-width: 900px) 100vw, 55vw"
+              quality={65}
+              className={styles["subHeroImageMedia"]}
+            />
+          ) : null}
+        </div>
       ) : null}
       <div className={styles["subHeroCopy"]} data-balinjera-animate="hero">
         <p className={styles["eyebrow"]}>{eyebrow}</p>

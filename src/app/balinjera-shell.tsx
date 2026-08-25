@@ -376,7 +376,17 @@ export function ReserveSection({
         </SiteButton>
       </div>
       {showImage ? (
-        <div className={styles["teamImage"]} data-balinjera-animate="image" />
+        <div className={styles["teamImage"]} data-balinjera-animate="image">
+          <Image
+            src="/balinjera/team.jpg"
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="(max-width: 900px) 100vw, 1920px"
+            quality={65}
+            className={styles["teamImageMedia"]}
+          />
+        </div>
       ) : null}
     </section>
   );

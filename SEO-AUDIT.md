@@ -1,6 +1,6 @@
 # Balinjera — SEO Audit
 
-> ⚠️ **Superseded.** This audit is dated 2026-06-22 and its premise (site on `balinjera.vercel.app`, un-indexed) is obsolete — nearly its full P0/P1 backlog has since shipped. See [`SEO-AUDIT-2026-07.md`](SEO-AUDIT-2026-07.md) for the current audit, grounded in live Search Console data.
+> ⚠️ **Superseded.** This audit is dated 2026-06-22 and its premise (site on `balinjera.vercel.app`, un-indexed) is obsolete — nearly its full P0/P1 backlog has since shipped. See [`SEO-AUDIT-2026-08.md`](SEO-AUDIT-2026-08.md) for the current audit (which itself supersedes the intermediate [`SEO-AUDIT-2026-07.md`](SEO-AUDIT-2026-07.md)).
 
 **Site:** Balinjera — bilingual (Hebrew-RTL default / English-LTR) restaurant, Tel Aviv (Ethiopian cuisine)
 **Stack:** Next.js 15.5.18 · React 19 · App Router · SSR · deployed on Vercel (`https://balinjera.vercel.app`)

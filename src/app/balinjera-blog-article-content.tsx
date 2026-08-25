@@ -34,7 +34,6 @@ export function BlogArticlePageContent({
       <PageHero
         body={post.excerpt}
         eyebrow={page.articleEyebrow}
-        imageClass={styles["blogHeroImage"]}
         lang={lang}
         sectionClass={styles["articleHero"]}
         showImage={false}

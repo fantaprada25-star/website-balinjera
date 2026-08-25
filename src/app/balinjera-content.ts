@@ -565,7 +565,7 @@ export const balinjeraCopy = {
         },
         {
           slug: "kosher-ethiopian-food-carmel-market",
-          title: "אוכל אתיופי כשר ליד שוק הכרמל",
+          title: "מסעדה אתיופית כשרה ליד שוק הכרמל",
           excerpt:
             "כרם התימנים ושוק הכרמל הם נקודת פתיחה טובה להכיר מטבח אתיופי כשר בלב תל אביב, עם אינג׳רה טרייה ומסורת שמזמינה לאכול ביחד.",
           publishedAt: "2026-07-19",
@@ -622,6 +622,198 @@ export const balinjeraCopy = {
               paragraphs: [
                 "כשמזמינים קייטרינג אתיופי מבאלינג׳רה, אנחנו מגיעים עם תפריט מלא שמבוסס על המנות שמוגשות במסעדה: תבשילי קטניות, ירקות מתובלים, מנות בשריות וטבעוניות, הכל מוגש על אינג׳רה טרייה. האווירה החמה שמאפיינת את המסעדה מגיעה יחד עם האוכל.",
                 "מי שמחפש לגוון את חוויית האירוח באירוע הקרוב, קייטרינג אתיופי הוא דרך להביא טעמים חדשים, סיפור תרבותי עשיר וחוויית אכילה משותפת שמזכירה לאורחים שארוחה טובה היא גם הזדמנות להתחבר.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לעמוד האירועים", path: "/events" },
+        },
+        {
+          slug: "ethiopian-dishes-glossary",
+          title: "מה זה דורו וואט, טיבס ושירו? מדריך למנות",
+          excerpt:
+            "מדריך קצר למנות המרכזיות בתפריט האתיופי - מה יש בכל אחת, מה חריף ומה לא, ואיך לבחור אם זו הפעם הראשונה שלכם.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "הבסיס: אינג׳רה, בירברי ודאבו",
+              paragraphs: [
+                "לפני שמדברים על מנות, כדאי להכיר שלושה מושגים שחוזרים בכל התפריט. אינג׳רה היא הלחם השטוח שעליו מוגשת כל הארוחה, מוכן אצלנו טרי מקמח טף. בירברי הוא תערובת התבלינים האתיופית שנותנת לתבשילים רבים את הצבע האדום ואת החריפות המאפיינת. דאבו הוא לחם אתיופי רגיל, שמוגש לצד המנות.",
+                "ההבדל בין אינג׳רה לדאבו חשוב לא רק לטעם: האינג׳רה עשויה מקמח טף וטבעית ללא גלוטן, בעוד שהדאבו הוא לחם חיטה רגיל. מי שנמנע מגלוטן צריך לשים לב להבחנה הזו.",
+              ],
+            },
+            {
+              heading: "התבשילים: וואט, טיבס ופירפיר",
+              paragraphs: [
+                "וואט הוא השם הכללי לתבשיל אתיופי מבושל לאט. דורו וואט הוא תבשיל עוף עם ביצה, בצל, שום ותיבול חריף פיקנטי. סיגה וואט הוא המקבילה עם בשר בקר - בצל, שום ותיבול אתיופי, וניתן להזמין אותו חריף או לא חריף.",
+                "טיבס עובד אחרת: במקום בישול ארוך, מדובר בנתח בשר מוקפץ על מחבת עם בצל ותיבול ייחודי. פירפיר הוא מנה שמבוססת על חתיכות אינג׳רה עצמן, מוקפצות עם בצל ובירברי - כלומר האינג׳רה כאן היא לא רק הבסיס אלא המנה עצמה.",
+              ],
+            },
+            {
+              heading: "שירו והצד הטבעוני",
+              paragraphs: [
+                "שירו הוא אחד התבשילים האהובים במטבח האתיופי - תבשיל קטניות טחונות, סמיך ועדין, שמוגש אצלנו עם אינג׳רה ופלפל חריף טרי. הוא נקודת פתיחה טובה במיוחד למי שמעדיף לוותר על בשר.",
+                "אם קשה לבחור, המגשים המשותפים פותרים את הבעיה: הם מגיעים עם כמה תוספות במקביל, כך שאפשר לטעום מגוון בלי להתחייב למנה אחת. זו גם הדרך המסורתית לאכול - כולם מאותו מגש.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לתפריט המלא", path: "/menu" },
+        },
+        {
+          slug: "vegan-ethiopian-carmel-market",
+          title: "אוכל אתיופי טבעוני ליד שוק הכרמל",
+          excerpt:
+            "המטבח האתיופי הוא אחד המטבחים הידידותיים ביותר לטבעונים - כאן מה שכדאי להזמין בבאלינג׳רה ולמה השילוב כשר-טבעוני-אתיופי נדיר.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "למה המטבח האתיופי מתאים לטבעונים",
+              paragraphs: [
+                "חלק גדול מהמטבח האתיופי המסורתי בנוי ממילא סביב קטניות, ירקות ותבלינים - לא כתחליף לבשר, אלא כבסיס בפני עצמו. התוצאה היא שתפריט טבעוני אתיופי הוא לא גרסה מצומצמת של התפריט הרגיל, אלא חלק מרכזי ממנו.",
+                "בבאלינג׳רה זה מתבטא בפועל: יש מגשים טבעוניים ייעודיים לצד המנות הבשריות, והאינג׳רה עצמה - הבסיס של כל ארוחה - מוכנה מקמח טף בלבד.",
+              ],
+            },
+            {
+              heading: "מה להזמין",
+              paragraphs: [
+                "המגשים הטבעוניים בנויים סביב מספר תוספות שמגיעות יחד: יש אפשרות ליחיד עם ארבע תוספות טבעוניות לבחירה, ואפשרות זוגית עם שבע תוספות - מגוון של קטניות וירקות מבושלים. בתפריט העסקי יש גם מגש טבעוני ליחיד עם שבע תוספות וסלט קטן.",
+                "לצד המגשים אפשר להוסיף מנות כמו שירו, חציל בטחינה אתיופית או סלט הבית. מי שרוצה לטעום מגוון רחב בארוחה אחת ימצא שהמגש המשותף הוא הדרך היעילה ביותר לעשות את זה.",
+              ],
+            },
+            {
+              heading: "השילוב הנדיר: כשר וטבעוני",
+              paragraphs: [
+                "באלינג׳רה היא מסעדה כשרה בשרית, כלומר אין במקום מוצרי חלב כלל. עבור סועדים טבעוניים זה דווקא יתרון: אין סיכון לערבוב עם מוצרי חלב במטבח.",
+                "השילוב של מטבח אתיופי, כשרות ואפשרויות טבעוניות רחבות הוא לא צירוף שקל למצוא בתל אביב, ובוודאי לא במרחק הליכה משוק הכרמל.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לתפריט המלא", path: "/menu" },
+        },
+        {
+          slug: "how-to-eat-injera",
+          title: "איך אוכלים אינג׳רה ביד - מדריך למתחילים",
+          excerpt:
+            "אכילה משותפת בידיים היא חלק מהחוויה האתיופית, אבל היא לא מובנת מאליה. הנה איך זה עובד, צעד אחר צעד.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "מה מגיע לשולחן",
+              paragraphs: [
+                "בארוחה אתיופית מסורתית לא מגיעה צלחת אישית לכל סועד. במקום זה מגיע מגש גדול ומשותף: האינג׳רה נפרשת עליו, והתבשילים השונים מונחים עליה בערימות נפרדות, כל אחת בצבע ובטעם משלה.",
+                "לצד המגש מגיעות בדרך כלל אינג׳רות נוספות מגולגלות. אלה כלי העבודה - מהן קורעים את החתיכות שאיתן אוכלים.",
+              ],
+            },
+            {
+              heading: "איך אוכלים בפועל",
+              paragraphs: [
+                "קורעים חתיכה קטנה מהאינג׳רה המגולגלת ביד אחת - מסורתית יד ימין. משתמשים בחתיכה כדי לצבוט או לאסוף מעט מאחד התבשילים, ומכניסים הכל לפה יחד. לא צריך סכין ומזלג, והאינג׳רה עצמה היא גם הכף וגם חלק מהמנה.",
+                "אין סדר קבוע. אפשר לעבור בין תבשילים, לשלב שניים יחד, לחזור למה שאהבתם. ככל שהארוחה מתקדמת, האינג׳רה שמתחת סופגת את הרטבים - וגם היא נאכלת בסוף.",
+              ],
+            },
+            {
+              heading: "כמה דברים שכדאי לדעת",
+              paragraphs: [
+                "אם זו הפעם הראשונה, כדאי להתחיל בביסים קטנים ולהכיר את רמות החריפות. חלק מהתבשילים פיקנטיים יותר מאחרים, ואפשר לשאול אותנו מה חריף ומה עדין לפני שמזמינים.",
+                "והכי חשוב: אכילה מאותו מגש היא לא רק טכניקה אלא הרעיון עצמו. זו הסיבה שהמסעדה נקראת באלינג׳רה - לאכול ביחד.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לתפריט המלא", path: "/menu" },
+        },
+        {
+          slug: "injera-gluten-free",
+          title: "אינג׳רה וגלוטן - מה חשוב לדעת",
+          excerpt:
+            "האינג׳רה שלנו מוכנה מקמח טף וטבעית ללא גלוטן. הנה ההסבר, יחד עם מה שחשוב לבדוק בשאר התפריט.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "טף - הדגן שמאחורי האינג׳רה",
+              paragraphs: [
+                "טף הוא דגן קטן שגדל באתיופיה במשך דורות, והוא הבסיס המסורתי לאינג׳רה. בניגוד לחיטה, שיפון ושעורה, הטף אינו מכיל גלוטן באופן טבעי.",
+                "האינג׳רה בבאלינג׳רה מוכנה טרייה מקמח טף. לכן היא עצמה נטולת גלוטן - וזו לא התאמה מיוחדת שעשינו, אלא פשוט הדרך המסורתית להכין אותה.",
+              ],
+            },
+            {
+              heading: "מה כן מכיל גלוטן בתפריט",
+              paragraphs: [
+                "חשוב להיות מדויקים: העובדה שהאינג׳רה נטולת גלוטן לא אומרת שכל התפריט כזה. הדאבו, למשל, הוא לחם אתיופי רגיל על בסיס חיטה. גם סלט הנפרו מבוסס על חיטה.",
+                "לכן ההמלצה הפשוטה היא: אם אתם נמנעים מגלוטן, הזמינו את המנות שמוגשות על אינג׳רה וּותרו על הדאבו ועל סלט הנפרו.",
+              ],
+            },
+            {
+              heading: "אם יש לכם רגישות משמעותית",
+              paragraphs: [
+                "המידע כאן מתייחס למרכיבים של המנות עצמן. אם מדובר ברגישות רפואית משמעותית או בצליאק, אנחנו ממליצים להתקשר אלינו לפני ההגעה ולשאול ישירות - כך נוכל לענות לכם בדיוק לגבי המנה שמעניינת אתכם.",
+                "עדיף לשאול מראש מאשר להסתמך על הנחה כללית, וישמח אותנו לעזור לכם לבחור.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לתפריט המלא", path: "/menu" },
+        },
+        {
+          slug: "ethiopian-coffee-buna",
+          title: "בונה - הקפה האתיופי",
+          excerpt:
+            "קפה הוא חלק מרכזי מהתרבות האתיופית, ולא רק משקה שמסיים ארוחה. קצת רקע, ומה מוגש אצלנו.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "אתיופיה ומקורות הקפה",
+              paragraphs: [
+                "אתיופיה נחשבת למקום שממנו הגיע הקפה במקור, והוא תופס שם מקום שונה מזה שהוא תופס במערב. בונה, שפירושו קפה באמהרית, הוא לא רק משקה אלא הזדמנות חברתית - משהו שעושים יחד, לאט, לא בדרך החוצה.",
+                "התרבות הזו מתחברת ישירות לאופן שבו נאכלת הארוחה האתיופית: גם היא משותפת, גם היא לא ממהרת.",
+              ],
+            },
+            {
+              heading: "מה מוגש בבאלינג׳רה",
+              paragraphs: [
+                "בתפריט שלנו יש שתי אפשרויות. בונה קפה מוגש ככוס בודדת, ולצידה יש גם קנקן בונה - הגשה בקנקן, למי שרוצה לשבת עם הקפה לאורך זמן או לחלוק אותו עם עוד אנשים סביב השולחן.",
+                "לצד הקפה יש גם תה תבלינים, ותה תבלינים עם ג׳ינג׳ר - אפשרות טובה למי שמעדיף לסיים בלי קפאין.",
+              ],
+            },
+            {
+              heading: "מתי כדאי להזמין",
+              paragraphs: [
+                "הכי טבעי זה בסוף הארוחה. אחרי מגש משותף, הקפה הוא מה שמאריך את הישיבה עוד קצת - וזה בדיוק התפקיד שלו במסורת האתיופית.",
+                "אם אתם מגיעים בקבוצה, הקנקן הוא הבחירה ההגיונית: הוא מתאים לשיתוף, בדיוק כמו שאר הארוחה.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לתפריט המלא", path: "/menu" },
+        },
+        {
+          slug: "kerem-hateimanim-guide",
+          title: "כרם התימנים ושוק הכרמל - איפה אנחנו נמצאים",
+          excerpt:
+            "השכונה שבה נמצאת באלינג׳רה היא אחת הפינות המעניינות בתל אביב. קצת רקע על האזור ואיך משלבים ביקור.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "השכונה",
+              paragraphs: [
+                "כרם התימנים היא שכונה ותיקה בלב תל אביב, צמודה לשוק הכרמל. הרחובות בה צרים יותר מהסביבה, והאופי שלה שונה מהשדרות הגדולות שמסביב - היא שקטה יחסית, למרות שהיא נמצאת ממש במרכז.",
+                "האזור התפתח עם השנים לאחד המקומות המגוונים בעיר מבחינת אוכל, עם מטבחים ממסורות שונות זה לצד זה. באלינג׳רה יושבת בדיוק בנקודה הזו, בפאתי השוק.",
+              ],
+            },
+            {
+              heading: "לשלב עם ביקור בשוק",
+              paragraphs: [
+                "שוק הכרמל נמצא במרחק הליכה קצר, וזה משלב טוב: סיור בשוק הוא חוויה אינטנסיבית של צבעים, רעש וריחות, וארוחה אתיופית אחריו היא שינוי קצב נעים - יושבים, האוכל מגיע על מגש אחד, והקצב נרגע.",
+                "אם אתם מתכננים את היום, כדאי לזכור ששעות הפעילות של השוק ושל המסעדה לא זהות. שווה לבדוק את שעות הפתיחה שלנו מראש, במיוחד בימי שישי.",
+              ],
+            },
+            {
+              heading: "למבקרים מחוץ לעיר",
+              paragraphs: [
+                "למי שמגיע לתל אביב לביקור, האזור הזה נוח כנקודת עצירה: הוא מרכזי, קרוב לחוף, ומאפשר לשלב כמה דברים באותו יום בלי לנסוע.",
+                "ואם מחפשים משהו שהוא לא המטבח הישראלי הרגיל, מטבח אתיופי הוא בדיוק הסוג של הפסקה שכדאי לשלב באמצע.",
               ],
             },
           ],
@@ -1148,7 +1340,7 @@ export const balinjeraCopy = {
         },
         {
           slug: "kosher-ethiopian-food-carmel-market",
-          title: "Kosher Ethiopian food near Carmel Market",
+          title: "Kosher Ethiopian restaurant near Carmel Market",
           excerpt:
             "Kerem HaTeimanim and Carmel Market are a great starting point for kosher Ethiopian cuisine in Tel Aviv, with fresh injera and food made for sharing.",
           publishedAt: "2026-07-19",
@@ -1205,6 +1397,198 @@ export const balinjeraCopy = {
               paragraphs: [
                 "When you order Ethiopian catering from Balinjera, we arrive with a full menu based on the dishes served at the restaurant: legume stews, seasoned vegetables, meat and vegan dishes, all served on fresh injera. The warm atmosphere that characterizes the restaurant comes along with the food.",
                 "For anyone looking to add something different to their next event, Ethiopian catering is a way to bring new flavors, a rich cultural story and a shared eating experience that reminds guests that a good meal is also a chance to connect.",
+              ],
+            },
+          ],
+          relatedLink: { label: "Visit the events page", path: "/events" },
+        },
+        {
+          slug: "ethiopian-dishes-glossary",
+          title: "What are doro wat, tibs and shiro? A guide to the dishes",
+          excerpt:
+            "A short guide to the main dishes on an Ethiopian menu - what is in each one, what is spicy and what is not, and how to choose on a first visit.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "The basics: injera, berbere and dabo",
+              paragraphs: [
+                "Before the dishes themselves, three words are worth knowing, because they come up across the whole menu. Injera is the flatbread the entire meal is served on, made fresh here from teff flour. Berbere is the Ethiopian spice blend that gives many stews their red color and their characteristic heat. Dabo is a regular Ethiopian bread served alongside the dishes.",
+                "The difference between injera and dabo matters beyond taste: injera is made from teff flour and is naturally gluten free, while dabo is an ordinary wheat bread. Anyone avoiding gluten should keep that distinction in mind.",
+              ],
+            },
+            {
+              heading: "The stews: wat, tibs and firfir",
+              paragraphs: [
+                "Wat is the general name for a slow-cooked Ethiopian stew. Doro wat is a chicken stew with egg, onion, garlic and a spicy, piquant seasoning. Siga wat is the beef equivalent - onion, garlic and Ethiopian seasoning - and it can be ordered spicy or mild.",
+                "Tibs works differently: instead of long cooking, it is a cut of meat sautéed in a pan with onion and a distinctive seasoning. Firfir is built on pieces of injera themselves, sautéed with onion and berbere - so here the injera is not just the base, it is the dish.",
+              ],
+            },
+            {
+              heading: "Shiro and the vegan side",
+              paragraphs: [
+                "Shiro is one of the best-loved dishes in Ethiopian cooking - a thick, gentle stew of ground legumes, served here with injera and fresh hot pepper. It is a particularly good starting point for anyone who would rather skip meat.",
+                "If choosing feels hard, the shared platters solve it: they arrive with several sides at once, so you can taste a range without committing to one dish. That is also the traditional way to eat - everyone from the same platter.",
+              ],
+            },
+          ],
+          relatedLink: { label: "See the full menu", path: "/menu" },
+        },
+        {
+          slug: "vegan-ethiopian-carmel-market",
+          title: "Vegan Ethiopian food near Carmel Market",
+          excerpt:
+            "Ethiopian cooking is one of the most vegan-friendly cuisines there is - here is what to order at Balinjera, and why kosher-plus-vegan-plus-Ethiopian is a rare combination.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "Why Ethiopian cooking suits vegans",
+              paragraphs: [
+                "A large part of traditional Ethiopian cooking is already built around legumes, vegetables and spices - not as a substitute for meat, but as a foundation in its own right. The result is that a vegan Ethiopian menu is not a reduced version of the regular one, it is a central part of it.",
+                "At Balinjera that shows up in practice: there are dedicated vegan platters alongside the meat dishes, and the injera itself - the base of every meal - is made from teff flour alone.",
+              ],
+            },
+            {
+              heading: "What to order",
+              paragraphs: [
+                "The vegan platters are built around several sides served together: there is a single-portion option with four vegan sides of your choice, and a platter for two with seven sides - a mix of legumes and cooked vegetables. The business menu also includes a vegan platter for one with seven sides and a small salad.",
+                "Alongside the platters you can add dishes like shiro, eggplant with Ethiopian tahini, or the house salad. If you want to taste widely in a single meal, the shared platter is the most efficient way to do it.",
+              ],
+            },
+            {
+              heading: "The rare part: kosher and vegan",
+              paragraphs: [
+                "Balinjera is a kosher meat restaurant, which means there are no dairy products on the premises at all. For vegan diners that is actually an advantage: there is no risk of mixing with dairy in the kitchen.",
+                "The combination of Ethiopian cooking, kosher certification and a wide vegan selection is not an easy one to find in Tel Aviv - certainly not within walking distance of Carmel Market.",
+              ],
+            },
+          ],
+          relatedLink: { label: "See the full menu", path: "/menu" },
+        },
+        {
+          slug: "how-to-eat-injera",
+          title: "How to eat injera by hand - a first-timer's guide",
+          excerpt:
+            "Eating together with your hands is part of the Ethiopian experience, but it is not self-explanatory. Here is how it works, step by step.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "What arrives at the table",
+              paragraphs: [
+                "In a traditional Ethiopian meal, no individual plate arrives for each guest. Instead a large shared platter comes out: the injera is spread across it, and the different stews are placed on top in separate mounds, each with its own color and flavor.",
+                "Alongside the platter there are usually additional rolled injeras. Those are the tools - you tear from them the pieces you eat with.",
+              ],
+            },
+            {
+              heading: "How it actually works",
+              paragraphs: [
+                "Tear a small piece from the rolled injera with one hand - traditionally the right. Use that piece to pinch or gather a little of one of the stews, and eat the whole thing together. No knife and fork needed, and the injera is both the utensil and part of the dish.",
+                "There is no fixed order. Move between stews, combine two at once, go back to whichever you liked. As the meal goes on, the injera underneath soaks up the sauces - and it gets eaten at the end too.",
+              ],
+            },
+            {
+              heading: "A few things worth knowing",
+              paragraphs: [
+                "If it is your first time, start with small bites and get a feel for the heat levels. Some stews are more piquant than others, and you can ask us what is spicy and what is mild before ordering.",
+                "Most importantly: eating from the same platter is not just a technique, it is the whole idea. That is why the restaurant is called Balinjera - to eat together.",
+              ],
+            },
+          ],
+          relatedLink: { label: "See the full menu", path: "/menu" },
+        },
+        {
+          slug: "injera-gluten-free",
+          title: "Injera and gluten - what you should know",
+          excerpt:
+            "Our injera is made from teff flour and is naturally gluten free. Here is the explanation, along with what to check on the rest of the menu.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "Teff - the grain behind injera",
+              paragraphs: [
+                "Teff is a small grain that has been grown in Ethiopia for generations, and it is the traditional base for injera. Unlike wheat, rye and barley, teff contains no gluten naturally.",
+                "The injera at Balinjera is made fresh from teff flour. So the injera itself is gluten free - and that is not a special adaptation we made, it is simply the traditional way to prepare it.",
+              ],
+            },
+            {
+              heading: "What on the menu does contain gluten",
+              paragraphs: [
+                "It is worth being precise: the fact that the injera is gluten free does not make the whole menu gluten free. Dabo, for instance, is a regular wheat-based Ethiopian bread. The nefro salad is also wheat-based.",
+                "So the simple recommendation is this: if you avoid gluten, order the dishes served on injera, and skip the dabo and the nefro salad.",
+              ],
+            },
+            {
+              heading: "If you have a significant sensitivity",
+              paragraphs: [
+                "The information here refers to the ingredients of the dishes themselves. If you have a significant medical sensitivity or celiac disease, we recommend calling us before you come and asking directly - that way we can answer precisely about the dish you have in mind.",
+                "It is better to ask in advance than to rely on a general assumption, and we are glad to help you choose.",
+              ],
+            },
+          ],
+          relatedLink: { label: "See the full menu", path: "/menu" },
+        },
+        {
+          slug: "ethiopian-coffee-buna",
+          title: "Buna - Ethiopian coffee",
+          excerpt:
+            "Coffee is a central part of Ethiopian culture, not just a drink that ends a meal. A little background, and what we serve.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "Ethiopia and the origins of coffee",
+              paragraphs: [
+                "Ethiopia is widely considered the place coffee originally came from, and it holds a different place there than it does in the West. Buna, which means coffee in Amharic, is not only a drink but a social occasion - something done together, slowly, not on the way out.",
+                "That culture connects directly to the way an Ethiopian meal is eaten: shared, and in no hurry.",
+              ],
+            },
+            {
+              heading: "What we serve at Balinjera",
+              paragraphs: [
+                "There are two options on our menu. Buna coffee is served as a single cup, and alongside it there is a buna pot - served in a pot, for anyone who wants to sit with the coffee for a while or share it with others around the table.",
+                "Alongside the coffee there is also spiced tea, and spiced tea with ginger - a good option for anyone who prefers to finish without caffeine.",
+              ],
+            },
+            {
+              heading: "When to order it",
+              paragraphs: [
+                "The most natural moment is at the end of the meal. After a shared platter, coffee is what stretches the sitting out a little longer - which is exactly its role in the Ethiopian tradition.",
+                "If you are coming as a group, the pot is the logical choice: it is made for sharing, just like the rest of the meal.",
+              ],
+            },
+          ],
+          relatedLink: { label: "See the full menu", path: "/menu" },
+        },
+        {
+          slug: "kerem-hateimanim-guide",
+          title: "Kerem HaTeimanim and Carmel Market - where we are",
+          excerpt:
+            "The neighborhood Balinjera sits in is one of the more interesting corners of Tel Aviv. Some background on the area and how to build a visit around it.",
+          publishedAt: "2026-08-25",
+          modifiedAt: "2026-08-25",
+          body: [
+            {
+              heading: "The neighborhood",
+              paragraphs: [
+                "Kerem HaTeimanim is an old neighborhood in the heart of Tel Aviv, right next to Carmel Market. Its streets are narrower than the surrounding area, and its character is different from the large boulevards nearby - relatively quiet, despite sitting right in the center.",
+                "Over the years the area has become one of the most varied parts of the city for food, with kitchens from different traditions side by side. Balinjera sits exactly at that point, on the edge of the market.",
+              ],
+            },
+            {
+              heading: "Combining it with the market",
+              paragraphs: [
+                "Carmel Market is a short walk away, and the two pair well: walking the market is an intense experience of color, noise and smells, and an Ethiopian meal afterwards is a welcome change of pace - you sit down, the food arrives on one platter, and the rhythm slows.",
+                "If you are planning your day, keep in mind that the market's hours and the restaurant's hours are not the same. It is worth checking our opening hours in advance, especially on Fridays.",
+              ],
+            },
+            {
+              heading: "For visitors from out of town",
+              paragraphs: [
+                "For anyone visiting Tel Aviv, this area works well as a stop: it is central, close to the beach, and lets you combine several things in one day without traveling.",
+                "And if you are looking for something other than the usual Israeli menu, Ethiopian cooking is exactly the kind of break worth building in.",
               ],
             },
           ],

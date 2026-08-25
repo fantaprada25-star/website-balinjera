@@ -1,4 +1,5 @@
 import { CalendarDays, Clock, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
 
 import {
   BALINJERA_PHONE_DISPLAY,
@@ -38,7 +39,16 @@ function EventsHero({
         </SiteButton>
       </div>
       <div className={styles["eventsHeroMedia"]} data-balinjera-animate="image">
-        <div className={styles["eventsHeroPhoto"]} aria-hidden="true" />
+        <div className={styles["eventsHeroPhoto"]} aria-hidden="true">
+          <Image
+            src="/balinjera/event-card.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 900px) 100vw, 50vw"
+            quality={65}
+            className={styles["eventsHeroPhotoMedia"]}
+          />
+        </div>
       </div>
       <div
         className={styles["eventsHeroOptions"]}
