@@ -122,3 +122,7 @@ jspm_packages/
 .storybook-out
 storybook-static/
 
+
+# iCloud sync exclusion: build artifacts live in *.nosync dirs (iCloud skips
+# that suffix) with symlinks pointing at them, so iCloud never syncs them.
+*.nosync
