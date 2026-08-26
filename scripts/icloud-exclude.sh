@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 # Keep build artifacts out of iCloud Drive.
 #
-# This project lives under ~/Documents, which macOS syncs to iCloud when
-# "Desktop & Documents Folders" is enabled. Syncing node_modules/.next is both
-# wasteful (~600MB of churn) and actively harmful: iCloud resolves concurrent
-# writes by renaming files ("abs.js" -> "abs 2.js"), which silently corrupts
-# dependencies and Next.js build output.
+# The project used to live under ~/Documents, which macOS syncs to iCloud when
+# "Desktop & Documents Folders" is enabled. That corrupted things: iCloud
+# resolves concurrent writes by renaming files, which produced "abs 2.js"
+# inside node_modules (breaking ESLint) and even duplicated git objects and
+# refs inside .git.
 #
-# The com.apple.fileprovider.ignore#P attribute tells the File Provider layer
-# to skip a path. It does not survive the directory being deleted and
-# recreated, so this runs from postinstall and prebuild.
+# The project has since been moved to ~/Developer, which is not synced, so
+# this script is now defensive rather than load-bearing: it still protects
+# anyone who clones this repo into a synced folder.
+#
+# com.apple.fileprovider.ignore#P tells the File Provider layer to skip a
+# path. It does not survive the directory being deleted and recreated, so this
+# runs from postinstall and prebuild.
 #
 # No-ops on non-macOS and never fails the build.
 
