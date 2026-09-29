@@ -1,23 +1,26 @@
 # Balinjera Restaurant
 
-> Traditional Ethiopian restaurant in Tel Aviv, Israel, specializing in injera and shared Ethiopian meals.
+> Kosher Ethiopian restaurant in Kerem HaTeimanim, next to Carmel Market in Tel Aviv, Israel, specializing in fresh teff injera and shared Ethiopian meals.
 
-Balinjera (באלינג'רה) serves traditional Ethiopian food at Malan 4 / HaKovshim 39 in Kerem HaTeimanim, near Carmel Market. The site is bilingual: Hebrew is the default RTL experience, and English LTR pages are available with the `?lang=en` query parameter.
+Balinjera (באלינג'רה) serves traditional Ethiopian and Ethiopian-Jewish food at Malan 4 / HaKovshim 39 in Kerem HaTeimanim, near Carmel Market. The site is bilingual: Hebrew is the default RTL experience, and English LTR pages are available with the `?lang=en` query parameter.
 
 Important details:
 
-- Cuisine: Traditional Ethiopian, specializing in injera (אינג'רה)
-- Hours: Sunday–Thursday 12:00–20:00, Friday 11:00–15:00, Saturday closed
+- Cuisine: Traditional Ethiopian, specializing in injera (אינג'רה) made fresh from teff flour
+- Kosher: kosher certificate from the Rabanut Tel Aviv (Regila standard); a meat restaurant with no dairy products on the premises
+- Menu: vegan injera platters and stews alongside meat dishes such as tibs, doro wat and siga wat (current prices on the menu page)
+- Hours: Sunday–Thursday 12:00–20:00, Friday 11:00–15:00, Saturday closed. Holiday hours may differ: see the site footer or call.
 - Phone: 03-525-2527
 - Email: fantaprada25@gmail.com
+- Last updated: 2026-09-29
 
 ## Key Pages
 
-- [Home](https://www.balinjera.com/): Main restaurant page with overview, hours, contact details, and ordering links.
-- [About](https://www.balinjera.com/about): Background on Balinjera, Ethiopian food traditions, and the restaurant story.
-- [Menu](https://www.balinjera.com/menu): Restaurant menu and dishes.
+- [Home](https://www.balinjera.com/): Main restaurant page with overview, hours, contact details, FAQ and ordering links.
+- [About](https://www.balinjera.com/about): The story of Fanta, the founder, and of Balinjera's Ethiopian-Jewish kitchen.
+- [Menu](https://www.balinjera.com/menu): Full menu with prices.
 - [Events and Catering](https://www.balinjera.com/events): Private events, catering, and group meal inquiries.
-- [Blog](https://www.balinjera.com/blog): Articles about Ethiopian food, injera, and eating together at Balinjera.
+- [Blog](https://www.balinjera.com/blog): Guides to Ethiopian food, injera, kosher dining and eating together.
 
 ## Language Versions
 
@@ -26,11 +29,22 @@ Important details:
 - [English about](https://www.balinjera.com/about?lang=en): English restaurant background.
 - [English menu](https://www.balinjera.com/menu?lang=en): English menu page.
 - [English events and catering](https://www.balinjera.com/events?lang=en): English events and catering page.
+- [English blog](https://www.balinjera.com/blog?lang=en): English articles.
 
-## Featured Articles
+## Articles
 
-- [Injera, Heart of the Meal](https://www.balinjera.com/blog/injera-heart-of-meal): Article about injera and its role in Ethiopian cuisine.
-- [Eating Together at Balinjera](https://www.balinjera.com/blog/eat-together-balinjera): Article about shared Ethiopian dining.
+- [What is injera?](https://www.balinjera.com/blog/injera-heart-of-meal): Ethiopia's teff flatbread and its role in the meal.
+- [How to eat injera](https://www.balinjera.com/blog/how-to-eat-injera): A first-visit guide to eating by hand from a shared platter.
+- [Doro wat, tibs and other dishes](https://www.balinjera.com/blog/ethiopian-dishes-glossary): What is in each Ethiopian dish and how to choose.
+- [Is injera gluten-free?](https://www.balinjera.com/blog/injera-gluten-free): Teff, wheat and what to check.
+- [What is buna?](https://www.balinjera.com/blog/ethiopian-coffee-buna): Ethiopian coffee, by the cup or in a pot.
+- [Vegan Ethiopian food near Carmel Market](https://www.balinjera.com/blog/vegan-ethiopian-carmel-market): What to order as a vegan.
+- [Kosher restaurant near Carmel Market](https://www.balinjera.com/blog/kosher-ethiopian-food-carmel-market): Balinjera's kosher certification in detail.
+- [Kerem HaTeimanim and Carmel Market](https://www.balinjera.com/blog/kerem-hateimanim-guide): Where the restaurant is.
+- [Eating together at Balinjera](https://www.balinjera.com/blog/eat-together-balinjera): Shared Ethiopian dining.
+- [Ethiopian catering in Tel Aviv](https://www.balinjera.com/blog/ethiopian-catering-events-tel-aviv): Catering and group events.
+
+Every article is also available in English by adding `?lang=en` to its URL.
 
 ## Ordering and Social Profiles
 

@@ -14,6 +14,8 @@ import {
   BALINJERA_ORDER_HREF,
   SITEKEPT_URL,
   balinjeraCopy,
+  formatOpeningHours,
+  getUpcomingSpecialHours,
   hrefWithLang,
   languageLabels,
   type BalinjeraFooterLine,
@@ -30,7 +32,7 @@ type FrameProps = {
   lang: BalinjeraLang;
 };
 
-const WHATSAPP_HREF = "https://api.whatsapp.com/send?phone=9720559655559";
+const WHATSAPP_HREF = "https://wa.me/972559655559";
 
 export function arrowFor() {
   return <ChevronRight className={styles["arrowIcon"]} aria-hidden="true" />;
@@ -230,6 +232,46 @@ function SiteHeader({
   );
 }
 
+// Owner-confirmed holiday hours for the next two weeks, shown under the
+// regular hours. Renders nothing when no holiday is coming up.
+function SpecialHoursLines({ lang }: { lang: BalinjeraLang }) {
+  const upcoming = getUpcomingSpecialHours(14);
+
+  if (upcoming.length === 0) {
+    return null;
+  }
+
+  const copy = balinjeraCopy[lang].specialHours;
+  const dateFormat = new Intl.DateTimeFormat(
+    lang === "he" ? "he-IL" : "en-GB",
+    {
+      weekday: "short",
+      day: "numeric",
+      month: "numeric",
+      timeZone: "Asia/Jerusalem",
+    }
+  );
+
+  return (
+    <>
+      <p className={styles["footerSpecialTitle"]}>{copy.title}</p>
+      {upcoming.map((entry) => (
+        <p key={entry.date}>
+          {copy.names[entry.key]} (
+          {dateFormat.format(new Date(`${entry.date}T12:00:00Z`))}):{" "}
+          {"closed" in entry ? (
+            copy.closed
+          ) : (
+            <span className={styles["footerSpecialHours"]} dir="ltr">
+              {formatOpeningHours(entry)}
+            </span>
+          )}
+        </p>
+      ))}
+    </>
+  );
+}
+
 function Footer({ lang }: { lang: BalinjeraLang }) {
   const copy = balinjeraCopy[lang];
 
@@ -255,6 +297,9 @@ function Footer({ lang }: { lang: BalinjeraLang }) {
           <h3>{column.title}</h3>
           <div className={styles["footerLines"]}>
             {column.lines.map((line) => renderFooterLine(line, lang))}
+            {"id" in column && column.id === "hours" ? (
+              <SpecialHoursLines lang={lang} />
+            ) : null}
           </div>
         </div>
       ))}

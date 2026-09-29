@@ -57,7 +57,9 @@ export function BlogArticlePageContent({
               </Link>
             </div>
             {(() => {
-              const relatedPost = page.posts.find((p) => p.slug !== post.slug);
+              const relatedPost = page.posts.find(
+                (p) => p.slug === post.relatedSlug
+              );
               if (!relatedPost) return null;
               const label = lang === "he" ? "לקריאה נוספת" : "Further reading";
               return (

@@ -521,7 +521,9 @@ export default function ScrollExpandMedia({
                           styles["mediaSurfaceCover"],
                           classes.mediaRadius
                         )}
-                        sizes="(max-width: 767px) 95vw, 85vw"
+                        // Same sizes as the background layer: both resolve to
+                        // one hero URL, so priority adds no second download.
+                        sizes="100vw"
                         quality={60}
                         priority={priorityMedia}
                       />

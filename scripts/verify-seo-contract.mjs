@@ -106,6 +106,27 @@ assert(
   'external links must use rel="noopener noreferrer"',
 )
 
+const postSlugs = [...source.content.matchAll(/slug: "([^"]+)",/g)].map((match) => match[1])
+const relatedSlugs = [...source.content.matchAll(/relatedSlug: "([^"]+)",/g)].map((match) => match[1])
+assert(
+  relatedSlugs.length === postSlugs.length,
+  'every blog post (HE and EN) must declare a relatedSlug',
+)
+relatedSlugs.forEach((relatedSlug, index) => {
+  assert(
+    postSlugs.includes(relatedSlug) && relatedSlug !== postSlugs[index],
+    `relatedSlug "${relatedSlug}" of post "${postSlugs[index]}" must be another existing post`,
+  )
+})
+const specialHoursBlock =
+  source.content.match(/BALINJERA_SPECIAL_HOURS: readonly BalinjeraSpecialHours\[\] = \[([\s\S]*?)\];/)?.[1] ?? ''
+for (const [, date] of specialHoursBlock.matchAll(/date: "([^"]*)"/g)) {
+  assert(
+    /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(Date.parse(`${date}T12:00:00Z`)),
+    `special hours date "${date}" must be a valid YYYY-MM-DD`,
+  )
+}
+
 if (failures.length > 0) {
   console.error('SEO contract check failed:')
   for (const failure of failures) {
