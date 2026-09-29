@@ -627,7 +627,7 @@ export const balinjeraCopy = {
             "באלינג׳רה נבנתה סביב רעיון של שולחן פתוח: מגש משותף, ידיים סביב האוכל ושיחה שמתקדמת בקצב טבעי.",
           publishedAt: "2026-06-22",
           modifiedAt: "2026-06-22",
-          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          relatedSlug: "sigd-ethiopian-jewish-holiday",
           body: [
             {
               heading: "למה קוראים למקום באלינג׳רה",
@@ -916,6 +916,39 @@ export const balinjeraCopy = {
             },
           ],
           relatedLink: { label: "לעמוד האירועים", path: "/events" },
+        },
+        {
+          slug: "sigd-ethiopian-jewish-holiday",
+          title: "מה זה סיגד? החג של יהודי אתיופיה",
+          excerpt:
+            "סיגד הוא החג של יהודי אתיופיה, 50 יום אחרי יום כיפור: צום, תפילה על הר מול ירושלים וארוחה משותפת בסוף. ב-2026 הוא חל ב-9 בנובמבר.",
+          publishedAt: "2026-09-29",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          body: [
+            {
+              heading: "מה זה סיגד?",
+              paragraphs: [
+                "סיגד הוא חג של קהילת ביתא ישראל, יהודי אתיופיה, שחל בכ״ט בחשוון - חמישים יום אחרי יום כיפור. השם מגיע מגעז, השפה הליטורגית העתיקה של אתיופיה, ופירושו השתחוויה. במרכז החג עומדים חידוש הברית בין העם לאלוהיו והכמיהה לירושלים, שליוותה את הקהילה לאורך דורות רבים באתיופיה.",
+                "ב-2008 הכירה הכנסת בסיגד כחג לאומי של מדינת ישראל, ומאז מתקיים בירושלים טקס ממלכתי מרכזי. ב-2026 חל הסיגד ביום שני, 9 בנובמבר, והחג מתחיל בערב שלפני כן.",
+              ],
+            },
+            {
+              heading: "איך מציינים את החג",
+              paragraphs: [
+                "באתיופיה נהגו לצום ביום הסיגד, ללבוש בגדים לבנים ולעלות אל ההר הגבוה שבסביבה. על ההר קראו הקסים, מנהיגי הקהילה הרוחניים, מתוך האורית - כתבי הקודש של ביתא ישראל - ונשאו תפילות שבהן חזרה שוב ושוב הכמיהה לשוב לירושלים.",
+                "בישראל התפילה המרכזית מתקיימת בטיילת ארמון הנציב בירושלים, מנקודה שממנה נשקף הר הבית. בני הקהילה מגיעים לשם מכל הארץ, וכך מה שהיה פעם כמיהה רחוקה הפך למפגש בעיר עצמה.",
+              ],
+            },
+            {
+              heading: "סוף הצום: ארוחה משותפת",
+              paragraphs: [
+                "הצום של הסיגד מסתיים בצהריים, ואחריו מגיעים הריקודים והארוחה החגיגית. באתיופיה נהגו לערוך סעודה גדולה ומשותפת לכל הקהילה; בישראל כל משפחה עורכת את הסעודה שלה.",
+                "זה גם הרגע שבו המטבח האתיופי-יהודי מדבר בשפה המוכרת לנו ביותר: שולחן אחד, אינג׳רה טרייה במרכז ותבשילים שחולקים יחד. בבאלינג׳רה, ששמה עצמו פירושו לאכול ביחד, זה הרעיון שמלווה אותנו כל השנה, בכרם התימנים ליד שוק הכרמל.",
+              ],
+            },
+          ],
+          relatedLink: { label: "הכירו את הסיפור שלנו", path: "/about" },
         },
       ],
     },
@@ -1440,7 +1473,7 @@ export const balinjeraCopy = {
             "Balinjera is built around the idea of an open table: a shared platter, hands around the food and conversation that moves at a natural pace.",
           publishedAt: "2026-06-22",
           modifiedAt: "2026-06-22",
-          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          relatedSlug: "sigd-ethiopian-jewish-holiday",
           body: [
             {
               heading: "Why the place is called Balinjera",
@@ -1729,6 +1762,39 @@ export const balinjeraCopy = {
             },
           ],
           relatedLink: { label: "Visit the events page", path: "/events" },
+        },
+        {
+          slug: "sigd-ethiopian-jewish-holiday",
+          title: "What is Sigd? The Ethiopian Jewish holiday",
+          excerpt:
+            "Sigd, the Ethiopian Jewish holiday 50 days after Yom Kippur: a fast, prayers on a mountaintop facing Jerusalem and a shared meal. In 2026: November 9.",
+          publishedAt: "2026-09-29",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          body: [
+            {
+              heading: "What is Sigd?",
+              paragraphs: [
+                "Sigd is a holiday of the Beta Israel community, the Jews of Ethiopia. It falls on the 29th of Cheshvan, fifty days after Yom Kippur. The name comes from Ge'ez, the ancient liturgical language of Ethiopia, and means prostration. At its heart are the renewal of the covenant between the people and God, and the longing for Jerusalem that accompanied the community through many generations in Ethiopia.",
+                "In 2008 the Knesset recognized Sigd as a national holiday of the State of Israel, and a central state ceremony has been held in Jerusalem ever since. In 2026 Sigd falls on Monday, November 9, and the holiday begins the evening before.",
+              ],
+            },
+            {
+              heading: "How the holiday is marked",
+              paragraphs: [
+                "In Ethiopia, people fasted on Sigd, dressed in white and climbed the highest mountain nearby. On the mountain, the kessim, the community's spiritual leaders, read from the Orit - the holy scriptures of Beta Israel - and led prayers in which the longing to return to Jerusalem came back again and again.",
+                "In Israel, the central prayer takes place at the Armon HaNatziv promenade in Jerusalem, from a point overlooking the Temple Mount. Members of the community come from all over the country, and what was once a distant longing has become a gathering in the city itself.",
+              ],
+            },
+            {
+              heading: "Breaking the fast: a shared meal",
+              paragraphs: [
+                "The Sigd fast ends at midday, followed by dancing and a festive meal. In Ethiopia the whole community traditionally shared one large meal; in Israel, each family holds its own.",
+                "It is also the moment when Ethiopian-Jewish cooking speaks the language we know best: one table, fresh injera at the center and stews that everyone shares. At Balinjera, whose very name means eating together, that is the idea we live by all year, in Kerem HaTeimanim next to Carmel Market.",
+              ],
+            },
+          ],
+          relatedLink: { label: "Read our story", path: "/about" },
         },
       ],
     },

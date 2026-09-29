@@ -43,6 +43,7 @@ Important details:
 - [Kerem HaTeimanim and Carmel Market](https://www.balinjera.com/blog/kerem-hateimanim-guide): Where the restaurant is.
 - [Eating together at Balinjera](https://www.balinjera.com/blog/eat-together-balinjera): Shared Ethiopian dining.
 - [Ethiopian catering in Tel Aviv](https://www.balinjera.com/blog/ethiopian-catering-events-tel-aviv): Catering and group events.
+- [What is Sigd?](https://www.balinjera.com/blog/sigd-ethiopian-jewish-holiday): The holiday of Ethiopian Jews (Beta Israel) and its festive meal.
 
 Every article is also available in English by adding `?lang=en` to its URL.
 
