@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
 import { preload } from 'react-dom'
 
+import { BalinjeraAnalytics } from './balinjera-analytics'
 import { getSiteUrl } from './balinjera-seo'
 import './globals.css'
 
@@ -58,6 +59,7 @@ export default async function RootLayout({
         {children}
         <Analytics />
         {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
+        {googleAnalyticsId ? <BalinjeraAnalytics /> : null}
       </body>
     </html>
   )

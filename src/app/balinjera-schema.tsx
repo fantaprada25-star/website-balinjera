@@ -1,7 +1,9 @@
 import {
   BALINJERA_EMAIL,
+  BALINJERA_OPENING_HOURS,
   BALINJERA_ORDER_HREF,
   BALINJERA_PHONE_HREF,
+  getUpcomingSpecialHours,
   type BalinjeraBlogPost,
   type BalinjeraLang,
   type BalinjeraPageKey,
@@ -39,19 +41,26 @@ const RESTAURANT_DESCRIPTION: Record<BalinjeraLang, string> = {
   en: 'Kosher Ethiopian restaurant in Kerem HaTeimanim, next to Carmel Market in Tel Aviv, specializing in fresh injera and traditional Ethiopian cuisine.',
 }
 
-// TripAdvisor shows 4.7/5 with 179 reviews as of 2026-08-25 (re-verified via direct
-// search of the live listing, not a search-engine AI summary — an earlier session's
-// figure of 1,506 "Google reviews" could not be independently confirmed and should
-// not be used). Re-verify periodically, review counts drift upward over time.
-const AGGREGATE_RATING: JsonLd = {
-  '@type': 'AggregateRating',
-  ratingValue: '4.7',
-  bestRating: '5',
-  reviewCount: '179',
+// No aggregateRating: Google's review-snippet guidelines forbid ratings
+// aggregated from other sites, and a business's own LocalBusiness pages are
+// ineligible for stars anyway (policy re-checked 2026-09-29). Google shows the
+// GBP rating (4.7★, 1,560 reviews in Sep 2026) in the local panel on its own.
+
+function buildPriceRange(lang: BalinjeraLang): string {
+  const prices = balinjeraCopy[lang].menuPage.sections.flatMap((section) =>
+    section.items.flatMap((item) =>
+      (item.price.match(/\d+/g) ?? []).map(Number)
+    )
+  )
+
+  return prices.length > 0
+    ? `₪${Math.min(...prices)}-₪${Math.max(...prices)}`
+    : '₪₪'
 }
 
 export function buildRestaurantSchema(lang: BalinjeraLang): JsonLd {
   const siteUrl = getSiteUrl()
+  const specialHours = getUpcomingSpecialHours(60)
 
   return {
     '@context': 'https://schema.org',
@@ -76,25 +85,34 @@ export function buildRestaurantSchema(lang: BalinjeraLang): JsonLd {
       longitude: 34.7665593,
     },
     servesCuisine: 'Ethiopian',
-    priceRange: '₪10-₪160',
+    priceRange: buildPriceRange(lang),
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-        opens: '12:00',
-        closes: '20:00',
+        ...BALINJERA_OPENING_HOURS.sundayToThursday,
       },
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: 'Friday',
-        opens: '11:00',
-        closes: '15:00',
+        ...BALINJERA_OPENING_HOURS.friday,
       },
     ],
+    ...(specialHours.length > 0
+      ? {
+          // Google convention: opens = closes = 00:00 means closed all day.
+          specialOpeningHoursSpecification: specialHours.map((entry) => ({
+            '@type': 'OpeningHoursSpecification',
+            validFrom: entry.date,
+            validThrough: entry.date,
+            opens: 'closed' in entry ? '00:00' : entry.opens,
+            closes: 'closed' in entry ? '00:00' : entry.closes,
+          })),
+        }
+      : {}),
     image: `${siteUrl}/balinjera/hero.jpg`,
     hasMenu: getLocalizedUrl('/menu', lang),
     acceptsReservations: true,
-    aggregateRating: AGGREGATE_RATING,
     sameAs: [
       'https://www.instagram.com/ethiopianfoodrestaurant/',
       'https://www.facebook.com/Traditional.Ethiopian.Cuisine/',
@@ -214,7 +232,7 @@ function buildOffer(price: string): JsonLd | undefined {
 }
 
 const VEGAN_PATTERN = /טבעונ|vegan/i
-const MEAT_PATTERN = /בשר|meat/i
+const MEAT_PATTERN = /בשר|עוף|בקר|meat|chicken|beef/i
 
 export function buildMenuSchema(lang: BalinjeraLang): JsonLd {
   const menu = balinjeraCopy[lang].menuPage

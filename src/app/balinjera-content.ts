@@ -31,6 +31,8 @@ export type BalinjeraBlogPost = {
   excerpt: string;
   publishedAt: string;
   modifiedAt: string;
+  // Post linked under "Further reading" (same slug in HE and EN).
+  relatedSlug: string;
   body: readonly BalinjeraBlogSection[];
   relatedLink: BalinjeraBlogRelatedLink;
 };
@@ -63,6 +65,64 @@ export const BALINJERA_PHONE_HREF = "tel:+97235252527";
 export const BALINJERA_EMAIL = "fantaprada25@gmail.com";
 export const BALINJERA_ACCESSIBILITY_HREF = "/accessibility";
 export const SITEKEPT_URL = "https://www.sitekept.com";
+
+// Regular opening hours: the single source for the footer (HE + EN) and the
+// Restaurant schema. Must match Google Business Profile and public/llms.txt.
+export const BALINJERA_OPENING_HOURS = {
+  sundayToThursday: { opens: "12:00", closes: "20:00" },
+  friday: { opens: "11:00", closes: "15:00" },
+} as const;
+
+export type BalinjeraHolidayKey =
+  | "roshHashanaEve"
+  | "roshHashana"
+  | "yomKippurEve"
+  | "yomKippur"
+  | "sukkotEve"
+  | "sukkot"
+  | "hoshanaRabba"
+  | "simchatTorah"
+  | "pesachEve"
+  | "pesach"
+  | "shavuotEve"
+  | "shavuot";
+
+export type BalinjeraSpecialHours =
+  | { date: string; key: BalinjeraHolidayKey; closed: true }
+  | { date: string; key: BalinjeraHolidayKey; opens: string; closes: string };
+
+// Holiday hours CONFIRMED by the owner only (date = YYYY-MM-DD, Israel time).
+// Mirror every entry in GBP → Special hours. Past dates drop out on their own.
+export const BALINJERA_SPECIAL_HOURS: readonly BalinjeraSpecialHours[] = [];
+
+const israelDateFormat = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Jerusalem",
+});
+
+// Calendar arithmetic on YYYY-MM-DD at UTC noon, so a DST change inside the
+// window can never shift the last day.
+function addDays(isoDate: string, days: number) {
+  const date = new Date(`${isoDate}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+
+  return date.toISOString().slice(0, 10);
+}
+
+export function getUpcomingSpecialHours(days: number, now = new Date()) {
+  const today = israelDateFormat.format(now);
+  const until = addDays(today, days);
+
+  return BALINJERA_SPECIAL_HOURS.filter(
+    (entry) => entry.date >= today && entry.date <= until
+  ).sort((a, b) => a.date.localeCompare(b.date));
+}
+
+export function formatOpeningHours(hours: {
+  opens: string;
+  closes: string;
+}) {
+  return `${hours.opens}-${hours.closes}`;
+}
 
 export const languageLabels: Record<
   BalinjeraLang,
@@ -127,10 +187,34 @@ export const balinjeraCopy = {
         ],
       },
       {
+        id: "hours",
         title: "שעות פתיחה",
-        lines: ["ראשון-חמישי", "12:00-20:00", "שישי", "11:00-15:00"],
+        lines: [
+          "ראשון-חמישי",
+          formatOpeningHours(BALINJERA_OPENING_HOURS.sundayToThursday),
+          "שישי",
+          formatOpeningHours(BALINJERA_OPENING_HOURS.friday),
+        ],
       },
     ],
+    specialHours: {
+      title: "שעות פתיחה בחגים",
+      closed: "סגור",
+      names: {
+        roshHashanaEve: "ערב ראש השנה",
+        roshHashana: "ראש השנה",
+        yomKippurEve: "ערב יום כיפור",
+        yomKippur: "יום כיפור",
+        sukkotEve: "ערב סוכות",
+        sukkot: "חול המועד סוכות",
+        hoshanaRabba: "הושענא רבה",
+        simchatTorah: "שמחת תורה",
+        pesachEve: "ערב פסח",
+        pesach: "פסח",
+        shavuotEve: "ערב שבועות",
+        shavuot: "שבועות",
+      },
+    },
     follow: "עקבו אחרינו",
     quick: {
       accessibility: "אפשרויות נגישות",
@@ -170,29 +254,29 @@ export const balinjeraCopy = {
     seo: {
       pages: {
         home: {
-          title: "מסעדת באלינג׳רה — מטבח אתיופי מסורתי בתל אביב",
+          title: "באלינג׳רה — מסעדה אתיופית כשרה בתל אביב, ליד שוק הכרמל",
           description:
-            "מסעדת באלינג׳רה בכרם התימנים, תל אביב. מטבח אתיופי אותנטי, אינג׳רה טרייה ואווירה חמה. הזמינו שולחן או קייטרינג אתיופי.",
+            "מסעדה אתיופית כשרה (רבנות תל אביב) בכרם התימנים, ליד שוק הכרמל: אינג׳רה טרייה מקמח טף, טיבס, דורו וואט ומגשים טבעוניים. במקום, במשלוח ב-Wolt ולאירועים.",
         },
         about: {
-          title: "על באלינג׳רה — הסיפור שלנו | מסעדה אתיופית תל אביב",
+          title: "על באלינג׳רה — הסיפור של פאנטה והמטבח האתיופי-יהודי",
           description:
-            "הכירו את הסיפור מאחורי מסעדת באלינג׳רה — מטבח אתיופי אותנטי עם לב, בכרם התימנים תל אביב.",
+            "פאנטה, ילידת אתיופיה ועורכת דין לשעבר, חזרה למתכונים של אמה והקימה את באלינג׳רה: מטבח אתיופי-יהודי כשר בכרם התימנים, ליד שוק הכרמל בתל אביב.",
         },
         menu: {
-          title: "התפריט | מסעדת באלינג׳רה — מנות אתיופיות תל אביב",
+          title: "התפריט של באלינג׳רה — טיבס, דורו וואט ומגשים טבעוניים",
           description:
-            "גלו את תפריט באלינג׳רה — מנות אתיופיות מסורתיות, אינג׳רה טרייה, מבחר טבעוני. כשר. כרם התימנים, תל אביב.",
+            "התפריט המלא עם מחירים: מגשי אינג׳רה טבעוניים ובשריים, טיבס, דורו וואט, סיגה וואט, פירפיר ושירו. כשר, כרם התימנים, תל אביב. גם במשלוח דרך Wolt.",
         },
         events: {
-          title: "אירועים וקייטרינג אתיופי | מסעדת באלינג׳רה תל אביב",
+          title: "אירועים וקייטרינג אתיופי בתל אביב | באלינג׳רה",
           description:
-            "קייטרינג אתיופי לאירועים פרטיים ומפגשי קבוצות בתל אביב. באלינג׳רה — חוויה ייחודית לכל אירוע. צרו קשר.",
+            "ימי הולדת, ארוחות צוות ומפגשי משפחה סביב מגשי אינג׳רה משותפים, בשרי או טבעוני. במסעדה הכשרה שלנו בכרם התימנים או כקייטרינג לאירוע שלכם. השאירו פרטים.",
         },
         blog: {
-          title: "בלוג | מסעדת באלינג׳רה — מטבח אתיופי ואינג׳רה",
+          title: "הבלוג של באלינג׳רה — אינג׳רה, מנות אתיופיות וכשרות",
           description:
-            "מאמרים על המטבח האתיופי, אינג׳רה ותרבות האוכל של באלינג׳רה. קראו ולמדו.",
+            "מדריכים קצרים למטבח האתיופי: מה זה אינג׳רה, איך אוכלים אותה, מה זה דורו וואט וטיבס, בונה, גלוטן וכשרות, מהמטבח של באלינג׳רה בכרם התימנים.",
         },
         accessibility: {
           title: "הצהרת נגישות | מסעדת באלינג׳רה",
@@ -200,7 +284,7 @@ export const balinjeraCopy = {
             "הצהרת הנגישות של אתר מסעדת באלינג׳רה, כולל התאמות נגישות, פרטי קשר ופנייה בנושא נגישות.",
         },
       },
-      blogArticleTitleSuffix: " | מסעדת באלינג׳רה",
+      blogArticleTitleSuffix: " | באלינג׳רה",
     },
     hero: {
       eyebrow: "ביסטרו אתיופי כשר בכרם התימנים",
@@ -264,7 +348,7 @@ export const balinjeraCopy = {
     },
     eventsPage: {
       eyebrow: "אירועים בבאלינג׳רה",
-      title: "אירוע קטן, צבעוני ומלא טעמים",
+      title: "אירועים וקייטרינג אתיופי",
       body: "המסעדה מתאימה למפגשים משפחתיים, ימי הולדת, ארוחות צוות וחוויות טעימה סביב המטבח האתיופי. אנחנו שומרים על האופי החם של המקום, עם תפריט שמבוסס על אינג׳רה טרייה, תבשילים בשריים או טבעוניים ושולחן שמזמין לאכול ביחד. מגשים משותפים מאפשרים לנו להתאים את הכמות לגודל הקבוצה - מארוחה זוגית ועד מפגש גדול.",
       options: [
         "ארוחות קבוצתיות סביב שולחן משותף",
@@ -324,110 +408,126 @@ export const balinjeraCopy = {
       },
     },
     menuPage: {
-      title: "התפריט, מסעדת באלינג׳רה",
-      body: "באלינג׳רה מציעה מאכלי עדה אתיופיים מסורתיים מבוססי מנת האינג׳רה מלחם הטף. תבשילים צמחוניים, טבעוניים ותבשילים בשריים בטעמים אותנטיים.",
+      title: "התפריט של באלינג׳רה",
+      body: "באלינג׳רה מציעה מאכלי עדה אתיופיים מסורתיים סביב אינג׳רה טרייה מקמח טף: מגשי אינג׳רה טבעוניים ובשריים, טיבס, דורו וואט, סיגה וואט ופירפיר, בטעמים אותנטיים.",
       sections: [
         {
           title: "תפריט אוכל",
           items: [
             {
               name: "סלט נפרו",
-              description: "סלט חיטה, עם עשבי טיבול וחמוציות",
-              price: "35 ₪",
+              description: "סלט חיטה, עם עשבי תיבול וחמוציות",
+              price: "60 ₪",
             },
             {
               name: "סלט הבית",
               description:
-                "חסה, בצל עגבניות, פטרוזיליה, כוסברה, נענע, ברוטב שמן זית וטחינת הבית",
-              price: "40 ₪",
+                "חסה, בצל, כוסברה ונענע, ברוטב שמן זית וטחינת הבית",
+              price: "62 ₪",
             },
             {
               name: "חציל בטחינה אתיופית",
               description: "טחינה אתיופית אורגנית, סלסה אתיופית",
-              price: "32 ₪",
+              price: "55 ₪",
             },
             {
-              name: "אינג׳ירה פירפיר",
-              description: "סלט עם חתיכות אינג׳רה",
-              price: "30 ₪",
+              name: "אינג׳רה פירפיר",
+              description: "סלט עם חתיכות קטנות של אינג׳רה",
+              price: "60 ₪",
             },
             {
               name: "פירפיר",
               description:
-                "חתיכות אינג׳ירה מוקפצות עם בצל ובירברי, חריף אתיופי פיקנטי",
-              price: "40 ₪",
+                "חתיכות אינג׳רה מוקפצות עם בצל ובירברי, תיבול אתיופי חריף",
+              price: "65 ₪",
+            },
+            {
+              name: "המנה הירוקה",
+              description: "עשבי תיבול, חתיכות אינג׳רה ואבוקדו",
+              price: "70 ₪",
             },
             {
               name: "צלוחית טחינה אתיופית אורגנית מתובלת",
-              description: "תיבול ייחודי",
-              price: "15 ₪",
+              description: "בתערובת תבלינים ייחודית",
+              price: "35 ₪",
+            },
+            {
+              name: "צלחת פלפלים חריפים מיוחדת",
+              price: "25 ₪",
             },
             {
               name: "דאבו",
-              description: "לחם אתיופי",
-              price: "10 ₪",
-            },
-            {
-              name: "תוספת אינג׳ירה",
-              price: "10 ₪",
+              description: "לחם אתיופי, חתיכות לחם בתיבול ייחודי",
+              price: "20 ₪",
             },
             {
               name: "מרק היום",
-              description: "תוספת טיבעונית 10 ₪ / תוספת בשרית 22 ₪",
-              price: "30 ₪",
+              description: "תוספת טבעונית 28 ₪ / תוספת בשרית 55 ₪",
+              price: "40 ₪",
             },
             {
               name: "באלינג׳רה שירו",
               description: "אינג׳רה עם שירו + פלפל חריף טרי",
-              price: "35 ₪",
+              price: "55 ₪",
             },
             {
-              name: "באלינג׳רה ליחיד",
+              name: "באלינג׳רה ליחיד טבעונית",
               description:
-                "4 תוספות טבעוניות לבחירה שמורכבות ממגוון של קטניות וירקות מבושלים",
-              price: "50 ₪",
+                "4 תוספות טבעוניות לבחירה, ממגוון קטניות וירקות מבושלים",
+              price: "65 ₪",
             },
             {
               name: "באלינג׳רה זוגית טבעונית",
               description:
-                "7 תוספות טבעוניות שמורכבות ממגוון של קטניות וירקות מבושלים",
-              price: "85 ₪",
+                "7 תוספות טבעוניות לבחירה, ממגוון קטניות וירקות מבושלים",
+              price: "120 ₪",
+            },
+            {
+              name: "ראם אינג׳רה",
+              description: "מנות בשריות, אינג׳רה, 3 תוספות צמחוניות + סלט קטן",
+              price: "150 ₪",
             },
             {
               name: "באלינג׳רה זוגית בשרית",
               description:
-                "2 סוגי בשר לבחירה, 2 אינג׳רות, 4 תוספות צמחוניות + סלט קטן + דאבו + טחינה",
-              price: "115 ₪",
+                "2 סוגי בשר לבחירה, 2 אינג׳רות, 4 תוספות צמחוניות + סלט קטן",
+              price: "155 ₪",
             },
             {
               name: "פסטיבל באלינג׳רה",
               description:
-                "7 תוספות טבעוניות + 3 תוספות בשריות + סלט גדול + טחינה אתיופית + 3 אינג׳רות",
-              price: "160 ₪",
+                "7 תוספות טבעוניות + 3 מנות בשריות + סלט גדול + טחינה אתיופית (מתאים ל-3 סועדים)",
+              price: "220 ₪",
             },
             {
-              name: "טיבס באלינג׳רה",
+              name: "טיבס באלינג׳רה ליחיד",
               description:
-                "נתח קצבים מוקפץ על מחבט עם תיבול ייחודי ובצל, מגיע עם 3 תוספות צמחוניות",
-              price: "80 ₪",
+                "קוביות בשר מוקפצות במחבת עם פלפל חריף ובצל, 2 תוספות צמחוניות + סלט קטן",
+              price: "90 ₪",
+            },
+            {
+              name: "טיבס באלינג׳רה זוגי",
+              description:
+                "קוביות בשר מוקפצות במחבת עם פלפל חריף ובצל, 2 תוספות צמחוניות + סלט קטן",
+              price: "160 ₪",
             },
             {
               name: "סיגה וואט",
               description:
-                "חריף / לא חריף. תבשיל בשר בקר עם בצל, שום ותיבול אתיופי + 3 תוספות צמחוניות",
-              price: "60 ₪",
+                "חריף / לא חריף. תבשיל בשר בקר עם בצל, שום ותיבול אתיופי + 2 תוספות טבעוניות",
+              price: "80 ₪",
             },
             {
               name: "סיגה פירפיר",
               description:
-                "חתיכות אינג׳רה עם חתיכות בשר ורוטב אדום + 3 תוספות צמחוניות",
-              price: "55 ₪",
+                "חתיכות אינג׳רה עם חתיכות בשר ברוטב אדום + 3 תוספות טבעוניות",
+              price: "70 ₪",
             },
             {
               name: "דורו וואט",
               description:
-                "תבשיל עוף עם ביצה, בצל, שום ותיבול חריף פיקנטי + 3 תוספות צמחוניות",
-              price: "55 ₪",
+                "תבשיל עוף עם ביצה, בצל, שום ותיבול חריף + 2 תוספות טבעוניות",
+              price: "70 ₪",
             },
           ],
         },
@@ -436,13 +536,13 @@ export const balinjeraCopy = {
           items: [
             {
               name: "באלינג׳רה יחיד טבעונית",
-              description: "7 תוספות + סלט קטן",
-              price: "55 ₪",
+              description: "7 תוספות טבעוניות + סלט קטן",
+              price: "70 ₪",
             },
             {
               name: "באלינג׳רה יחיד בשרית",
               description: "בשר לבחירה + 4 תוספות צמחוניות + סלט קטן",
-              price: "55 ₪",
+              price: "82 ₪",
             },
           ],
         },
@@ -451,43 +551,31 @@ export const balinjeraCopy = {
           items: [
             { name: "מים נביעות", price: "7 ₪" },
             { name: "קינלי סודה", price: "8 ₪" },
-            { name: "לימונדה", price: "10 ₪" },
+            { name: "לימונדה", price: "15 ₪" },
             { name: "פריגת תפוזים / פריגת אשכוליות", price: "9 ₪" },
-            { name: "פיוזטי", price: "10 ₪" },
-            { name: "קוקה קולה / זירו / דייט", price: "11 ₪" },
-            { name: "פנטה", price: "11 ₪" },
-            { name: "מלט בירה שחורה", price: "12 ₪" },
+            { name: "פיוזטי", price: "12 ₪" },
+            { name: "קוקה קולה / זירו / דייט", price: "12 ₪" },
+            { name: "פנטה", price: "12 ₪" },
+            { name: "ספרייט", price: "12 ₪" },
           ],
         },
         {
           title: "שתייה חמה",
           items: [
-            { name: "בונה קפה", price: "7 ₪" },
-            { name: "שי תה תבלינים", price: "10 ₪" },
-            { name: "תה תבלינים + ג׳ינג׳ר", price: "12 ₪" },
-            { name: "קנקן בונה - קפה אתיופי", price: "25 ₪" },
+            { name: "כוס בונה - קפה אתיופי", price: "10 ₪" },
+            { name: "שי - תה תבלינים", price: "15 ₪" },
+            { name: "שי - תה תבלינים + ג׳ינג׳ר", price: "18 ₪" },
+            { name: "ג׳בנה - קנקן בונה (קפה אתיופי)", price: "35 ₪" },
           ],
         },
         {
-          title: "יינות",
+          title: "אלכוהול",
           items: [
-            { name: "בקבוק יין אדום", price: "110 ₪" },
-            { name: "בקבוק יין לבן", price: "110 ₪" },
-          ],
-        },
-        {
-          title: "ערק",
-          items: [
-            { name: "צ׳ייסר ערק", price: "15 ₪" },
-            { name: "כוס ערק", price: "25 ₪" },
-          ],
-        },
-        {
-          title: "בירות",
-          items: [
-            { name: "בירה מהחבית - קלסברג", price: "28/23 ₪" },
-            { name: "בקבוק - טובורג / בירות אתיופיות", price: "23 ₪" },
-            { name: "סמרסבי - סיידר תפוחים אלכוהולי", price: "27 ₪" },
+            { name: "בירה אתיופית", price: "23 ₪" },
+            { name: "ערק", price: "40/25 ₪" },
+            { name: "קוקטייל", price: "50 ₪" },
+            { name: "ויסקי", price: "50 ₪" },
+            { name: "יין - כוס / בקבוק", price: "32/120 ₪" },
           ],
         },
       ],
@@ -501,11 +589,12 @@ export const balinjeraCopy = {
       posts: [
         {
           slug: "injera-heart-of-meal",
-          title: "מה הופך אינג׳רה ללב הארוחה?",
+          title: "מה זה אינג׳רה? הלחם האתיופי מקמח טף",
           excerpt:
-            "אינג׳רה היא לא רק הלחם של הארוחה האתיופית, אלא הבסיס שעליו נבנים הטעמים, הקצב והחוויה המשותפת סביב השולחן.",
+            "אינג׳רה היא הלחם השטוח והחמצמץ של המטבח האתיופי, מקמח טף, שמשמש גם כבסיס להגשה וגם כ״כף״. ממה מכינים אותה, איך אוכלים ואיפה טועמים אינג׳רה טרייה בתל אביב.",
           publishedAt: "2026-06-22",
-          modifiedAt: "2026-06-22",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "injera-gluten-free",
           body: [
             {
               heading: "מה זה אינג׳רה?",
@@ -538,6 +627,7 @@ export const balinjeraCopy = {
             "באלינג׳רה נבנתה סביב רעיון של שולחן פתוח: מגש משותף, ידיים סביב האוכל ושיחה שמתקדמת בקצב טבעי.",
           publishedAt: "2026-06-22",
           modifiedAt: "2026-06-22",
+          relatedSlug: "sigd-ethiopian-jewish-holiday",
           body: [
             {
               heading: "למה קוראים למקום באלינג׳רה",
@@ -565,11 +655,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "kosher-ethiopian-food-carmel-market",
-          title: "מסעדה אתיופית כשרה ליד שוק הכרמל",
+          title: "מסעדה כשרה ליד שוק הכרמל: כשרות, בשרי וטבעוני",
           excerpt:
-            "כרם התימנים ושוק הכרמל הם נקודת פתיחה טובה להכיר מטבח אתיופי כשר בלב תל אביב, עם אינג׳רה טרייה ומסורת שמזמינה לאכול ביחד.",
+            "באלינג׳רה בכרם התימנים, ליד שוק הכרמל, בכשרות הרבנות תל אביב (כשרות רגילה). מסעדה בשרית ללא מוצרי חלב, עם מגוון מנות טבעוניות ואינג׳רה טרייה מטף.",
           publishedAt: "2026-07-19",
-          modifiedAt: "2026-07-19",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "kerem-hateimanim-guide",
           body: [
             {
               heading: "כרם התימנים כבסיס לגילוי המטבח האתיופי",
@@ -602,6 +693,7 @@ export const balinjeraCopy = {
             "קייטרינג אתיופי מביא לאירוע מגשים משותפים, אינג׳רה טרייה וחוויית אכילה שמערבת את כל האורחים - מתאים למגוון סוגי אירועים בתל אביב.",
           publishedAt: "2026-07-19",
           modifiedAt: "2026-07-19",
+          relatedSlug: "ethiopian-dishes-glossary",
           body: [
             {
               heading: "מה מייחד קייטרינג אתיופי",
@@ -629,11 +721,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "ethiopian-dishes-glossary",
-          title: "מה זה דורו וואט, טיבס ושירו? מדריך למנות",
+          title: "מה זה דורו וואט וטיבס? מדריך למנות אתיופיות",
           excerpt:
-            "מדריך קצר למנות המרכזיות בתפריט האתיופי - מה יש בכל אחת, מה חריף ומה לא, ואיך לבחור אם זו הפעם הראשונה שלכם.",
+            "דורו וואט, סיגה וואט, טיבס, פירפיר ושירו: מה יש בכל מנה אתיופית, מה חריף ומה עדין, ואיך לבחור בביקור הראשון במסעדה אתיופית.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "ethiopian-coffee-buna",
           body: [
             {
               heading: "הבסיס: אינג׳רה, בירברי ודאבו",
@@ -665,7 +758,8 @@ export const balinjeraCopy = {
           excerpt:
             "המטבח האתיופי הוא אחד המטבחים הידידותיים ביותר לטבעונים - כאן מה שכדאי להזמין בבאלינג׳רה ולמה השילוב כשר-טבעוני-אתיופי נדיר.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "kosher-ethiopian-food-carmel-market",
           body: [
             {
               heading: "למה המטבח האתיופי מתאים לטבעונים",
@@ -693,11 +787,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "how-to-eat-injera",
-          title: "איך אוכלים אינג׳רה ביד - מדריך למתחילים",
+          title: "איך אוכלים אינג׳רה? מדריך קצר לביקור הראשון",
           excerpt:
-            "אכילה משותפת בידיים היא חלק מהחוויה האתיופית, אבל היא לא מובנת מאליה. הנה איך זה עובד, צעד אחר צעד.",
+            "קורעים, צובטים ואוספים: איך אוכלים אינג׳רה בידיים, באיזו יד נהוג להשתמש ומה מגיע לשולחן בארוחה אתיופית משותפת. מדריך קצר לביקור הראשון.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "injera-heart-of-meal",
           body: [
             {
               heading: "מה מגיע לשולחן",
@@ -725,11 +820,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "injera-gluten-free",
-          title: "אינג׳רה וגלוטן - מה חשוב לדעת",
+          title: "האם אינג׳רה ללא גלוטן? טף, חיטה ומה לבדוק",
           excerpt:
-            "האינג׳רה שלנו מוכנה מקמח טף וטבעית ללא גלוטן. הנה ההסבר, יחד עם מה שחשוב לבדוק בשאר התפריט.",
+            "טף הוא דגן ללא גלוטן, והאינג׳רה שלנו מוכנה טרייה מקמח טף. מה בכל זאת מכיל גלוטן בתפריט, ומתי כדאי להתקשר אלינו לפני שמגיעים.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "vegan-ethiopian-carmel-market",
           body: [
             {
               heading: "טף - הדגן שמאחורי האינג׳רה",
@@ -757,11 +853,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "ethiopian-coffee-buna",
-          title: "בונה - הקפה האתיופי",
+          title: "מה זה בונה? הקפה האתיופי, בכוס או בקנקן",
           excerpt:
-            "קפה הוא חלק מרכזי מהתרבות האתיופית, ולא רק משקה שמסיים ארוחה. קצת רקע, ומה מוגש אצלנו.",
+            "בונה פירושו קפה באמהרית, ובאתיופיה הוא הרבה יותר ממשקה. קצת רקע על הקפה האתיופי, ומה מחכה לכם אצלנו: בונה בכוס, קנקן בונה לשולחן ותה תבלינים.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "how-to-eat-injera",
           body: [
             {
               heading: "אתיופיה ומקורות הקפה",
@@ -774,7 +871,7 @@ export const balinjeraCopy = {
               heading: "מה מוגש בבאלינג׳רה",
               paragraphs: [
                 "בתפריט שלנו יש שתי אפשרויות. בונה קפה מוגש ככוס בודדת, ולצידה יש גם קנקן בונה - הגשה בקנקן, למי שרוצה לשבת עם הקפה לאורך זמן או לחלוק אותו עם עוד אנשים סביב השולחן.",
-                "לצד הקפה יש גם תה תבלינים, ותה תבלינים עם ג׳ינג׳ר - אפשרות טובה למי שמעדיף לסיים בלי קפאין.",
+                "לצד הקפה יש גם תה תבלינים, ותה תבלינים עם ג׳ינג׳ר - אפשרות טובה למי שמעדיף תה על פני קפה.",
               ],
             },
             {
@@ -794,6 +891,7 @@ export const balinjeraCopy = {
             "השכונה שבה נמצאת באלינג׳רה היא אחת הפינות המעניינות בתל אביב. קצת רקע על האזור ואיך משלבים ביקור.",
           publishedAt: "2026-08-25",
           modifiedAt: "2026-08-25",
+          relatedSlug: "eat-together-balinjera",
           body: [
             {
               heading: "השכונה",
@@ -818,6 +916,39 @@ export const balinjeraCopy = {
             },
           ],
           relatedLink: { label: "לעמוד האירועים", path: "/events" },
+        },
+        {
+          slug: "sigd-ethiopian-jewish-holiday",
+          title: "מה זה סיגד? החג של יהודי אתיופיה",
+          excerpt:
+            "סיגד הוא החג של יהודי אתיופיה, 50 יום אחרי יום כיפור: צום, תפילה על הר מול ירושלים וארוחה משותפת בסוף. ב-2026 הוא חל ב-9 בנובמבר.",
+          publishedAt: "2026-09-29",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          body: [
+            {
+              heading: "מה זה סיגד?",
+              paragraphs: [
+                "סיגד הוא חג של קהילת ביתא ישראל, יהודי אתיופיה, שחל בכ״ט בחשוון - חמישים יום אחרי יום כיפור. השם מגיע מגעז, השפה הליטורגית העתיקה של אתיופיה, ופירושו השתחוויה. במרכז החג עומדים חידוש הברית בין העם לאלוהיו והכמיהה לירושלים, שליוותה את הקהילה לאורך דורות רבים באתיופיה.",
+                "ב-2008 הכירה הכנסת בסיגד כחג לאומי של מדינת ישראל, ומאז מתקיים בירושלים טקס ממלכתי מרכזי. ב-2026 חל הסיגד ביום שני, 9 בנובמבר, והחג מתחיל בערב שלפני כן.",
+              ],
+            },
+            {
+              heading: "איך מציינים את החג",
+              paragraphs: [
+                "באתיופיה נהגו לצום ביום הסיגד, ללבוש בגדים לבנים ולעלות אל ההר הגבוה שבסביבה. על ההר קראו הקסים, מנהיגי הקהילה הרוחניים, מתוך האורית - כתבי הקודש של ביתא ישראל - ונשאו תפילות שבהן חזרה שוב ושוב הכמיהה לשוב לירושלים.",
+                "בישראל התפילה המרכזית מתקיימת בטיילת ארמון הנציב בירושלים, מנקודה שממנה נשקף הר הבית. בני הקהילה מגיעים לשם מכל הארץ, וכך מה שהיה פעם כמיהה רחוקה הפך למפגש בעיר עצמה.",
+              ],
+            },
+            {
+              heading: "סוף הצום: ארוחה משותפת",
+              paragraphs: [
+                "הצום של הסיגד מסתיים בצהריים, ואחריו מגיעים הריקודים והארוחה החגיגית. באתיופיה נהגו לערוך סעודה גדולה ומשותפת לכל הקהילה; בישראל כל משפחה עורכת את הסעודה שלה.",
+                "זה גם הרגע שבו המטבח האתיופי-יהודי מדבר בשפה המוכרת לנו ביותר: שולחן אחד, אינג׳רה טרייה במרכז ותבשילים שחולקים יחד. בבאלינג׳רה, ששמה עצמו פירושו לאכול ביחד, זה הרעיון שמלווה אותנו כל השנה, בכרם התימנים ליד שוק הכרמל.",
+              ],
+            },
+          ],
+          relatedLink: { label: "הכירו את הסיפור שלנו", path: "/about" },
         },
       ],
     },
@@ -899,10 +1030,34 @@ export const balinjeraCopy = {
         ],
       },
       {
+        id: "hours",
         title: "Opening hours",
-        lines: ["Sunday-Thursday", "12:00-20:00", "Friday", "11:00-15:00"],
+        lines: [
+          "Sunday-Thursday",
+          formatOpeningHours(BALINJERA_OPENING_HOURS.sundayToThursday),
+          "Friday",
+          formatOpeningHours(BALINJERA_OPENING_HOURS.friday),
+        ],
       },
     ],
+    specialHours: {
+      title: "Holiday hours",
+      closed: "Closed",
+      names: {
+        roshHashanaEve: "Rosh Hashana eve",
+        roshHashana: "Rosh Hashana",
+        yomKippurEve: "Yom Kippur eve",
+        yomKippur: "Yom Kippur",
+        sukkotEve: "Sukkot eve",
+        sukkot: "Sukkot, Chol HaMoed",
+        hoshanaRabba: "Hoshana Rabba",
+        simchatTorah: "Simchat Torah",
+        pesachEve: "Passover eve",
+        pesach: "Passover",
+        shavuotEve: "Shavuot eve",
+        shavuot: "Shavuot",
+      },
+    },
     follow: "Follow us",
     quick: {
       accessibility: "Accessibility options",
@@ -944,29 +1099,29 @@ export const balinjeraCopy = {
     seo: {
       pages: {
         home: {
-          title: "Balinjera — Traditional Ethiopian Restaurant in Tel Aviv",
+          title: "Balinjera — Kosher Ethiopian Restaurant in Tel Aviv",
           description:
-            "Balinjera in Kerem HaTeimanim, Tel Aviv. Authentic Ethiopian cuisine, fresh injera, warm atmosphere. Reserve a table or book Ethiopian catering.",
+            "Kosher Ethiopian restaurant by Carmel Market (Rabanut Tel Aviv): teff injera, tibs, doro wat and vegan platters. Dine in, order on Wolt or book an event.",
         },
         about: {
-          title: "About Balinjera — Our Story | Ethiopian Restaurant Tel Aviv",
+          title: "About Balinjera — Fanta's Ethiopian-Jewish Kitchen",
           description:
-            "Learn the story behind Balinjera — authentic Ethiopian cuisine served with heart in Kerem HaTeimanim, Tel Aviv.",
+            "Born in Ethiopia and a lawyer for years, Fanta returned to her mother's recipes and opened Balinjera, a kosher Ethiopian-Jewish kitchen by Carmel Market.",
         },
         menu: {
-          title: "Menu — Balinjera Ethiopian Restaurant Tel Aviv",
+          title: "Balinjera Menu — Tibs, Doro Wat & Vegan Injera Platters",
           description:
-            "Explore Balinjera's menu — traditional Ethiopian dishes, fresh injera, vegan options. Kosher. Kerem HaTeimanim, Tel Aviv.",
+            "Full menu with prices: vegan and meat injera platters, tibs, doro wat, siga wat, firfir and shiro. Kosher, Kerem HaTeimanim, Tel Aviv. Delivery via Wolt.",
         },
         events: {
-          title: "Events & Ethiopian Catering | Balinjera Restaurant Tel Aviv",
+          title: "Ethiopian Catering & Group Events in Tel Aviv | Balinjera",
           description:
-            "Ethiopian catering for private events and group dining in Tel Aviv. Balinjera offers a unique experience for every occasion. Contact us.",
+            "Birthdays, team dinners and family meals around shared injera platters, meat or vegan. At our kosher restaurant by Carmel Market or catered to your event.",
         },
         blog: {
-          title: "Blog — Balinjera | Ethiopian Cuisine & Injera",
+          title: "Balinjera Blog — Injera, Ethiopian Dishes & Kosher Dining",
           description:
-            "Articles about Ethiopian cuisine, injera, and Balinjera's food culture. Read and discover.",
+            "Short guides to Ethiopian food: what injera is and how to eat it, doro wat and tibs, buna coffee, gluten and kosher questions. From Balinjera, Tel Aviv.",
         },
         accessibility: {
           title: "Accessibility Statement | Balinjera Restaurant",
@@ -1038,7 +1193,7 @@ export const balinjeraCopy = {
     },
     eventsPage: {
       eyebrow: "Events at Balinjera",
-      title: "Small, colorful events full of flavor",
+      title: "Ethiopian events and catering",
       body: "The restaurant is suited for family gatherings, birthdays, team meals and tasting experiences around Ethiopian cuisine. We keep the warm character of the place, with a menu based on fresh injera, meat or vegan stews and a table that invites everyone to eat together. Shared platters let us scale the quantity to the size of your group, from a couple's dinner to a large gathering.",
       options: [
         "Group meals around a shared table",
@@ -1099,8 +1254,8 @@ export const balinjeraCopy = {
       },
     },
     menuPage: {
-      title: "The menu, Balinjera Restaurant",
-      body: "Balinjera serves traditional Ethiopian dishes built around injera, the teff-flour bread at the heart of the meal. The menu includes vegetarian, vegan and meat stews with authentic Ethiopian flavors.",
+      title: "The Balinjera menu",
+      body: "Balinjera serves traditional Ethiopian dishes built around fresh teff injera: vegan and meat injera platters, tibs, doro wat, siga wat and firfir, with authentic Ethiopian flavors.",
       sections: [
         {
           title: "Food menu",
@@ -1108,116 +1263,132 @@ export const balinjeraCopy = {
             {
               name: "Nefro salad",
               description: "Wheat salad with herbs and cranberries",
-              price: "35 ₪",
+              price: "60 ₪",
             },
             {
               name: "House salad",
               description:
-                "Lettuce, onion, tomatoes, parsley, cilantro, mint, olive oil dressing and house tahini",
-              price: "40 ₪",
+                "Lettuce, onion, cilantro and mint, with olive oil and house tahini dressing",
+              price: "62 ₪",
             },
             {
               name: "Eggplant with Ethiopian tahini",
               description: "Organic Ethiopian tahini and Ethiopian salsa",
-              price: "32 ₪",
+              price: "55 ₪",
             },
             {
               name: "Injera firfir",
-              description: "Salad with pieces of injera",
-              price: "30 ₪",
+              description: "Salad with small pieces of injera",
+              price: "60 ₪",
             },
             {
               name: "Firfir",
               description:
-                "Pieces of injera sauteed with onion and berbere, a spicy Ethiopian seasoning",
-              price: "40 ₪",
+                "Pieces of injera stir-fried with onion and berbere, a spicy Ethiopian seasoning",
+              price: "65 ₪",
             },
             {
-              name: "Seasoned organic Ethiopian tahini bowl",
-              description: "Unique Balinjera seasoning",
-              price: "15 ₪",
+              name: "Green dish",
+              description: "Herbs and pieces of injera with avocado",
+              price: "70 ₪",
+            },
+            {
+              name: "Small organic Ethiopian tahini bowl",
+              description: "Seasoned with a unique spice blend",
+              price: "35 ₪",
+            },
+            {
+              name: "Special hot peppers plate",
+              price: "25 ₪",
             },
             {
               name: "Dabo",
-              description: "Ethiopian bread",
-              price: "10 ₪",
-            },
-            {
-              name: "Extra injera",
-              price: "10 ₪",
+              description: "Ethiopian bread, pieces of bread with a unique seasoning",
+              price: "20 ₪",
             },
             {
               name: "Soup of the day",
-              description: "Vegan add-on 10 ₪ / meat add-on 22 ₪",
-              price: "30 ₪",
+              description: "Vegan add-on 28 ₪ / meat add-on 55 ₪",
+              price: "40 ₪",
             },
             {
               name: "Balinjera shiro",
               description: "Injera with shiro and fresh hot pepper",
-              price: "35 ₪",
+              price: "55 ₪",
             },
             {
-              name: "Balinjera for one",
+              name: "Vegan Balinjera for one",
               description:
-                "Choose 4 vegan sides made from legumes and cooked vegetables",
-              price: "50 ₪",
+                "Choose 4 vegan toppings made from legumes and cooked vegetables",
+              price: "65 ₪",
             },
             {
               name: "Vegan Balinjera for two",
               description:
-                "7 vegan sides made from legumes and cooked vegetables",
-              price: "85 ₪",
+                "Choose 7 vegan toppings made from legumes and cooked vegetables",
+              price: "120 ₪",
+            },
+            {
+              name: "Ram injera",
+              description: "Meat dishes, injera, 3 vegetarian sides and a small salad",
+              price: "150 ₪",
             },
             {
               name: "Meat Balinjera for two",
               description:
-                "Choose 2 meats, 2 injeras, 4 vegetarian sides, small salad, dabo and tahini",
-              price: "115 ₪",
+                "Choose 2 meats, 2 injeras, 4 vegetarian sides and a small salad",
+              price: "155 ₪",
             },
             {
               name: "Balinjera Festival",
               description:
-                "7 vegan sides, 3 meat sides, large salad, Ethiopian tahini and 3 injeras",
-              price: "160 ₪",
+                "7 vegan sides, 3 meat dishes, a large salad and Ethiopian tahini (serves 3)",
+              price: "220 ₪",
             },
             {
-              name: "Balinjera tibs",
+              name: "Balinjera tibs for one",
               description:
-                "Butcher's cut sauteed with unique seasoning and onion, served with 3 vegetarian sides",
-              price: "80 ₪",
+                "Meat cubes stir-fried in a pan with hot pepper and onion, 2 vegetarian sides and a small salad",
+              price: "90 ₪",
+            },
+            {
+              name: "Balinjera tibs for two",
+              description:
+                "Meat cubes stir-fried in a pan with hot pepper and onion, 2 vegetarian sides and a small salad",
+              price: "160 ₪",
             },
             {
               name: "Siga wat",
               description:
-                "Spicy or mild beef stew with onion, garlic and Ethiopian seasoning, served with 3 vegetarian sides",
-              price: "60 ₪",
+                "Spicy or mild beef stew with onion, garlic and Ethiopian seasoning, served with 2 vegan sides",
+              price: "80 ₪",
             },
             {
               name: "Siga firfir",
               description:
-                "Pieces of injera with meat and red sauce, served with 3 vegetarian sides",
-              price: "55 ₪",
+                "Pieces of injera with meat in red sauce, served with 3 vegan sides",
+              price: "70 ₪",
             },
             {
               name: "Doro wat",
               description:
-                "Chicken stew with egg, onion, garlic and spicy seasoning, served with 3 vegetarian sides",
-              price: "55 ₪",
+                "Chicken stew with egg, onion, garlic and hot spicy seasoning, served with 2 vegan sides",
+              price: "70 ₪",
             },
           ],
         },
         {
-          title: "Business menu",
+          title: "Business lunch",
           items: [
             {
               name: "Vegan Balinjera business for one",
-              description: "7 sides + small salad",
-              price: "55 ₪",
+              description: "7 vegan toppings and a small salad",
+              price: "70 ₪",
             },
             {
               name: "Meat Balinjera business for one",
-              description: "Choice of meat + 4 vegetarian sides + small salad",
-              price: "55 ₪",
+              description: "Choice of meat, 4 vegetarian sides and a small salad",
+              price: "82 ₪",
             },
           ],
         },
@@ -1226,43 +1397,31 @@ export const balinjeraCopy = {
           items: [
             { name: "Neviot water", price: "7 ₪" },
             { name: "Kinley soda", price: "8 ₪" },
-            { name: "Lemonade", price: "10 ₪" },
+            { name: "Lemonade", price: "15 ₪" },
             { name: "Prigat orange / Prigat grapefruit", price: "9 ₪" },
-            { name: "Fuzetea", price: "10 ₪" },
-            { name: "Coca-Cola / Zero / Diet", price: "11 ₪" },
-            { name: "Fanta", price: "11 ₪" },
-            { name: "Malt black beer", price: "12 ₪" },
+            { name: "Fuzetea", price: "12 ₪" },
+            { name: "Coca-Cola / Zero / Diet", price: "12 ₪" },
+            { name: "Fanta", price: "12 ₪" },
+            { name: "Sprite", price: "12 ₪" },
           ],
         },
         {
           title: "Hot drinks",
           items: [
-            { name: "Buna coffee", price: "7 ₪" },
-            { name: "Shai spiced tea", price: "10 ₪" },
-            { name: "Spiced tea + ginger", price: "12 ₪" },
-            { name: "Buna pot - Ethiopian coffee", price: "25 ₪" },
+            { name: "Buna cup - Ethiopian coffee", price: "10 ₪" },
+            { name: "Shai - spiced tea", price: "15 ₪" },
+            { name: "Shai - spiced tea + ginger", price: "18 ₪" },
+            { name: "Jebena - pot of buna (Ethiopian coffee)", price: "35 ₪" },
           ],
         },
         {
-          title: "Wines",
+          title: "Alcohol",
           items: [
-            { name: "Red wine bottle", price: "110 ₪" },
-            { name: "White wine bottle", price: "110 ₪" },
-          ],
-        },
-        {
-          title: "Arak",
-          items: [
-            { name: "Arak chaser", price: "15 ₪" },
-            { name: "Glass of arak", price: "25 ₪" },
-          ],
-        },
-        {
-          title: "Beers",
-          items: [
-            { name: "Draft beer - Carlsberg", price: "28/23 ₪" },
-            { name: "Bottle - Tuborg / Ethiopian beers", price: "23 ₪" },
-            { name: "Somersby - alcoholic apple cider", price: "27 ₪" },
+            { name: "Ethiopian beer", price: "23 ₪" },
+            { name: "Arak", price: "40/25 ₪" },
+            { name: "Cocktail", price: "50 ₪" },
+            { name: "Whiskey", price: "50 ₪" },
+            { name: "Wine - glass / bottle", price: "32/120 ₪" },
           ],
         },
       ],
@@ -1276,11 +1435,12 @@ export const balinjeraCopy = {
       posts: [
         {
           slug: "injera-heart-of-meal",
-          title: "Why injera is the heart of the meal",
+          title: "What is injera? Ethiopia's teff flatbread",
           excerpt:
-            "Injera is not only the bread of an Ethiopian meal. It is the base that carries the flavors, the rhythm and the shared experience around the table.",
+            "The tangy teff flatbread at the heart of every Ethiopian meal: base, utensil and bread in one. What injera is, how it's made and where to try it in Tel Aviv.",
           publishedAt: "2026-06-22",
-          modifiedAt: "2026-06-22",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "injera-gluten-free",
           body: [
             {
               heading: "What is injera?",
@@ -1313,6 +1473,7 @@ export const balinjeraCopy = {
             "Balinjera is built around the idea of an open table: a shared platter, hands around the food and conversation that moves at a natural pace.",
           publishedAt: "2026-06-22",
           modifiedAt: "2026-06-22",
+          relatedSlug: "sigd-ethiopian-jewish-holiday",
           body: [
             {
               heading: "Why the place is called Balinjera",
@@ -1340,11 +1501,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "kosher-ethiopian-food-carmel-market",
-          title: "Kosher Ethiopian restaurant near Carmel Market",
+          title: "Kosher restaurant near Carmel Market",
           excerpt:
-            "Kerem HaTeimanim and Carmel Market are a great starting point for kosher Ethiopian cuisine in Tel Aviv, with fresh injera and food made for sharing.",
+            "Balinjera, next to Carmel Market, is certified kosher by the Rabanut Tel Aviv (Regila): a meat restaurant with no dairy, many vegan dishes and teff injera.",
           publishedAt: "2026-07-19",
-          modifiedAt: "2026-07-19",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "kerem-hateimanim-guide",
           body: [
             {
               heading: "Kerem HaTeimanim as a base for discovering Ethiopian cuisine",
@@ -1377,6 +1539,7 @@ export const balinjeraCopy = {
             "Ethiopian catering brings shared platters, fresh injera and an eating experience that involves every guest - a good fit for a range of event types in Tel Aviv.",
           publishedAt: "2026-07-19",
           modifiedAt: "2026-07-19",
+          relatedSlug: "ethiopian-dishes-glossary",
           body: [
             {
               heading: "What makes Ethiopian catering different",
@@ -1404,11 +1567,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "ethiopian-dishes-glossary",
-          title: "What are doro wat, tibs and shiro? A guide to the dishes",
+          title: "What are doro wat and tibs? A dish guide",
           excerpt:
-            "A short guide to the main dishes on an Ethiopian menu - what is in each one, what is spicy and what is not, and how to choose on a first visit.",
+            "Doro wat, siga wat, tibs, firfir and shiro: what's in each dish, which ones are spicy and how to order on your first visit to an Ethiopian restaurant.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "ethiopian-coffee-buna",
           body: [
             {
               heading: "The basics: injera, berbere and dabo",
@@ -1438,9 +1602,10 @@ export const balinjeraCopy = {
           slug: "vegan-ethiopian-carmel-market",
           title: "Vegan Ethiopian food near Carmel Market",
           excerpt:
-            "Ethiopian cooking is one of the most vegan-friendly cuisines there is - here is what to order at Balinjera, and why kosher-plus-vegan-plus-Ethiopian is a rare combination.",
+            "Ethiopian cooking is one of the most vegan-friendly cuisines: what to order at Balinjera, and why kosher, vegan and Ethiopian together is a rare combination.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "kosher-ethiopian-food-carmel-market",
           body: [
             {
               heading: "Why Ethiopian cooking suits vegans",
@@ -1468,11 +1633,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "how-to-eat-injera",
-          title: "How to eat injera by hand - a first-timer's guide",
+          title: "How to eat injera: a first-visit guide",
           excerpt:
-            "Eating together with your hands is part of the Ethiopian experience, but it is not self-explanatory. Here is how it works, step by step.",
+            "Tear, pinch, gather: how to eat injera with your hands, which hand to use and what to expect from a shared Ethiopian platter on your first visit.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "injera-heart-of-meal",
           body: [
             {
               heading: "What arrives at the table",
@@ -1500,11 +1666,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "injera-gluten-free",
-          title: "Injera and gluten - what you should know",
+          title: "Is injera gluten-free? What to know about teff",
           excerpt:
-            "Our injera is made from teff flour and is naturally gluten free. Here is the explanation, along with what to check on the rest of the menu.",
+            "Teff is naturally gluten free, and our injera is made fresh from teff flour. What on our menu does contain gluten, and when to call us before you come.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "vegan-ethiopian-carmel-market",
           body: [
             {
               heading: "Teff - the grain behind injera",
@@ -1532,11 +1699,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "ethiopian-coffee-buna",
-          title: "Buna - Ethiopian coffee",
+          title: "What is buna? Ethiopian coffee, explained",
           excerpt:
-            "Coffee is a central part of Ethiopian culture, not just a drink that ends a meal. A little background, and what we serve.",
+            "Buna means coffee in Amharic, and in Ethiopia it is a social occasion, not a quick drink. Some background, and how we serve it: by the cup or in a pot.",
           publishedAt: "2026-08-25",
-          modifiedAt: "2026-08-25",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "how-to-eat-injera",
           body: [
             {
               heading: "Ethiopia and the origins of coffee",
@@ -1549,7 +1717,7 @@ export const balinjeraCopy = {
               heading: "What we serve at Balinjera",
               paragraphs: [
                 "There are two options on our menu. Buna coffee is served as a single cup, and alongside it there is a buna pot - served in a pot, for anyone who wants to sit with the coffee for a while or share it with others around the table.",
-                "Alongside the coffee there is also spiced tea, and spiced tea with ginger - a good option for anyone who prefers to finish without caffeine.",
+                "Alongside the coffee there is also spiced tea, and spiced tea with ginger - a good option for anyone who prefers tea to coffee.",
               ],
             },
             {
@@ -1569,6 +1737,7 @@ export const balinjeraCopy = {
             "The neighborhood Balinjera sits in is one of the more interesting corners of Tel Aviv. Some background on the area and how to build a visit around it.",
           publishedAt: "2026-08-25",
           modifiedAt: "2026-08-25",
+          relatedSlug: "eat-together-balinjera",
           body: [
             {
               heading: "The neighborhood",
@@ -1593,6 +1762,39 @@ export const balinjeraCopy = {
             },
           ],
           relatedLink: { label: "Visit the events page", path: "/events" },
+        },
+        {
+          slug: "sigd-ethiopian-jewish-holiday",
+          title: "What is Sigd? The Ethiopian Jewish holiday",
+          excerpt:
+            "Sigd, the Ethiopian Jewish holiday 50 days after Yom Kippur: a fast, prayers on a mountaintop facing Jerusalem and a shared meal. In 2026: November 9.",
+          publishedAt: "2026-09-29",
+          modifiedAt: "2026-09-29",
+          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          body: [
+            {
+              heading: "What is Sigd?",
+              paragraphs: [
+                "Sigd is a holiday of the Beta Israel community, the Jews of Ethiopia. It falls on the 29th of Cheshvan, fifty days after Yom Kippur. The name comes from Ge'ez, the ancient liturgical language of Ethiopia, and means prostration. At its heart are the renewal of the covenant between the people and God, and the longing for Jerusalem that accompanied the community through many generations in Ethiopia.",
+                "In 2008 the Knesset recognized Sigd as a national holiday of the State of Israel, and a central state ceremony has been held in Jerusalem ever since. In 2026 Sigd falls on Monday, November 9, and the holiday begins the evening before.",
+              ],
+            },
+            {
+              heading: "How the holiday is marked",
+              paragraphs: [
+                "In Ethiopia, people fasted on Sigd, dressed in white and climbed the highest mountain nearby. On the mountain, the kessim, the community's spiritual leaders, read from the Orit - the holy scriptures of Beta Israel - and led prayers in which the longing to return to Jerusalem came back again and again.",
+                "In Israel, the central prayer takes place at the Armon HaNatziv promenade in Jerusalem, from a point overlooking the Temple Mount. Members of the community come from all over the country, and what was once a distant longing has become a gathering in the city itself.",
+              ],
+            },
+            {
+              heading: "Breaking the fast: a shared meal",
+              paragraphs: [
+                "The Sigd fast ends at midday, followed by dancing and a festive meal. In Ethiopia the whole community traditionally shared one large meal; in Israel, each family holds its own.",
+                "It is also the moment when Ethiopian-Jewish cooking speaks the language we know best: one table, fresh injera at the center and stews that everyone shares. At Balinjera, whose very name means eating together, that is the idea we live by all year, in Kerem HaTeimanim next to Carmel Market.",
+              ],
+            },
+          ],
+          relatedLink: { label: "Read our story", path: "/about" },
         },
       ],
     },

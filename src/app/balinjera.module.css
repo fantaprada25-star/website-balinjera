@@ -287,6 +287,15 @@
   line-height: 1.55;
 }
 
+.footer .footerSpecialTitle {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.footerSpecialHours {
+  white-space: nowrap;
+}
+
 .reserveSection {
   display: flex;
   min-height: auto;

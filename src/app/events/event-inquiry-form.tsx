@@ -3,6 +3,7 @@
 import { CheckCircle2, Send } from "lucide-react";
 import { useId, useState, type FormEvent } from "react";
 
+import { trackEvent } from "../balinjera-analytics";
 import { balinjeraCopy, type BalinjeraLang } from "../balinjera-content";
 import styles from "../balinjera-events.module.css";
 
@@ -43,6 +44,8 @@ export function EventInquiryForm({ lang }: { lang: BalinjeraLang }) {
       }
 
       setStatus("success");
+      // No form content (name, email, phone…) is ever sent to GA4.
+      trackEvent("generate_lead", { form_id: "event_inquiry" });
       form.reset();
     } catch {
       setStatus("error");

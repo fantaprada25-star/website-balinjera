@@ -126,3 +126,7 @@ storybook-static/
 # iCloud sync exclusion: build artifacts live in *.nosync dirs (iCloud skips
 # that suffix) with symlinks pointing at them, so iCloud never syncs them.
 *.nosync
+
+# Raw SEO exports (GSC / GA4 / GBP): client data, kept local only because
+# this repository is public. The monthly SEO-AUDIT-*.md files summarise it.
+/seo-data/

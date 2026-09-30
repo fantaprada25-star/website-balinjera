@@ -1,8 +1,15 @@
 const BASE_URL = process.env.SEO_CHECK_BASE_URL ?? 'http://localhost:3000'
 const CANONICAL_HOST = 'https://www.balinjera.com'
 
+// Fetch as Googlebot smartphone: without `htmlLimitedBots` Next streams the
+// metadata into <body> for this user agent, which is what we guard against.
+const GOOGLEBOT_UA =
+  'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+
 async function get(path) {
-  const response = await fetch(`${BASE_URL}${path}`)
+  const response = await fetch(`${BASE_URL}${path}`, {
+    headers: { 'user-agent': GOOGLEBOT_UA },
+  })
 
   if (!response.ok) {
     throw new Error(`${path} returned ${response.status}`)
@@ -14,6 +21,14 @@ async function get(path) {
 function assertIncludes(content, expected, label) {
   if (!content.includes(expected)) {
     throw new Error(`${label} missing: ${expected}`)
+  }
+}
+
+function assertInHead(content, marker, label) {
+  const position = content.indexOf(marker)
+
+  if (position === -1 || position > content.indexOf('</head>')) {
+    throw new Error(`${label}: ${marker} must be inside <head>`)
   }
 }
 
@@ -145,7 +160,8 @@ const checks = [
     expected: [
       '"@type":"BlogPosting"',
       '"datePublished":"2026-06-22"',
-      '"dateModified":"2026-06-22"',
+      '"dateModified":"',
+      'Further reading',
     ],
     links: [
       [
@@ -163,6 +179,9 @@ for (const check of checks) {
     assertIncludes(html, expected, check.path)
   }
 
+  assertInHead(html, '<title>', check.path)
+  assertInHead(html, '<meta name="description"', check.path)
+
   for (const link of check.links ?? []) {
     assertLinkTag(html, link, check.path)
   }
@@ -172,6 +191,24 @@ for (const check of checks) {
   }
 }
 
+const home = await get('/')
+if (home.includes('aggregateRating')) {
+  throw new Error('/ must not publish a third-party aggregateRating')
+}
+if (!/"dateModified":"\d{4}-\d{2}-\d{2}"/.test(await get('/blog/injera-heart-of-meal'))) {
+  throw new Error('/blog/injera-heart-of-meal dateModified must be YYYY-MM-DD')
+}
+
+const typoRedirect = await fetch(`${BASE_URL}/blog/ethiopian-dish-glossary`, {
+  redirect: 'manual',
+})
+if (
+  typoRedirect.status !== 308 ||
+  !typoRedirect.headers.get('location')?.endsWith('/blog/ethiopian-dishes-glossary')
+) {
+  throw new Error('/blog/ethiopian-dish-glossary must 308 to /blog/ethiopian-dishes-glossary')
+}
+
 const sitemap = await get('/sitemap.xml')
 for (const expected of [
   `<loc>${CANONICAL_HOST}/</loc>`,
@@ -179,6 +216,12 @@ for (const expected of [
   `hreflang="x-default" href="${CANONICAL_HOST}/"`,
 ]) {
   assertIncludes(sitemap, expected, '/sitemap.xml')
+}
+const lastModifiedDates = new Set(
+  [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]),
+)
+if (lastModifiedDates.size < 2) {
+  throw new Error('/sitemap.xml lastmod values must be real content dates, not one build time')
 }
 
 const robots = await get('/robots.txt')
