@@ -51,6 +51,20 @@ export function BlogArticlePageContent({
                 ))}
               </div>
             ))}
+            {post.sources && post.sources.length > 0 ? (
+              <div className={styles["articleSources"]}>
+                <h2>{lang === "he" ? "מקורות" : "Sources"}</h2>
+                <ol>
+                  {post.sources.map((source) => (
+                    <li key={source.url}>
+                      <a href={source.url} rel="noopener noreferrer" target="_blank">
+                        {source.label}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
             <div className={styles["blogReadMore"]}>
               <Link href={hrefWithLang(post.relatedLink.path, lang)}>
                 {post.relatedLink.label}

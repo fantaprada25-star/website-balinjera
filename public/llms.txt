@@ -43,7 +43,9 @@ Important details:
 - [Kerem HaTeimanim and Carmel Market](https://www.balinjera.com/blog/kerem-hateimanim-guide): Where the restaurant is.
 - [Eating together at Balinjera](https://www.balinjera.com/blog/eat-together-balinjera): Shared Ethiopian dining.
 - [Ethiopian catering in Tel Aviv](https://www.balinjera.com/blog/ethiopian-catering-events-tel-aviv): Catering and group events.
-- [What is Sigd?](https://www.balinjera.com/blog/sigd-ethiopian-jewish-holiday): The holiday of Ethiopian Jews (Beta Israel) and its festive meal.
+- [What is Sigd?](https://www.balinjera.com/blog/sigd-ethiopian-jewish-holiday): The holiday of Ethiopian Jews (Beta Israel) and its festive meal. In 2026: November 9.
+- [Ethiopian Jewish food](https://www.balinjera.com/blog/ethiopian-jewish-beta-israel-food): How Beta Israel cooked: kessim slaughter, meat for feasts, dabo and doro wat for Shabbat. With sources.
+- [What is doro wat?](https://www.balinjera.com/blog/doro-wat-ethiopian-chicken-stew): Ethiopia's festive chicken stew, its kosher version and how it differs from siga wat. With sources.
 
 Every article is also available in English by adding `?lang=en` to its URL.
 

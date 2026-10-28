@@ -283,6 +283,15 @@ export function buildBlogPostingSchema({
     image: `${siteUrl}/balinjera/hero.jpg`,
     datePublished: post.publishedAt,
     dateModified: post.modifiedAt,
+    ...(post.sources && post.sources.length > 0
+      ? {
+          citation: post.sources.map((source) => ({
+            '@type': 'CreativeWork',
+            name: source.label,
+            url: source.url,
+          })),
+        }
+      : {}),
     author: {
       '@type': 'Organization',
       name: 'Balinjera',

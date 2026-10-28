@@ -186,6 +186,28 @@
   text-underline-offset: 4px;
 }
 
+.articleSources h2 {
+  margin-bottom: 12px;
+  font-size: clamp(22px, 2vw, 28px);
+}
+
+.articleSources ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-inline-start: 1.25em;
+}
+
+.articleSources li {
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.5;
+}
+
+.articleSources a {
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
 .accessibilitySection {
   display: grid;
   gap: 18px;

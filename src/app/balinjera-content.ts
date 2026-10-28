@@ -25,6 +25,11 @@ export type BalinjeraBlogRelatedLink = {
   path: string;
 };
 
+export type BalinjeraBlogSource = {
+  label: string;
+  url: string;
+};
+
 export type BalinjeraBlogPost = {
   slug: string;
   title: string;
@@ -35,6 +40,8 @@ export type BalinjeraBlogPost = {
   relatedSlug: string;
   body: readonly BalinjeraBlogSection[];
   relatedLink: BalinjeraBlogRelatedLink;
+  // External references listed under "Sources" and cited in the BlogPosting schema.
+  sources?: readonly BalinjeraBlogSource[];
 };
 
 export type BalinjeraSeoPageMeta = {
@@ -765,7 +772,7 @@ export const balinjeraCopy = {
               heading: "למה המטבח האתיופי מתאים לטבעונים",
               paragraphs: [
                 "חלק גדול מהמטבח האתיופי המסורתי בנוי ממילא סביב קטניות, ירקות ותבלינים - לא כתחליף לבשר, אלא כבסיס בפני עצמו. התוצאה היא שתפריט טבעוני אתיופי הוא לא גרסה מצומצמת של התפריט הרגיל, אלא חלק מרכזי ממנו.",
-                "בבאלינג׳רה זה מתבטא בפועל: יש מגשים טבעוניים ייעודיים לצד המנות הבשריות, והאינג׳רה עצמה - הבסיס של כל ארוחה - מוכנה מקמח טף בלבד.",
+                "בבאלינג׳רה זה מתבטא בפועל: יש מגשים טבעוניים ייעודיים לצד המנות הבשריות, והאינג׳רה עצמה - הבסיס של כל ארוחה - מוכנה מקמח טף.",
               ],
             },
             {
@@ -919,12 +926,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "sigd-ethiopian-jewish-holiday",
-          title: "מה זה סיגד? החג של יהודי אתיופיה",
+          title: "חג הסיגד 2026 (9 בנובמבר): מה זה ואיך מציינים",
           excerpt:
             "סיגד הוא החג של יהודי אתיופיה, 50 יום אחרי יום כיפור: צום, תפילה על הר מול ירושלים וארוחה משותפת בסוף. ב-2026 הוא חל ב-9 בנובמבר.",
           publishedAt: "2026-09-29",
-          modifiedAt: "2026-09-29",
-          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          modifiedAt: "2026-10-27",
+          relatedSlug: "ethiopian-jewish-beta-israel-food",
           body: [
             {
               heading: "מה זה סיגד?",
@@ -949,6 +956,144 @@ export const balinjeraCopy = {
             },
           ],
           relatedLink: { label: "הכירו את הסיפור שלנו", path: "/about" },
+        },
+        {
+          slug: "ethiopian-jewish-beta-israel-food",
+          title: "אוכל אתיופי-יהודי: המטבח של ביתא ישראל",
+          excerpt:
+            "איך אכלו יהודי אתיופיה: בשר משחיטת הקסים ובעיקר לחג, דאבו ודורו וואט לשבת, ומה השתנה בישראל. מדריך קצר לקראת הסיגד, 9 בנובמבר 2026.",
+          publishedAt: "2026-10-27",
+          modifiedAt: "2026-10-27",
+          relatedSlug: "doro-wat-ethiopian-chicken-stew",
+          body: [
+            {
+              heading: "מי הם ביתא ישראל",
+              paragraphs: [
+                "ביתא ישראל הוא השם של הקהילה היהודית של אתיופיה. את חייה הדתיים הובילו הקסים, כוהני הדת, שהיו ההנהגה הרוחנית העליונה של הקהילה. ספר התורה נקרא בשפתם אורית, ולקהילה יש חג משלה, הסיגד, שחל בכ״ט בחשוון.",
+                "במבט ראשון המטבח של ביתא ישראל דומה למטבח האתיופי שכולם מכירים: אינג׳רה, תבשילים שמתבשלים לאט ותבלינים חמים. מה שמייחד אותו הם כללי הכשרות כפי שנשמרו בקהילה: מי שוחט, מתי אוכלים בשר ומה מכינים לשבת.",
+              ],
+            },
+            {
+              heading: "בשר, שחיטה והקסים",
+              paragraphs: [
+                "בקהילה הקפידו מאוד על מקור הבשר. כפי שסיפרה חנה טמנו למעריב, המבוגרים בעדה מקפידים על מקור החלב והבשר, ואת הבשר הם קונים רק משחיטה של הקסים.",
+                "בשר גם לא היה מאכל של יום-יום. לפי סקירה של ספרה של החוקרת חגר סלמון על מקומו של הבשר בחיי ביתא ישראל, באירועים חגיגיים נשחטה פרה אחת לפי כללי השחיטה הכשרה. הבשר היה חלק מהחג, לא מהשגרה.",
+              ],
+            },
+            {
+              heading: "שבת: דאבו ודורו וואט",
+              paragraphs: [
+                "השבת הייתה שיא השבוע, גם במטבח. לשבת ולחגים אפו דאבו, לחם מתובל וממותק מעט בדבש. דורו וואט, תבשיל עוף עם ביצים קשות, נחשב למנה חגיגית נפוצה בשולחן השבת.",
+                "כמו בכל בית ששומר שבת, את האוכל מכינים מראש, לפני כניסת השבת. אסיף, המרכז לתרבות האוכל בישראל, מתאר את הדורו וואט כקלאסיקה של שבת אתיופית: עוף וביצים ברוטב עגבניות עשיר, מתובל בג׳ינג׳ר ובבירברי.",
+              ],
+            },
+            {
+              heading: "מה השתנה בישראל",
+              paragraphs: [
+                "עם העלייה לישראל השתנו גם הרגלי המטבח. לפי הסקירה על ספרה של סלמון, בישראל ברוב המקרים לא ניתן היה להמשיך במנהג השחיטה הקהילתית שהיה נהוג באתיופיה.",
+                "גם המטבח האתיופי עצמו מצא את מקומו בישראל לאט. ב-2015 עדיין כתב מגזין Moment שלמרות שבני הקהילה חיים בישראל כבר עשרות שנים, האוכל האתיופי רק מתחיל לתפוס מקום בסצנה הקולינרית הישראלית.",
+              ],
+            },
+            {
+              heading: "מהמטבח של אמא לכרם התימנים",
+              paragraphs: [
+                "פאנטה, ילידת אתיופיה, חזרה למתכונים של אמה והקימה את באלינג׳רה: מטבח אתיופי-יהודי כשר בכרם התימנים, ליד שוק הכרמל. הכשרות היא של רבנות תל אביב, והמסעדה פועלת כמסעדה בשרית, בלי מוצרי חלב במקום.",
+                "בתפריט תמצאו את המנות שהוזכרו כאן: דורו וואט, דאבו (לחם אתיופי מתובל) ואינג׳רה טרייה מקמח טף, לצד מגשים טבעוניים ובשריים. והסיגד, שחל השנה ב-9 בנובמבר, הוא תזכורת טובה לרעיון שמאחורי השם שלנו: לפתוח את השולחן ולאכול ביחד.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לתפריט המלא", path: "/menu" },
+          sources: [
+            {
+              label: "משרד החינוך, פורטל פופ: יהדות אתיופיה",
+              url: "https://pop.education.gov.il/tchumey_daat/moledet_hevra_ezrahut/yesodi/noseem_nilmadim/yehadut_ethiopia/",
+            },
+            {
+              label: "מעריב: מאתיופיה באהבה - הצצה טעימה למטבח האתיופי לרגל חג הסיגד (2020)",
+              url: "https://www.maariv.co.il/food/food-recipes/Article-801520",
+            },
+            {
+              label: "Sephardic Horizons: סקירה של הנרי שוורץ על Meat Matters מאת חגר סלמון (2023)",
+              url: "https://sephardichorizons.org/Volume14/Issue3-4/Schwarcz.html",
+            },
+            {
+              label: "Moment Magazine: Talk of the Table - Ethiopian Food (2015)",
+              url: "https://momentmag.com/talk-of-the-table-ethiopian-food/",
+            },
+            {
+              label: "אסיף - המרכז לתרבות האוכל בישראל: הדורו וואט של אלעזר טמנו",
+              url: "https://asif.org/en/recipes/traditional-doro-wat-ethiopian-shabbat-chicken-stew/",
+            },
+          ],
+        },
+        {
+          slug: "doro-wat-ethiopian-chicken-stew",
+          title: "מה זה דורו וואט? תבשיל העוף החגיגי של אתיופיה",
+          excerpt:
+            "דורו וואט הוא תבשיל עוף אתיופי עם ביצה קשה, הרבה בצל ובירברי. ממה הוא עשוי, למה הוא מנה של חג ושל שבת, ובמה הוא שונה מסיגה וואט.",
+          publishedAt: "2026-10-27",
+          modifiedAt: "2026-10-27",
+          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          body: [
+            {
+              heading: "מה זה דורו וואט?",
+              paragraphs: [
+                "דורו פירושו עוף באמהרית, והמילה וואט היא השם הכללי לתבשיל אתיופי שמתבשל לאט. דורו וואט הוא אם כן תבשיל עוף, ובגרסה המוכרת: תבשיל עוף עם ביצים קשות, ברוטב אדום, סמיך וחריף.",
+                "זו אחת המנות המוכרות ביותר של המטבח האתיופי. היא מוגשת על אינג׳רה, ואוכלים אותה בידיים: קורעים חתיכת אינג׳רה ואוספים איתה את התבשיל.",
+              ],
+            },
+            {
+              heading: "בצל, בירברי וביצה",
+              paragraphs: [
+                "הבסיס של דורו וואט הוא כמות גדולה של בצל, שמתבשל לאט עד שהוא מצטמצם. במתכון של SBS הבצל מתבשל כשעה, עד שנפחו קטן בשני שלישים. בכתבה של NPR על ארוחת חג המולד האתיופית מתואר בישול של כארבעה קילו בצל קצוץ לכל תרנגול.",
+                "הצבע והחריפות מגיעים מבירברי, תערובת התבלינים והצ׳ילי האתיופית. ואז הביצים הקשות: לפי NPR, יש מי שרואים בהן סמל לנצח.",
+              ],
+            },
+            {
+              heading: "מנה של חג ושל שבת",
+              paragraphs: [
+                "באתיופיה דורו וואט הוא מנה של אירועים. אצל הנוצרים האתיופים-אורתודוקסים הוא מנת הדגל של חג המולד, שחל ב-7 בינואר אחרי צום טבעוני של 40 יום. לפי NPR התרנגול נחתך ל-12 חלקים בדיוק, כנגד 12 השליחים, ולצדו מגישים 12 ביצים קשות.",
+                "גם אצל ביתא ישראל, יהודי אתיופיה, דורו וואט נחשב למנה חגיגית נפוצה בשבת, כפי שמתאר מגזין Moment. אסיף, המרכז לתרבות האוכל בישראל, מגדיר אותו קלאסיקה של שבת אתיופית.",
+              ],
+            },
+            {
+              heading: "דורו וואט במטבח כשר",
+              paragraphs: [
+                "במתכונים האתיופיים הקלאסיים מבשלים את הדורו וואט עם ניטר קיבה, חמאה מזוקקת ומתובלת. במטבח כשר אי אפשר לבשל עוף בחמאה, ולכן בגרסאות כשרות מחליפים אותה, למשל בשמן. כך במתכון השבת של אלעזר טמנו באסיף, שמבוסס על שמן זית.",
+                "באלינג׳רה היא מסעדה בשרית בכשרות רבנות תל אביב, בלי מוצרי חלב במקום, כך שהדורו וואט אצלנו מוכן בלי חמאה.",
+              ],
+            },
+            {
+              heading: "דורו וואט או סיגה וואט?",
+              paragraphs: [
+                "שני התבשילים קרובים. סיגה וואט הוא המקבילה עם בשר בקר: בצל, שום ותיבול אתיופי. ההבדל המעשי בתפריט שלנו הוא החריפות: את הסיגה וואט אפשר להזמין חריף או לא חריף, והדורו וואט מוגש בתיבול חריף.",
+                "בבאלינג׳רה הדורו וואט מוגש כתבשיל עוף עם ביצה, בצל, שום ותיבול חריף, יחד עם שתי תוספות טבעוניות. אם אתם באים בקבוצה, כדאי להזמין כמה תבשילים ולחלוק אותם יחד על השולחן.",
+              ],
+            },
+          ],
+          relatedLink: { label: "לתפריט המלא", path: "/menu" },
+          sources: [
+            {
+              label: "אסיף - המרכז לתרבות האוכל בישראל: הדורו וואט של אלעזר טמנו",
+              url: "https://asif.org/en/recipes/traditional-doro-wat-ethiopian-shabbat-chicken-stew/",
+            },
+            {
+              label: "SBS Food: Ethiopian red chicken stew (doro wat)",
+              url: "https://www.sbs.com.au/food/recipe/ethiopian-red-chicken-stew-doro-wat/lyek5gvu8",
+            },
+            {
+              label: "NPR (דרך KBIA): A 40-Day Vegan Fast, Then, At Last, A January Christmas Feast (2015)",
+              url: "https://www.kbia.org/2015-01-01/a-40-day-vegan-fast-then-at-last-a-january-christmas-feast",
+            },
+            {
+              label: "מעריב: מאתיופיה באהבה - הצצה טעימה למטבח האתיופי לרגל חג הסיגד (2020)",
+              url: "https://www.maariv.co.il/food/food-recipes/Article-801520",
+            },
+            {
+              label: "Moment Magazine: Talk of the Table - Ethiopian Food (2015)",
+              url: "https://momentmag.com/talk-of-the-table-ethiopian-food/",
+            },
+          ],
         },
       ],
     },
@@ -1611,7 +1756,7 @@ export const balinjeraCopy = {
               heading: "Why Ethiopian cooking suits vegans",
               paragraphs: [
                 "A large part of traditional Ethiopian cooking is already built around legumes, vegetables and spices - not as a substitute for meat, but as a foundation in its own right. The result is that a vegan Ethiopian menu is not a reduced version of the regular one, it is a central part of it.",
-                "At Balinjera that shows up in practice: there are dedicated vegan platters alongside the meat dishes, and the injera itself - the base of every meal - is made from teff flour alone.",
+                "At Balinjera that shows up in practice: there are dedicated vegan platters alongside the meat dishes, and the injera itself - the base of every meal - is made from teff flour.",
               ],
             },
             {
@@ -1765,12 +1910,12 @@ export const balinjeraCopy = {
         },
         {
           slug: "sigd-ethiopian-jewish-holiday",
-          title: "What is Sigd? The Ethiopian Jewish holiday",
+          title: "Sigd 2026 (Nov 9): the Ethiopian Jewish holiday",
           excerpt:
             "Sigd, the Ethiopian Jewish holiday 50 days after Yom Kippur: a fast, prayers on a mountaintop facing Jerusalem and a shared meal. In 2026: November 9.",
           publishedAt: "2026-09-29",
-          modifiedAt: "2026-09-29",
-          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          modifiedAt: "2026-10-27",
+          relatedSlug: "ethiopian-jewish-beta-israel-food",
           body: [
             {
               heading: "What is Sigd?",
@@ -1795,6 +1940,144 @@ export const balinjeraCopy = {
             },
           ],
           relatedLink: { label: "Read our story", path: "/about" },
+        },
+        {
+          slug: "ethiopian-jewish-beta-israel-food",
+          title: "Ethiopian Jewish food: the Beta Israel kitchen",
+          excerpt:
+            "How Ethiopia's Jews ate: meat from the kessim's slaughter, mostly for feasts; dabo and doro wat for Shabbat; and what changed in Israel. Ahead of Sigd, Nov 9.",
+          publishedAt: "2026-10-27",
+          modifiedAt: "2026-10-27",
+          relatedSlug: "doro-wat-ethiopian-chicken-stew",
+          body: [
+            {
+              heading: "Who are Beta Israel?",
+              paragraphs: [
+                "Beta Israel is the name of the Jewish community of Ethiopia. Its religious life was led by the kessim, the priests, who were the community's highest spiritual leadership. Its Torah is called, in their language, the Orit, and the community has a holiday of its own, Sigd, on the 29th of Cheshvan.",
+                "At first glance the Beta Israel kitchen looks like the Ethiopian cooking everyone knows: injera, slow-cooked stews and warm spices. What sets it apart are the kashrut rules as the community kept them: who slaughters, when meat is eaten and what is cooked for Shabbat.",
+              ],
+            },
+            {
+              heading: "Meat, slaughter and the kessim",
+              paragraphs: [
+                "The community was strict about where meat came from. As Hanna Tamano told the Israeli daily Maariv, the community's elders are careful about the source of milk and meat, and buy meat only from slaughter by the kessim.",
+                "Meat was not everyday food either. According to a review of the scholar Hagar Salamon's book on the place of meat in Beta Israel life, on festive occasions one cow would be slaughtered according to kosher practice. Meat belonged to the feast, not to the routine.",
+              ],
+            },
+            {
+              heading: "Shabbat: dabo and doro wat",
+              paragraphs: [
+                "Shabbat was the high point of the week, in the kitchen too. Dabo, a spiced, honey-flavored bread, was baked for Shabbat and holidays, and doro wat, a chicken stew with hard-boiled eggs, was a common sign of celebration at the Shabbat table.",
+                "As in any Shabbat-observant home, the food is cooked ahead, before Shabbat begins. ASIF, the Culinary Institute of Israel, calls doro wat an Ethiopian Shabbat classic: chicken and eggs in a rich tomato sauce spiced with ginger and berbere.",
+              ],
+            },
+            {
+              heading: "What changed in Israel",
+              paragraphs: [
+                "Kitchen habits changed with the move to Israel. According to a review of Salamon's book, in Israel it has generally not been possible to carry on the communal slaughter practiced in Ethiopia.",
+                "Ethiopian food itself took time to find its place in Israel. As late as 2015, Moment magazine wrote that although Beta Israel had lived in Israel for decades, Ethiopian food was just beginning to take off in the Israeli culinary scene.",
+              ],
+            },
+            {
+              heading: "From a mother's kitchen to Kerem HaTeimanim",
+              paragraphs: [
+                "Fanta, born in Ethiopia, went back to her mother's recipes and opened Balinjera: a kosher Ethiopian-Jewish kitchen in Kerem HaTeimanim, next to Carmel Market. It is certified kosher by the Rabanut Tel Aviv and runs as a meat restaurant, with no dairy products on the premises.",
+                "On the menu you will find the dishes mentioned here: doro wat, dabo (a spiced Ethiopian bread) and fresh teff injera, alongside vegan and meat platters. And Sigd, which falls on November 9 this year, is a good reminder of the idea behind our name: open the table and eat together.",
+              ],
+            },
+          ],
+          relatedLink: { label: "See the full menu", path: "/menu" },
+          sources: [
+            {
+              label: "Israel Ministry of Education, Pop portal: Ethiopian Jewry (Hebrew)",
+              url: "https://pop.education.gov.il/tchumey_daat/moledet_hevra_ezrahut/yesodi/noseem_nilmadim/yehadut_ethiopia/",
+            },
+            {
+              label: "Maariv: From Ethiopia with love, a taste of Ethiopian cooking for Sigd (Hebrew, 2020)",
+              url: "https://www.maariv.co.il/food/food-recipes/Article-801520",
+            },
+            {
+              label: "Sephardic Horizons: Henry Schwarcz reviews Meat Matters by Hagar Salamon (2023)",
+              url: "https://sephardichorizons.org/Volume14/Issue3-4/Schwarcz.html",
+            },
+            {
+              label: "Moment Magazine: Talk of the Table - Ethiopian Food (2015)",
+              url: "https://momentmag.com/talk-of-the-table-ethiopian-food/",
+            },
+            {
+              label: "ASIF - Culinary Institute of Israel: Elazar Tamano's traditional doro wat",
+              url: "https://asif.org/en/recipes/traditional-doro-wat-ethiopian-shabbat-chicken-stew/",
+            },
+          ],
+        },
+        {
+          slug: "doro-wat-ethiopian-chicken-stew",
+          title: "What is doro wat? Ethiopia's festive chicken stew",
+          excerpt:
+            "Doro wat, Ethiopia's chicken stew with hard-boiled egg, onion and berbere: what's in it, why it is a feast and Shabbat dish, and how it differs from siga wat.",
+          publishedAt: "2026-10-27",
+          modifiedAt: "2026-10-27",
+          relatedSlug: "ethiopian-catering-events-tel-aviv",
+          body: [
+            {
+              heading: "What is doro wat?",
+              paragraphs: [
+                "Doro means chicken in Amharic, and wat is the general name for a slow-cooked Ethiopian stew. So doro wat is a chicken stew, and in its best-known form a chicken stew with hard-boiled eggs in a thick, red, spicy sauce.",
+                "It is one of the best-known dishes of Ethiopian cooking. It is served on injera and eaten by hand: you tear off a piece of injera and use it to scoop up the stew.",
+              ],
+            },
+            {
+              heading: "Onion, berbere and egg",
+              paragraphs: [
+                "The base of doro wat is onion, and plenty of it, cooked slowly until it reduces. In SBS's recipe the onion cooks for about an hour, until it has reduced by two-thirds. An NPR story on the Ethiopian Christmas meal describes simmering 9 pounds of chopped onion for every rooster.",
+                "The color and heat come from berbere, the Ethiopian chili-spice blend. Then come the hard-boiled eggs: in the tradition NPR reports, some say they symbolize eternity.",
+              ],
+            },
+            {
+              heading: "A dish for feasts and for Shabbat",
+              paragraphs: [
+                "In Ethiopia, doro wat is a dish for occasions. For Ethiopian Orthodox Christians it is the centerpiece of Christmas, on January 7, after a 40-day vegan fast. According to NPR, the rooster is carved into exactly 12 pieces, for the 12 disciples, and served with 12 hard-boiled eggs.",
+                "Among Beta Israel, the Jews of Ethiopia, doro wat was also a common sign of celebration on Shabbat, as Moment magazine describes. ASIF, the Culinary Institute of Israel, calls it an Ethiopian Shabbat classic.",
+              ],
+            },
+            {
+              heading: "Doro wat in a kosher kitchen",
+              paragraphs: [
+                "Classic Ethiopian recipes cook doro wat with niter kibbeh, a spiced clarified butter. A kosher kitchen cannot cook chicken in butter, so kosher versions replace it, for example with oil. Elazar Tamano's Shabbat recipe at ASIF, for example, is built on olive oil.",
+                "Balinjera is a meat restaurant certified by the Rabanut Tel Aviv, with no dairy products on the premises, so our doro wat is made without butter.",
+              ],
+            },
+            {
+              heading: "Doro wat or siga wat?",
+              paragraphs: [
+                "The two stews are close relatives. Siga wat is the beef version: onion, garlic and Ethiopian spices. The practical difference on our menu is the heat: siga wat can be ordered spicy or mild, while doro wat comes spicy.",
+                "At Balinjera, doro wat is served as a chicken stew with egg, onion, garlic and spicy seasoning, with two vegan sides. If you come as a group, order a few stews and share them at the table.",
+              ],
+            },
+          ],
+          relatedLink: { label: "See the full menu", path: "/menu" },
+          sources: [
+            {
+              label: "ASIF - Culinary Institute of Israel: Elazar Tamano's traditional doro wat",
+              url: "https://asif.org/en/recipes/traditional-doro-wat-ethiopian-shabbat-chicken-stew/",
+            },
+            {
+              label: "SBS Food: Ethiopian red chicken stew (doro wat)",
+              url: "https://www.sbs.com.au/food/recipe/ethiopian-red-chicken-stew-doro-wat/lyek5gvu8",
+            },
+            {
+              label: "NPR (via KBIA): A 40-Day Vegan Fast, Then, At Last, A January Christmas Feast (2015)",
+              url: "https://www.kbia.org/2015-01-01/a-40-day-vegan-fast-then-at-last-a-january-christmas-feast",
+            },
+            {
+              label: "Maariv: From Ethiopia with love, a taste of Ethiopian cooking for Sigd (Hebrew, 2020)",
+              url: "https://www.maariv.co.il/food/food-recipes/Article-801520",
+            },
+            {
+              label: "Moment Magazine: Talk of the Table - Ethiopian Food (2015)",
+              url: "https://momentmag.com/talk-of-the-table-ethiopian-food/",
+            },
+          ],
         },
       ],
     },
